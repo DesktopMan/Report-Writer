@@ -67,5 +67,10 @@ namespace Report_Writer
         }
 
         private bool changed = false;
+
+        private void txtDocument_MouseUp(object sender, MouseEventArgs e)
+        {
+            UpdateInterface();
+        }
     }
 }
