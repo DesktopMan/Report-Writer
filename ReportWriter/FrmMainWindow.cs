@@ -22,11 +22,36 @@ namespace Report_Writer
         private void FrmMainWindow_Load(object sender, EventArgs e)
         {
             txtDocument.Text = File.ReadAllText("Docs/Specification.txt");
+            UpdateInterface();
         }
 
         private void txtDocument_KeyUp(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode != Keys.Enter || changed == false)
+            if (e.KeyCode != Keys.Enter)
+                return;
+
+            UpdateInterface();
+        }
+
+        private void txtDocument_TextChanged(object sender, EventArgs e)
+        {
+            changed = true;
+        }
+
+        private bool changed = false;
+
+        private void lbNavigation_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            DocumentLib.Heading heading = (DocumentLib.Heading)lbNavigation.SelectedItem;
+
+            txtDocument.Select(heading.position, 0);
+            txtDocument.Focus();
+            txtDocument.ScrollToCaret();
+        }
+
+        private void UpdateInterface()
+        {
+            if (changed == false)
                 return;
 
             parser.SetDocument(txtDocument.Text);
@@ -36,15 +61,10 @@ namespace Report_Writer
 
             foreach (KeyValuePair<string, DocumentLib.Heading> pair in parser.GetHeadings())
             {
-                lbNavigation.Items.Add(pair.Value.text);
+                lbNavigation.Items.Add(pair.Value);
             }
-        }
 
-        private void txtDocument_TextChanged(object sender, EventArgs e)
-        {
-            changed = true;
+            changed = false;
         }
-
-        private bool changed = false;
     }
 }

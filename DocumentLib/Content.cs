@@ -7,15 +7,15 @@ namespace DocumentLib
 {
     public class Content
     {
-        public Content(string id, int line, string text)
+        public Content(string id, int position, string text)
         {
             this.id = id;
-            this.line = line;
+            this.position = position;
             this.text = text;
         }
 
         public string id;
         public string text;
-        public int line;
+        public int position;
     }
 }

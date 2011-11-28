@@ -66,6 +66,7 @@
             this.lbNavigation.Name = "lbNavigation";
             this.lbNavigation.Size = new System.Drawing.Size(201, 544);
             this.lbNavigation.TabIndex = 1;
+            this.lbNavigation.SelectedIndexChanged += new System.EventHandler(this.lbNavigation_SelectedIndexChanged);
             // 
             // splitContainer2
             // 

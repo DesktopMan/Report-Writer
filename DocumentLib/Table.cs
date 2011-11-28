@@ -7,7 +7,7 @@ namespace DocumentLib
 {
     class Table : Content
     {
-        public Table(string id, int line, string text) : base(id, line, text)
+        public Table(string id, int position, string text) : base(id, position, text)
         {
         }
     }

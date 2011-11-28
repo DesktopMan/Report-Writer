@@ -37,19 +37,14 @@ namespace DocumentLib
 
         void ExtractHeadings()
         {
-            Regex re = new Regex("^([#$])+ (.*)$");
-            string[] lines = document.Replace("\r", "").Split('\n');
+            Regex re = new Regex("^([#$]+) (.*)\r$", RegexOptions.Multiline);
+            MatchCollection mc = re.Matches(document);
 
-            for (int i = 0; i < lines.Count(); i++)
+            foreach (Match m in mc)
             {
-                Match m = re.Match(lines[i]);
-
-                if (!m.Success)
-                    continue;
-
                 string id = m.Groups[2].ToString().ToLower().Replace(' ', '_');
                 string text = m.Groups[2].ToString();
-                int level = m.Groups[2].Length;
+                int level = m.Groups[1].Length;
                 bool showInToc = m.Groups[1].ToString()[0] == '#';
 
                 if (text == "")
@@ -63,7 +58,7 @@ namespace DocumentLib
                     log.Add("Error: Duplicate heading id '" + id + "'");
                 }
 
-                headings[id] = new Heading(id, i, text, level, showInToc);
+                headings[id] = new Heading(id, m.Index, text, level, showInToc);
             }
         }
 
