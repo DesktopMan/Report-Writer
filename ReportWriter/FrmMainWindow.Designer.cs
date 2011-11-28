@@ -36,18 +36,32 @@
             this.ssTip = new System.Windows.Forms.StatusStrip();
             this.tsslblTip = new System.Windows.Forms.ToolStripStatusLabel();
             this.txtLog = new System.Windows.Forms.TextBox();
+            this.splitContainer4 = new System.Windows.Forms.SplitContainer();
+            this.splitContainer5 = new System.Windows.Forms.SplitContainer();
+            this.lbFigures = new System.Windows.Forms.ListBox();
+            this.lbTables = new System.Windows.Forms.ListBox();
+            this.lbReferences = new System.Windows.Forms.ListBox();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).BeginInit();
             this.splitContainer2.Panel1.SuspendLayout();
+            this.splitContainer2.Panel2.SuspendLayout();
             this.splitContainer2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer3)).BeginInit();
             this.splitContainer3.Panel1.SuspendLayout();
             this.splitContainer3.Panel2.SuspendLayout();
             this.splitContainer3.SuspendLayout();
             this.ssTip.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer4)).BeginInit();
+            this.splitContainer4.Panel1.SuspendLayout();
+            this.splitContainer4.Panel2.SuspendLayout();
+            this.splitContainer4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer5)).BeginInit();
+            this.splitContainer5.Panel1.SuspendLayout();
+            this.splitContainer5.Panel2.SuspendLayout();
+            this.splitContainer5.SuspendLayout();
             this.SuspendLayout();
             // 
             // splitContainer1
@@ -86,6 +100,10 @@
             // splitContainer2.Panel1
             // 
             this.splitContainer2.Panel1.Controls.Add(this.splitContainer3);
+            // 
+            // splitContainer2.Panel2
+            // 
+            this.splitContainer2.Panel2.Controls.Add(this.splitContainer4);
             this.splitContainer2.Size = new System.Drawing.Size(571, 522);
             this.splitContainer2.SplitterDistance = 379;
             this.splitContainer2.TabIndex = 0;
@@ -148,6 +166,69 @@
             this.txtLog.Size = new System.Drawing.Size(379, 94);
             this.txtLog.TabIndex = 0;
             // 
+            // splitContainer4
+            // 
+            this.splitContainer4.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainer4.Location = new System.Drawing.Point(0, 0);
+            this.splitContainer4.Name = "splitContainer4";
+            this.splitContainer4.Orientation = System.Windows.Forms.Orientation.Horizontal;
+            // 
+            // splitContainer4.Panel1
+            // 
+            this.splitContainer4.Panel1.Controls.Add(this.lbFigures);
+            // 
+            // splitContainer4.Panel2
+            // 
+            this.splitContainer4.Panel2.Controls.Add(this.splitContainer5);
+            this.splitContainer4.Size = new System.Drawing.Size(188, 522);
+            this.splitContainer4.SplitterDistance = 162;
+            this.splitContainer4.TabIndex = 0;
+            // 
+            // splitContainer5
+            // 
+            this.splitContainer5.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainer5.Location = new System.Drawing.Point(0, 0);
+            this.splitContainer5.Name = "splitContainer5";
+            this.splitContainer5.Orientation = System.Windows.Forms.Orientation.Horizontal;
+            // 
+            // splitContainer5.Panel1
+            // 
+            this.splitContainer5.Panel1.Controls.Add(this.lbTables);
+            // 
+            // splitContainer5.Panel2
+            // 
+            this.splitContainer5.Panel2.Controls.Add(this.lbReferences);
+            this.splitContainer5.Size = new System.Drawing.Size(188, 356);
+            this.splitContainer5.SplitterDistance = 168;
+            this.splitContainer5.TabIndex = 0;
+            // 
+            // lbFigures
+            // 
+            this.lbFigures.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lbFigures.FormattingEnabled = true;
+            this.lbFigures.Location = new System.Drawing.Point(0, 0);
+            this.lbFigures.Name = "lbFigures";
+            this.lbFigures.Size = new System.Drawing.Size(188, 162);
+            this.lbFigures.TabIndex = 0;
+            // 
+            // lbTables
+            // 
+            this.lbTables.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lbTables.FormattingEnabled = true;
+            this.lbTables.Location = new System.Drawing.Point(0, 0);
+            this.lbTables.Name = "lbTables";
+            this.lbTables.Size = new System.Drawing.Size(188, 168);
+            this.lbTables.TabIndex = 1;
+            // 
+            // lbReferences
+            // 
+            this.lbReferences.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lbReferences.FormattingEnabled = true;
+            this.lbReferences.Location = new System.Drawing.Point(0, 0);
+            this.lbReferences.Name = "lbReferences";
+            this.lbReferences.Size = new System.Drawing.Size(188, 184);
+            this.lbReferences.TabIndex = 1;
+            // 
             // FrmMainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -163,6 +244,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
             this.splitContainer2.Panel1.ResumeLayout(false);
+            this.splitContainer2.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).EndInit();
             this.splitContainer2.ResumeLayout(false);
             this.splitContainer3.Panel1.ResumeLayout(false);
@@ -173,6 +255,14 @@
             this.splitContainer3.ResumeLayout(false);
             this.ssTip.ResumeLayout(false);
             this.ssTip.PerformLayout();
+            this.splitContainer4.Panel1.ResumeLayout(false);
+            this.splitContainer4.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer4)).EndInit();
+            this.splitContainer4.ResumeLayout(false);
+            this.splitContainer5.Panel1.ResumeLayout(false);
+            this.splitContainer5.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer5)).EndInit();
+            this.splitContainer5.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -188,6 +278,11 @@
         private System.Windows.Forms.StatusStrip ssTip;
         private System.Windows.Forms.ToolStripStatusLabel tsslblTip;
         private System.Windows.Forms.TextBox txtLog;
+        private System.Windows.Forms.SplitContainer splitContainer4;
+        private System.Windows.Forms.SplitContainer splitContainer5;
+        private System.Windows.Forms.ListBox lbFigures;
+        private System.Windows.Forms.ListBox lbTables;
+        private System.Windows.Forms.ListBox lbReferences;
     }
 }
 
