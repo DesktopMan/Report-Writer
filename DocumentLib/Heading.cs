@@ -5,20 +5,30 @@ using System.Text;
 
 namespace DocumentLib
 {
-    public class Heading : Content
-    {
-        public Heading(string id, int position, string text, int level, bool showInToc) : base(id, position, text)
-        {
-            this.level = level;
-            this.showInToc = showInToc;
-        }
+	public class Heading : Content
+	{
+		public Heading(string id, int position, Heading parent, string text, int level, bool showInToc)
+			: base(id, position, text)
+		{
+			this.level = level;
+			this.showInToc = showInToc;
+		}
 
-        public override string ToString()
-        {
-            return text.PadLeft((level - 1) * 4 + text.Length);
-        }
+		public string GetFullTitle()
+		{
+			if (parent != null)
+				return parent.GetFullTitle() + " - " + text;
+			else
+				return text;
+		}
 
-        public int level;
-        public bool showInToc;
-    }
+		public override string ToString()
+		{
+			return text.PadLeft((level - 1) * 4 + text.Length);
+		}
+
+		public int level;
+		public bool showInToc;
+		public Heading parent;
+	}
 }

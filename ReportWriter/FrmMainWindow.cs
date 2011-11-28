@@ -10,74 +10,85 @@ using System.IO;
 
 namespace Report_Writer
 {
-    public partial class FrmMainWindow : Form
-    {
-        DocumentLib.Parser parser = new DocumentLib.Parser();
+	public partial class FrmMainWindow : Form
+	{
+		DocumentLib.Parser parser = new DocumentLib.Parser();
 
-        public FrmMainWindow()
-        {
-            InitializeComponent();
-        }
+		public FrmMainWindow()
+		{
+			InitializeComponent();
+		}
 
-        private void FrmMainWindow_Load(object sender, EventArgs e)
-        {
-            txtDocument.Text = File.ReadAllText("Docs/Specification.txt");
-            UpdateInterface();
-        }
+		private void FrmMainWindow_Load(object sender, EventArgs e)
+		{
+			txtDocument.Text = File.ReadAllText("Docs/Specification.txt");
+			UpdateInterface();
+		}
 
-        private void txtDocument_KeyUp(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode != Keys.Enter)
-                return;
+		private void txtDocument_KeyUp(object sender, KeyEventArgs e)
+		{
+			if (e.KeyCode != Keys.Enter)
+				return;
 
-            UpdateInterface();
-        }
+			UpdateInterface();
+		}
 
-        private void txtDocument_TextChanged(object sender, EventArgs e)
-        {
-            changed = true;
-        }
+		private void txtDocument_TextChanged(object sender, EventArgs e)
+		{
+			changed = true;
+		}
 
-        private void lbNavigation_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            DocumentLib.Heading heading = (DocumentLib.Heading)lbNavigation.SelectedItem;
+		private void lbNavigation_SelectedIndexChanged(object sender, EventArgs e)
+		{
+			DocumentLib.Heading heading = (DocumentLib.Heading)lbNavigation.SelectedItem;
 
-            if (heading == null)
-                return;
+			if (heading == null)
+				return;
 
-            txtDocument.Focus();
+			Navigate(heading.position);
+		}
 
-            txtDocument.Select(txtDocument.Text.Length, 0);
-            txtDocument.ScrollToCaret();
+		private void UpdateInterface()
+		{
+			if (changed == false)
+				return;
 
-            txtDocument.Select(heading.position, 0);
-            txtDocument.ScrollToCaret();
-        }
+			parser.SetDocument(txtDocument.Text);
+			parser.Parse();
+			txtLog.Text = parser.GetLog();
 
-        private void UpdateInterface()
-        {
-            if (changed == false)
-                return;
+			lbNavigation.Items.Clear();
+			lbFigures.Items.Clear();
 
-            parser.SetDocument(txtDocument.Text);
-            parser.Parse();
-            txtLog.Text = parser.GetLog();
+			foreach (KeyValuePair<string, DocumentLib.Heading> pair in parser.GetHeadings())
+			{
+				lbNavigation.Items.Add(pair.Value);
+			}
 
-            lbNavigation.Items.Clear();
+			foreach (KeyValuePair<string, DocumentLib.Figure> pair in parser.GetFigures())
+			{
+				lbFigures.Items.Add(pair.Value);
+			}
 
-            foreach (KeyValuePair<string, DocumentLib.Heading> pair in parser.GetHeadings())
-            {
-                lbNavigation.Items.Add(pair.Value);
-            }
+			changed = false;
+		}
 
-            changed = false;
-        }
+		private void Navigate(int position)
+		{
+			txtDocument.Focus();
 
-        private bool changed = false;
+			txtDocument.Select(txtDocument.Text.Length, 0);
+			txtDocument.ScrollToCaret();
 
-        private void txtDocument_MouseUp(object sender, MouseEventArgs e)
-        {
-            UpdateInterface();
-        }
-    }
+			txtDocument.Select(position, 0);
+			txtDocument.ScrollToCaret();
+		}
+
+		private bool changed = false;
+
+		private void txtDocument_MouseUp(object sender, MouseEventArgs e)
+		{
+			UpdateInterface();
+		}
+	}
 }
