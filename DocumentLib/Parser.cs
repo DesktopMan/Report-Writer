@@ -32,7 +32,22 @@ namespace DocumentLib
             ExtractFigures();
             ExtractTables();
 
+            if (log.Count == 0)
+                log.Add("Document parsed successfully");
+
             return true;
+        }
+
+        public string GetLog()
+        {
+            StringBuilder sb = new StringBuilder();
+
+            foreach (string s in log)
+            {
+                sb.Append(s + Environment.NewLine);
+            }
+
+            return sb.ToString();
         }
 
         void ExtractHeadings()

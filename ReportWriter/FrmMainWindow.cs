@@ -38,8 +38,6 @@ namespace Report_Writer
             changed = true;
         }
 
-        private bool changed = false;
-
         private void lbNavigation_SelectedIndexChanged(object sender, EventArgs e)
         {
             DocumentLib.Heading heading = (DocumentLib.Heading)lbNavigation.SelectedItem;
@@ -56,6 +54,7 @@ namespace Report_Writer
 
             parser.SetDocument(txtDocument.Text);
             parser.Parse();
+            txtLog.Text = parser.GetLog();
 
             lbNavigation.Items.Clear();
 
@@ -66,5 +65,7 @@ namespace Report_Writer
 
             changed = false;
         }
+
+        private bool changed = false;
     }
 }

@@ -31,7 +31,11 @@
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.lbNavigation = new System.Windows.Forms.ListBox();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
+            this.splitContainer3 = new System.Windows.Forms.SplitContainer();
             this.txtDocument = new System.Windows.Forms.TextBox();
+            this.ssTip = new System.Windows.Forms.StatusStrip();
+            this.tsslblTip = new System.Windows.Forms.ToolStripStatusLabel();
+            this.txtLog = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -39,6 +43,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).BeginInit();
             this.splitContainer2.Panel1.SuspendLayout();
             this.splitContainer2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer3)).BeginInit();
+            this.splitContainer3.Panel1.SuspendLayout();
+            this.splitContainer3.Panel2.SuspendLayout();
+            this.splitContainer3.SuspendLayout();
+            this.ssTip.SuspendLayout();
             this.SuspendLayout();
             // 
             // splitContainer1
@@ -54,7 +63,7 @@
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.splitContainer2);
-            this.splitContainer1.Size = new System.Drawing.Size(776, 544);
+            this.splitContainer1.Size = new System.Drawing.Size(776, 522);
             this.splitContainer1.SplitterDistance = 201;
             this.splitContainer1.TabIndex = 0;
             // 
@@ -64,7 +73,7 @@
             this.lbNavigation.FormattingEnabled = true;
             this.lbNavigation.Location = new System.Drawing.Point(0, 0);
             this.lbNavigation.Name = "lbNavigation";
-            this.lbNavigation.Size = new System.Drawing.Size(201, 544);
+            this.lbNavigation.Size = new System.Drawing.Size(201, 522);
             this.lbNavigation.TabIndex = 1;
             this.lbNavigation.SelectedIndexChanged += new System.EventHandler(this.lbNavigation_SelectedIndexChanged);
             // 
@@ -76,10 +85,28 @@
             // 
             // splitContainer2.Panel1
             // 
-            this.splitContainer2.Panel1.Controls.Add(this.txtDocument);
-            this.splitContainer2.Size = new System.Drawing.Size(571, 544);
+            this.splitContainer2.Panel1.Controls.Add(this.splitContainer3);
+            this.splitContainer2.Size = new System.Drawing.Size(571, 522);
             this.splitContainer2.SplitterDistance = 379;
             this.splitContainer2.TabIndex = 0;
+            // 
+            // splitContainer3
+            // 
+            this.splitContainer3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainer3.Location = new System.Drawing.Point(0, 0);
+            this.splitContainer3.Name = "splitContainer3";
+            this.splitContainer3.Orientation = System.Windows.Forms.Orientation.Horizontal;
+            // 
+            // splitContainer3.Panel1
+            // 
+            this.splitContainer3.Panel1.Controls.Add(this.txtDocument);
+            // 
+            // splitContainer3.Panel2
+            // 
+            this.splitContainer3.Panel2.Controls.Add(this.txtLog);
+            this.splitContainer3.Size = new System.Drawing.Size(379, 522);
+            this.splitContainer3.SplitterDistance = 424;
+            this.splitContainer3.TabIndex = 0;
             // 
             // txtDocument
             // 
@@ -88,10 +115,38 @@
             this.txtDocument.Multiline = true;
             this.txtDocument.Name = "txtDocument";
             this.txtDocument.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txtDocument.Size = new System.Drawing.Size(379, 544);
-            this.txtDocument.TabIndex = 0;
+            this.txtDocument.Size = new System.Drawing.Size(379, 424);
+            this.txtDocument.TabIndex = 1;
             this.txtDocument.TextChanged += new System.EventHandler(this.txtDocument_TextChanged);
             this.txtDocument.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtDocument_KeyUp);
+            this.txtDocument.MouseUp += new System.Windows.Forms.MouseEventHandler(this.txtDocument_MouseUp);
+            // 
+            // ssTip
+            // 
+            this.ssTip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsslblTip});
+            this.ssTip.Location = new System.Drawing.Point(0, 522);
+            this.ssTip.Name = "ssTip";
+            this.ssTip.Size = new System.Drawing.Size(776, 22);
+            this.ssTip.TabIndex = 1;
+            this.ssTip.Text = "statusStrip1";
+            // 
+            // tsslblTip
+            // 
+            this.tsslblTip.Name = "tsslblTip";
+            this.tsslblTip.Size = new System.Drawing.Size(118, 17);
+            this.tsslblTip.Text = "toolStripStatusLabel1";
+            // 
+            // txtLog
+            // 
+            this.txtLog.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtLog.Location = new System.Drawing.Point(0, 0);
+            this.txtLog.Multiline = true;
+            this.txtLog.Name = "txtLog";
+            this.txtLog.ReadOnly = true;
+            this.txtLog.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.txtLog.Size = new System.Drawing.Size(379, 94);
+            this.txtLog.TabIndex = 0;
             // 
             // FrmMainWindow
             // 
@@ -99,6 +154,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(776, 544);
             this.Controls.Add(this.splitContainer1);
+            this.Controls.Add(this.ssTip);
             this.Name = "FrmMainWindow";
             this.Text = "Report Writer";
             this.Load += new System.EventHandler(this.FrmMainWindow_Load);
@@ -107,10 +163,18 @@
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
             this.splitContainer2.Panel1.ResumeLayout(false);
-            this.splitContainer2.Panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).EndInit();
             this.splitContainer2.ResumeLayout(false);
+            this.splitContainer3.Panel1.ResumeLayout(false);
+            this.splitContainer3.Panel1.PerformLayout();
+            this.splitContainer3.Panel2.ResumeLayout(false);
+            this.splitContainer3.Panel2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer3)).EndInit();
+            this.splitContainer3.ResumeLayout(false);
+            this.ssTip.ResumeLayout(false);
+            this.ssTip.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -119,7 +183,11 @@
         private System.Windows.Forms.SplitContainer splitContainer1;
         private System.Windows.Forms.SplitContainer splitContainer2;
         private System.Windows.Forms.ListBox lbNavigation;
+        private System.Windows.Forms.SplitContainer splitContainer3;
         private System.Windows.Forms.TextBox txtDocument;
+        private System.Windows.Forms.StatusStrip ssTip;
+        private System.Windows.Forms.ToolStripStatusLabel tsslblTip;
+        private System.Windows.Forms.TextBox txtLog;
     }
 }
 
