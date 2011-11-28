@@ -42,8 +42,15 @@ namespace Report_Writer
         {
             DocumentLib.Heading heading = (DocumentLib.Heading)lbNavigation.SelectedItem;
 
-            txtDocument.Select(heading.position, 0);
+            if (heading == null)
+                return;
+
             txtDocument.Focus();
+
+            txtDocument.Select(txtDocument.Text.Length, 0);
+            txtDocument.ScrollToCaret();
+
+            txtDocument.Select(heading.position, 0);
             txtDocument.ScrollToCaret();
         }
 
