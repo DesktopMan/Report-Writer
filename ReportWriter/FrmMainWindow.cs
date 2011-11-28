@@ -26,13 +26,25 @@ namespace Report_Writer
 
         private void txtDocument_KeyUp(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode != Keys.Enter)
+            if (e.KeyCode != Keys.Enter || changed == false)
                 return;
 
-            parser.SetText(txtDocument.Text);
+            parser.SetDocument(txtDocument.Text);
             parser.Parse();
 
+            lbNavigation.Items.Clear();
 
+            foreach (KeyValuePair<string, DocumentLib.Heading> pair in parser.GetHeadings())
+            {
+                lbNavigation.Items.Add(pair.Value.text);
+            }
         }
+
+        private void txtDocument_TextChanged(object sender, EventArgs e)
+        {
+            changed = true;
+        }
+
+        private bool changed = false;
     }
 }

@@ -29,8 +29,8 @@
         private void InitializeComponent()
         {
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
-            this.splitContainer2 = new System.Windows.Forms.SplitContainer();
             this.lbNavigation = new System.Windows.Forms.ListBox();
+            this.splitContainer2 = new System.Windows.Forms.SplitContainer();
             this.txtDocument = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -58,6 +58,15 @@
             this.splitContainer1.SplitterDistance = 201;
             this.splitContainer1.TabIndex = 0;
             // 
+            // lbNavigation
+            // 
+            this.lbNavigation.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lbNavigation.FormattingEnabled = true;
+            this.lbNavigation.Location = new System.Drawing.Point(0, 0);
+            this.lbNavigation.Name = "lbNavigation";
+            this.lbNavigation.Size = new System.Drawing.Size(201, 544);
+            this.lbNavigation.TabIndex = 1;
+            // 
             // splitContainer2
             // 
             this.splitContainer2.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -71,15 +80,6 @@
             this.splitContainer2.SplitterDistance = 379;
             this.splitContainer2.TabIndex = 0;
             // 
-            // lbNavigation
-            // 
-            this.lbNavigation.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lbNavigation.FormattingEnabled = true;
-            this.lbNavigation.Location = new System.Drawing.Point(0, 0);
-            this.lbNavigation.Name = "lbNavigation";
-            this.lbNavigation.Size = new System.Drawing.Size(201, 544);
-            this.lbNavigation.TabIndex = 1;
-            // 
             // txtDocument
             // 
             this.txtDocument.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -89,6 +89,7 @@
             this.txtDocument.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.txtDocument.Size = new System.Drawing.Size(379, 544);
             this.txtDocument.TabIndex = 0;
+            this.txtDocument.TextChanged += new System.EventHandler(this.txtDocument_TextChanged);
             this.txtDocument.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtDocument_KeyUp);
             // 
             // FrmMainWindow

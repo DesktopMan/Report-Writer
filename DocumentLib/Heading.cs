@@ -5,9 +5,9 @@ using System.Text;
 
 namespace DocumentLib
 {
-    class Heading : Content
+    public class Heading : Content
     {
-        public Heading(string id, string text, int level, bool showInToc) : base(id, text)
+        public Heading(string id, int line, string text, int level, bool showInToc) : base(id, line, text)
         {
             this.level = level;
             this.showInToc = showInToc;
