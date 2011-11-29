@@ -24,11 +24,17 @@ namespace DocumentLib
 			return figures;
 		}
 
+		public Dictionary<string, Reference> GetReferences()
+		{
+			return references;
+		}
+
 		public bool Parse()
 		{
 			headings = new Dictionary<string, Heading>();
 			figures = new Dictionary<string, Figure>();
 			tables = new Dictionary<string, Table>();
+			references = new Dictionary<string, Reference>();
 			log = new List<LogLine>();
 
 			if (document == "")
@@ -37,6 +43,7 @@ namespace DocumentLib
 			ExtractHeadings();
 			ExtractFigures();
 			ExtractTables();
+			ExtractReferences();
 
 			VerifyReferences();
 
@@ -123,9 +130,30 @@ namespace DocumentLib
 
 		}
 
+		void ExtractReferences()
+		{
+			Regex re = new Regex("^@reference\\((.+?),(.+?),(.+?)\\)\r$", RegexOptions.Multiline);
+			MatchCollection mc = re.Matches(document);
+
+			foreach (Match m in mc)
+			{
+				string id = m.Groups[1].ToString().Trim();
+				string url = m.Groups[2].ToString().Trim();
+				string text = m.Groups[3].ToString().Trim();
+
+				if (references.ContainsKey(id))
+				{
+					log.Add(new LogLine(LogLine.Level.ERR, "Skipping duplicate reference id '" + id + "'", m.Index));
+					continue;
+				}
+
+				references[id] = new Reference(id, m.Index, text, url);
+			}
+		}
+
 		void VerifyReferences()
 		{
-			Regex re = new Regex("@(heading|page|figure|table)\\(([^,|.]+?)\\)");
+			Regex re = new Regex("@(.+?)\\(([^,|.]+?)\\)");
 
 			MatchCollection mc = re.Matches(document);
 
@@ -134,8 +162,32 @@ namespace DocumentLib
 				string type = m.Groups[1].ToString();
 				string id = m.Groups[2].ToString();
 
-				if (!headings.ContainsKey(id) && !figures.ContainsKey(id) && !tables.ContainsKey(id))
-					log.Add(new LogLine(LogLine.Level.ERR, "Error: Unknown reference '" + id + "'", m.Index));
+				switch (type)
+				{
+					case "figure":
+						if (!figures.ContainsKey(id))
+							log.Add(new LogLine(LogLine.Level.ERR, "Unknown figure '" + id + "'", m.Index));
+						break;
+
+					case "table":
+						if (!tables.ContainsKey(id))
+							log.Add(new LogLine(LogLine.Level.ERR, "Unknown table '" + id + "'", m.Index));
+						break;
+
+					case "heading":
+						if (!headings.ContainsKey(id))
+							log.Add(new LogLine(LogLine.Level.ERR, "Unknown heading '" + id + "'", m.Index));
+						break;
+
+					case "reference":
+						if (!references.ContainsKey(id))
+							log.Add(new LogLine(LogLine.Level.ERR, "Unknown reference '" + id + "'", m.Index));
+						break;
+
+					default:
+						log.Add(new LogLine(LogLine.Level.ERR, "Unknown command '" + type + "'", m.Index));
+						break;
+				}
 			}
 		}
 
@@ -144,6 +196,7 @@ namespace DocumentLib
 		Dictionary<string, Heading> headings = null;
 		Dictionary<string, Figure> figures = null;
 		Dictionary<string, Table> tables = null;
+		Dictionary<string, Reference> references = null;
 
 		List<LogLine> log;
 	}

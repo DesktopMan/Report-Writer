@@ -56,6 +56,8 @@ namespace Report_Writer
 			parser.SetDocument(txtDocument.Text);
 			parser.Parse();
 
+			lbLog.Items.Clear();
+
 			foreach (DocumentLib.LogLine l in parser.GetLog())
 				lbLog.Items.Add(l);
 
@@ -66,16 +68,16 @@ namespace Report_Writer
 
 			lbNavigation.Items.Clear();
 			lbFigures.Items.Clear();
+			lbReferences.Items.Clear();
 
 			foreach (KeyValuePair<string, DocumentLib.Heading> pair in parser.GetHeadings())
-			{
 				lbNavigation.Items.Add(pair.Value);
-			}
 
 			foreach (KeyValuePair<string, DocumentLib.Figure> pair in parser.GetFigures())
-			{
 				lbFigures.Items.Add(pair.Value);
-			}
+
+			foreach (KeyValuePair<string, DocumentLib.Reference> pair in parser.GetReferences())
+				lbReferences.Items.Add(pair.Value);
 
 			changed = false;
 		}
