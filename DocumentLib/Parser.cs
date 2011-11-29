@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.IO;
 
 namespace DocumentLib
 {
@@ -28,7 +29,7 @@ namespace DocumentLib
 			headings = new Dictionary<string, Heading>();
 			figures = new Dictionary<string, Figure>();
 			tables = new Dictionary<string, Table>();
-			log = new List<string>();
+			log = new List<LogLine>();
 
 			if (document == "")
 				return true;
@@ -39,22 +40,12 @@ namespace DocumentLib
 
 			VerifyReferences();
 
-			if (log.Count == 0)
-				log.Add("Document parsed successfully");
-
 			return true;
 		}
 
-		public string GetLog()
+		public List<LogLine> GetLog()
 		{
-			StringBuilder sb = new StringBuilder();
-
-			foreach (string s in log)
-			{
-				sb.Append(s + Environment.NewLine);
-			}
-
-			return sb.ToString();
+			return log;
 		}
 
 		void ExtractHeadings()
@@ -86,13 +77,13 @@ namespace DocumentLib
 
                 if (text == "")
                 {
-                    log.Add("Warning: Heading with no text");
+                    log.Add(new LogLine(LogLine.Level.WARN, "Heading with no text", m.Index));
                     continue;
                 }
 
                 if (headings.ContainsKey(id))
                 {
-                    log.Add("Error: Skipping duplicate heading id '" + id + "'");
+                    log.Add( new LogLine(LogLine.Level.ERR, "Skipping duplicate heading id '" + id + "'", m.Index));
 					continue;
                 }
 
@@ -116,9 +107,12 @@ namespace DocumentLib
 
 				if (figures.ContainsKey(id))
 				{
-					log.Add("Error: Skipping duplicate figure '" + id + "'");
+					log.Add(new LogLine(LogLine.Level.ERR, "Skipping duplicate figure id '" + id + "'", m.Index));
 					continue;
 				}
+
+				if (!File.Exists(path))
+					log.Add(new LogLine(LogLine.Level.WARN, "Unable to find figure file '" + path + "'", m.Index));
 
 				figures[id] = new Figure(id, m.Index, text, path);
 			}
@@ -141,7 +135,7 @@ namespace DocumentLib
 				string id = m.Groups[2].ToString();
 
 				if (!headings.ContainsKey(id) && !figures.ContainsKey(id) && !tables.ContainsKey(id))
-					log.Add("Error: Unknown reference '" + id + "'");
+					log.Add(new LogLine(LogLine.Level.ERR, "Error: Unknown reference '" + id + "'", m.Index));
 			}
 		}
 
@@ -151,6 +145,6 @@ namespace DocumentLib
 		Dictionary<string, Figure> figures = null;
 		Dictionary<string, Table> tables = null;
 
-		List<string> log;
+		List<LogLine> log;
 	}
 }

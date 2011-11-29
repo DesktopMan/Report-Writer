@@ -33,14 +33,14 @@
 			this.splitContainer2 = new System.Windows.Forms.SplitContainer();
 			this.splitContainer3 = new System.Windows.Forms.SplitContainer();
 			this.txtDocument = new System.Windows.Forms.TextBox();
-			this.ssTip = new System.Windows.Forms.StatusStrip();
-			this.tsslblTip = new System.Windows.Forms.ToolStripStatusLabel();
-			this.txtLog = new System.Windows.Forms.TextBox();
 			this.splitContainer4 = new System.Windows.Forms.SplitContainer();
-			this.splitContainer5 = new System.Windows.Forms.SplitContainer();
 			this.lbFigures = new System.Windows.Forms.ListBox();
+			this.splitContainer5 = new System.Windows.Forms.SplitContainer();
 			this.lbTables = new System.Windows.Forms.ListBox();
 			this.lbReferences = new System.Windows.Forms.ListBox();
+			this.ssTip = new System.Windows.Forms.StatusStrip();
+			this.tsslblTip = new System.Windows.Forms.ToolStripStatusLabel();
+			this.lbLog = new System.Windows.Forms.ListBox();
 			((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
 			this.splitContainer1.Panel1.SuspendLayout();
 			this.splitContainer1.Panel2.SuspendLayout();
@@ -53,7 +53,6 @@
 			this.splitContainer3.Panel1.SuspendLayout();
 			this.splitContainer3.Panel2.SuspendLayout();
 			this.splitContainer3.SuspendLayout();
-			this.ssTip.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.splitContainer4)).BeginInit();
 			this.splitContainer4.Panel1.SuspendLayout();
 			this.splitContainer4.Panel2.SuspendLayout();
@@ -62,6 +61,7 @@
 			this.splitContainer5.Panel1.SuspendLayout();
 			this.splitContainer5.Panel2.SuspendLayout();
 			this.splitContainer5.SuspendLayout();
+			this.ssTip.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// splitContainer1
@@ -84,7 +84,9 @@
 			// lbNavigation
 			// 
 			this.lbNavigation.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.lbNavigation.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.lbNavigation.FormattingEnabled = true;
+			this.lbNavigation.ItemHeight = 15;
 			this.lbNavigation.Location = new System.Drawing.Point(0, 0);
 			this.lbNavigation.Name = "lbNavigation";
 			this.lbNavigation.Size = new System.Drawing.Size(201, 522);
@@ -121,7 +123,7 @@
 			// 
 			// splitContainer3.Panel2
 			// 
-			this.splitContainer3.Panel2.Controls.Add(this.txtLog);
+			this.splitContainer3.Panel2.Controls.Add(this.lbLog);
 			this.splitContainer3.Size = new System.Drawing.Size(379, 522);
 			this.splitContainer3.SplitterDistance = 424;
 			this.splitContainer3.TabIndex = 0;
@@ -129,6 +131,7 @@
 			// txtDocument
 			// 
 			this.txtDocument.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.txtDocument.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.txtDocument.Location = new System.Drawing.Point(0, 0);
 			this.txtDocument.Multiline = true;
 			this.txtDocument.Name = "txtDocument";
@@ -138,33 +141,6 @@
 			this.txtDocument.TextChanged += new System.EventHandler(this.txtDocument_TextChanged);
 			this.txtDocument.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtDocument_KeyUp);
 			this.txtDocument.MouseUp += new System.Windows.Forms.MouseEventHandler(this.txtDocument_MouseUp);
-			// 
-			// ssTip
-			// 
-			this.ssTip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tsslblTip});
-			this.ssTip.Location = new System.Drawing.Point(0, 522);
-			this.ssTip.Name = "ssTip";
-			this.ssTip.Size = new System.Drawing.Size(776, 22);
-			this.ssTip.TabIndex = 1;
-			this.ssTip.Text = "statusStrip1";
-			// 
-			// tsslblTip
-			// 
-			this.tsslblTip.Name = "tsslblTip";
-			this.tsslblTip.Size = new System.Drawing.Size(118, 17);
-			this.tsslblTip.Text = "toolStripStatusLabel1";
-			// 
-			// txtLog
-			// 
-			this.txtLog.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.txtLog.Location = new System.Drawing.Point(0, 0);
-			this.txtLog.Multiline = true;
-			this.txtLog.Name = "txtLog";
-			this.txtLog.ReadOnly = true;
-			this.txtLog.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-			this.txtLog.Size = new System.Drawing.Size(379, 94);
-			this.txtLog.TabIndex = 0;
 			// 
 			// splitContainer4
 			// 
@@ -184,6 +160,17 @@
 			this.splitContainer4.SplitterDistance = 162;
 			this.splitContainer4.TabIndex = 0;
 			// 
+			// lbFigures
+			// 
+			this.lbFigures.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.lbFigures.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.lbFigures.FormattingEnabled = true;
+			this.lbFigures.ItemHeight = 15;
+			this.lbFigures.Location = new System.Drawing.Point(0, 0);
+			this.lbFigures.Name = "lbFigures";
+			this.lbFigures.Size = new System.Drawing.Size(188, 162);
+			this.lbFigures.TabIndex = 0;
+			// 
 			// splitContainer5
 			// 
 			this.splitContainer5.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -202,19 +189,12 @@
 			this.splitContainer5.SplitterDistance = 168;
 			this.splitContainer5.TabIndex = 0;
 			// 
-			// lbFigures
-			// 
-			this.lbFigures.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.lbFigures.FormattingEnabled = true;
-			this.lbFigures.Location = new System.Drawing.Point(0, 0);
-			this.lbFigures.Name = "lbFigures";
-			this.lbFigures.Size = new System.Drawing.Size(188, 162);
-			this.lbFigures.TabIndex = 0;
-			// 
 			// lbTables
 			// 
 			this.lbTables.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.lbTables.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.lbTables.FormattingEnabled = true;
+			this.lbTables.ItemHeight = 15;
 			this.lbTables.Items.AddRange(new object[] {
             "Tables will be here"});
 			this.lbTables.Location = new System.Drawing.Point(0, 0);
@@ -225,13 +205,43 @@
 			// lbReferences
 			// 
 			this.lbReferences.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.lbReferences.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.lbReferences.FormattingEnabled = true;
+			this.lbReferences.ItemHeight = 15;
 			this.lbReferences.Items.AddRange(new object[] {
             "References will be here"});
 			this.lbReferences.Location = new System.Drawing.Point(0, 0);
 			this.lbReferences.Name = "lbReferences";
 			this.lbReferences.Size = new System.Drawing.Size(188, 184);
 			this.lbReferences.TabIndex = 1;
+			// 
+			// ssTip
+			// 
+			this.ssTip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsslblTip});
+			this.ssTip.Location = new System.Drawing.Point(0, 522);
+			this.ssTip.Name = "ssTip";
+			this.ssTip.Size = new System.Drawing.Size(776, 22);
+			this.ssTip.TabIndex = 1;
+			this.ssTip.Text = "statusStrip1";
+			// 
+			// tsslblTip
+			// 
+			this.tsslblTip.Name = "tsslblTip";
+			this.tsslblTip.Size = new System.Drawing.Size(118, 17);
+			this.tsslblTip.Text = "toolStripStatusLabel1";
+			// 
+			// lbLog
+			// 
+			this.lbLog.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.lbLog.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.lbLog.FormattingEnabled = true;
+			this.lbLog.ItemHeight = 15;
+			this.lbLog.Location = new System.Drawing.Point(0, 0);
+			this.lbLog.Name = "lbLog";
+			this.lbLog.Size = new System.Drawing.Size(379, 94);
+			this.lbLog.TabIndex = 0;
+			this.lbLog.SelectedIndexChanged += new System.EventHandler(this.lbLog_SelectedIndexChanged);
 			// 
 			// FrmMainWindow
 			// 
@@ -242,6 +252,7 @@
 			this.Controls.Add(this.ssTip);
 			this.Name = "FrmMainWindow";
 			this.Text = "Report Writer";
+			this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
 			this.Load += new System.EventHandler(this.FrmMainWindow_Load);
 			this.splitContainer1.Panel1.ResumeLayout(false);
 			this.splitContainer1.Panel2.ResumeLayout(false);
@@ -254,11 +265,8 @@
 			this.splitContainer3.Panel1.ResumeLayout(false);
 			this.splitContainer3.Panel1.PerformLayout();
 			this.splitContainer3.Panel2.ResumeLayout(false);
-			this.splitContainer3.Panel2.PerformLayout();
 			((System.ComponentModel.ISupportInitialize)(this.splitContainer3)).EndInit();
 			this.splitContainer3.ResumeLayout(false);
-			this.ssTip.ResumeLayout(false);
-			this.ssTip.PerformLayout();
 			this.splitContainer4.Panel1.ResumeLayout(false);
 			this.splitContainer4.Panel2.ResumeLayout(false);
 			((System.ComponentModel.ISupportInitialize)(this.splitContainer4)).EndInit();
@@ -267,6 +275,8 @@
 			this.splitContainer5.Panel2.ResumeLayout(false);
 			((System.ComponentModel.ISupportInitialize)(this.splitContainer5)).EndInit();
 			this.splitContainer5.ResumeLayout(false);
+			this.ssTip.ResumeLayout(false);
+			this.ssTip.PerformLayout();
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -280,13 +290,13 @@
         private System.Windows.Forms.SplitContainer splitContainer3;
         private System.Windows.Forms.TextBox txtDocument;
         private System.Windows.Forms.StatusStrip ssTip;
-        private System.Windows.Forms.ToolStripStatusLabel tsslblTip;
-        private System.Windows.Forms.TextBox txtLog;
+		private System.Windows.Forms.ToolStripStatusLabel tsslblTip;
         private System.Windows.Forms.SplitContainer splitContainer4;
         private System.Windows.Forms.SplitContainer splitContainer5;
         private System.Windows.Forms.ListBox lbFigures;
         private System.Windows.Forms.ListBox lbTables;
         private System.Windows.Forms.ListBox lbReferences;
+		private System.Windows.Forms.ListBox lbLog;
     }
 }
 

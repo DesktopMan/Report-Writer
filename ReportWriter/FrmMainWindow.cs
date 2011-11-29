@@ -55,7 +55,14 @@ namespace Report_Writer
 
 			parser.SetDocument(txtDocument.Text);
 			parser.Parse();
-			txtLog.Text = parser.GetLog();
+
+			foreach (DocumentLib.LogLine l in parser.GetLog())
+				lbLog.Items.Add(l);
+
+			if (lbLog.Items.Count == 0)
+				tsslblTip.Text = "Document parsed successfully";
+			else
+				tsslblTip.Text = "Some issues were found while parsing the document";
 
 			lbNavigation.Items.Clear();
 			lbFigures.Items.Clear();
@@ -89,6 +96,12 @@ namespace Report_Writer
 		private void txtDocument_MouseUp(object sender, MouseEventArgs e)
 		{
 			UpdateInterface();
+		}
+
+		private void lbLog_SelectedIndexChanged(object sender, EventArgs e)
+		{
+			if (lbLog.SelectedItem != null)
+				Navigate(((DocumentLib.LogLine)lbLog.SelectedItem).position);
 		}
 	}
 }

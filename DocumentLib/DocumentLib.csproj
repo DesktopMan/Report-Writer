@@ -43,6 +43,7 @@
     <Compile Include="Content.cs" />
     <Compile Include="Figure.cs" />
     <Compile Include="Heading.cs" />
+    <Compile Include="LogLine.cs" />
     <Compile Include="Parser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Table.cs" />
