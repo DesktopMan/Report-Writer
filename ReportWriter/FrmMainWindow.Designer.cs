@@ -170,6 +170,7 @@
 			this.lbFigures.Name = "lbFigures";
 			this.lbFigures.Size = new System.Drawing.Size(188, 162);
 			this.lbFigures.TabIndex = 0;
+			this.lbFigures.SelectedIndexChanged += new System.EventHandler(this.lbFigures_SelectedIndexChanged);
 			// 
 			// splitContainer5
 			// 
@@ -201,6 +202,7 @@
 			this.lbTables.Name = "lbTables";
 			this.lbTables.Size = new System.Drawing.Size(188, 168);
 			this.lbTables.TabIndex = 1;
+			this.lbTables.SelectedIndexChanged += new System.EventHandler(this.lbTables_SelectedIndexChanged);
 			// 
 			// lbReferences
 			// 
@@ -214,6 +216,7 @@
 			this.lbReferences.Name = "lbReferences";
 			this.lbReferences.Size = new System.Drawing.Size(188, 184);
 			this.lbReferences.TabIndex = 1;
+			this.lbReferences.SelectedIndexChanged += new System.EventHandler(this.lbReferences_SelectedIndexChanged);
 			// 
 			// ssTip
 			// 

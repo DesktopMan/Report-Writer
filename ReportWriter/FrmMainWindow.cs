@@ -64,7 +64,7 @@ namespace Report_Writer
 			if (lbLog.Items.Count == 0)
 				tsslblTip.Text = "Document parsed successfully";
 			else
-				tsslblTip.Text = "Some issues were found while parsing the document";
+				tsslblTip.Text = "Some issues were found while parsing this document";
 
 			lbNavigation.Items.Clear();
 			lbFigures.Items.Clear();
@@ -104,6 +104,29 @@ namespace Report_Writer
 		{
 			if (lbLog.SelectedItem != null)
 				Navigate(((DocumentLib.LogLine)lbLog.SelectedItem).position);
+
+			lbLog.ClearSelected();
+		}
+
+		private void lbFigures_SelectedIndexChanged(object sender, EventArgs e)
+		{
+			if (lbFigures.SelectedItem != null)
+				Navigate(((DocumentLib.Figure)lbFigures.SelectedItem).position);
+
+			lbFigures.ClearSelected();
+		}
+
+		private void lbReferences_SelectedIndexChanged(object sender, EventArgs e)
+		{
+			if (lbReferences.SelectedItem != null)
+				Navigate(((DocumentLib.Reference)lbReferences.SelectedItem).position);
+
+			lbReferences.ClearSelected();
+		}
+
+		private void lbTables_SelectedIndexChanged(object sender, EventArgs e)
+		{
+			lbTables.ClearSelected();
 		}
 	}
 }
