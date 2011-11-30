@@ -27,7 +27,7 @@ namespace Report_Writer
 
 		private void txtDocument_KeyUp(object sender, KeyEventArgs e)
 		{
-			if (e.KeyCode != Keys.Enter)
+			if (e.KeyCode != Keys.Enter && e.KeyCode != Keys.Up && e.KeyCode != Keys.Down)
 				return;
 
 			UpdateInterface();
