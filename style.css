@@ -1,0 +1,153 @@
+@page
+{
+	size: A4
+}
+
+@page blank
+{
+	@bottom
+	{
+		content: normal;
+	}
+}
+
+div.appendix
+{
+	page-break-after: always;
+}
+
+@page:first
+{
+	@bottom
+	{
+		content: normal
+	}
+}
+
+@page
+{
+	@bottom
+	{
+		content: counter(page) " of " counter(pages);
+	}
+}
+
+h1, h2, h3
+{
+	page-break-after: avoid;
+}
+
+h1
+{
+	counter-increment: h1;
+	counter-reset: h2 h3;
+	page-break-before: always;
+}
+
+h2
+{
+	counter-increment: h2;
+	counter-reset: h3;
+}
+
+h3
+{
+	counter-increment: h3;
+}
+
+
+h1::before {
+  content: counter(h1) " ";
+}
+
+h2::before {
+  content: counter(h1) "." counter(h2) " ";
+}
+
+h3::before {
+  content: counter(h1) " . " counter(h2) "." counter(h3) " ";
+}
+
+p
+{
+  text-align: justify;
+  page-break-inside: avoid;
+}
+
+a
+{
+	color: #000000;
+	text-decoration: none;
+}
+
+a.pageref { font-style: italic; content: "page " target-counter(attr(href), page); }
+a.chaff { font-style: italic; content: "chapter " target-counter(attr(href), chapter) ", "; }
+a.figref { font-style: italic; content: "figure " target-counter(attr(href), figure); }
+a.tableref { font-style: italic; content: "table " target-counter(attr(href), table); }
+a.refref { content: "[" target-counter(attr(href), reference) "]"; }
+
+div.figure {
+  margin: 1em 0;
+  counter-increment: figure;
+  page-break-inside: avoid;
+  text-align: center;
+}
+
+div.table {
+  margin: 1em 0;
+  counter-increment: table;
+  page-break-inside: avoid;
+}
+
+a.reftoc {
+  margin: 1em 0;
+  counter-increment: reference;
+}
+
+pre {
+  font-size: 0.7em;
+  border-style: dotted;
+}
+
+div.figure .caption, div.table .caption {
+  /*width: 37%;
+  text-align: right;*/
+  font-size: 0.9em;
+  /*margin: 0 0 1.2em -40%;*/
+}
+
+div.figure .caption:before {
+  content: "Figure " counter(figure) ": ";
+  font-weight: bold;
+}
+
+div.table .caption:before {
+  content: "Table " counter(table) ": ";
+  font-weight: bold;
+}
+
+a.figtoc::before { content: "Figure " target-counter(attr(href), figure) " - "; }
+a.tabletoc { content: "Table " target-counter(attr(href), table) " - " target-content(attr(href)) .caption; }
+a.reftoc::before { content: "[" counter(reference) "] "; }
+
+a.toc_1, a.toc_2, a.toc_3, a.figtoc, a.tabletoc
+{
+	text-decoration: none;
+	color: black;
+}
+
+a.toc_2:before
+{
+	margin-left: 1em;
+	content: "";
+}
+
+a.toc_3:before
+{
+	margin-left: 2em;
+	content: "";
+}
+
+a.toc_1:after, a.toc_2:after, a.toc_3:after, a.figtoc::after, a.tabletoc:after {
+  content: leader('.') target-counter(attr(href), page);
+}

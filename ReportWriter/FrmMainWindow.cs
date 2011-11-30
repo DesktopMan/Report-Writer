@@ -79,6 +79,8 @@ namespace Report_Writer
 			foreach (KeyValuePair<string, DocumentLib.Reference> pair in parser.GetReferences())
 				lbReferences.Items.Add(pair.Value);
 
+			File.WriteAllText("output.html", DocumentLib.HtmlGenerator.GetHtml(txtDocument.Text));
+
 			changed = false;
 		}
 
