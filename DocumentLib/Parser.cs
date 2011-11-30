@@ -182,6 +182,10 @@ namespace DocumentLib
 						if (!references.ContainsKey(id))
 							log.Add(new LogLine(LogLine.Level.ERR, m.ToString().Trim(), "Unknown reference '" + id + "'", m.Index));
 						break;
+					case "page":
+						if (!figures.ContainsKey(id) && !tables.ContainsKey(id) && !headings.ContainsKey(id) && !references.ContainsKey(id))
+							log.Add(new LogLine(LogLine.Level.ERR, m.ToString().Trim(), "Unknown id '" + id + "'", m.Index));
+						break;
 
 					default:
 						log.Add(new LogLine(LogLine.Level.ERR, m.ToString().Trim(), "Unknown command '" + type + "'", m.Index));
