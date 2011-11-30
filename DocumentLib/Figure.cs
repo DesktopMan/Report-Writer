@@ -7,8 +7,8 @@ namespace DocumentLib
 {
 	public class Figure : Content
 	{
-		public Figure(string id, int position, string text, string imagePath)
-			: base(id, position, text)
+		public Figure(string id, int position, string match, string text, string imagePath)
+			: base(id, position, match, text)
 		{
 			this.imagePath = imagePath;
 		}

@@ -84,20 +84,19 @@ namespace DocumentLib
 
                 if (text == "")
                 {
-                    log.Add(new LogLine(LogLine.Level.WARN, "Heading with no text", m.Index));
+                    log.Add(new LogLine(LogLine.Level.WARN, "Heading with no text", m.ToString().Trim(), m.Index));
                     continue;
                 }
 
                 if (headings.ContainsKey(id))
                 {
-                    log.Add( new LogLine(LogLine.Level.ERR, "Skipping duplicate heading id '" + id + "'", m.Index));
+                    log.Add( new LogLine(LogLine.Level.ERR, "Skipping duplicate heading id '" + id + "'", m.ToString().Trim(), m.Index));
 					continue;
                 }
 
-                headings[id] = new Heading(id, m.Index, parent, text, level, showInToc);
+                headings[id] = new Heading(id, m.Index, m.ToString().Trim(), parent, text, level, showInToc);
 
 				currentHeading = headings[id];
-
             }
         }
 
@@ -114,14 +113,14 @@ namespace DocumentLib
 
 				if (figures.ContainsKey(id))
 				{
-					log.Add(new LogLine(LogLine.Level.ERR, "Skipping duplicate figure id '" + id + "'", m.Index));
+					log.Add(new LogLine(LogLine.Level.ERR, m.ToString().Trim(), "Skipping duplicate figure id '" + id + "'", m.Index));
 					continue;
 				}
 
 				if (!File.Exists(path))
-					log.Add(new LogLine(LogLine.Level.WARN, "Unable to find figure file '" + path + "'", m.Index));
+					log.Add(new LogLine(LogLine.Level.WARN, m.ToString().Trim(), "Unable to find figure file '" + path + "'", m.Index));
 
-				figures[id] = new Figure(id, m.Index, text, path);
+				figures[id] = new Figure(id, m.Index, m.ToString().Trim(), text, path);
 			}
 		}
 
@@ -143,11 +142,11 @@ namespace DocumentLib
 
 				if (references.ContainsKey(id))
 				{
-					log.Add(new LogLine(LogLine.Level.ERR, "Skipping duplicate reference id '" + id + "'", m.Index));
+					log.Add(new LogLine(LogLine.Level.ERR, m.ToString().Trim(), "Skipping duplicate reference id '" + id + "'", m.Index));
 					continue;
 				}
 
-				references[id] = new Reference(id, m.Index, text, url);
+				references[id] = new Reference(id, m.Index, m.ToString().Trim(), text, url);
 			}
 		}
 
@@ -166,26 +165,26 @@ namespace DocumentLib
 				{
 					case "figure":
 						if (!figures.ContainsKey(id))
-							log.Add(new LogLine(LogLine.Level.ERR, "Unknown figure '" + id + "'", m.Index));
+							log.Add(new LogLine(LogLine.Level.ERR, m.ToString().Trim(), "Unknown figure '" + id + "'", m.Index));
 						break;
 
 					case "table":
 						if (!tables.ContainsKey(id))
-							log.Add(new LogLine(LogLine.Level.ERR, "Unknown table '" + id + "'", m.Index));
+							log.Add(new LogLine(LogLine.Level.ERR, m.ToString().Trim(), "Unknown table '" + id + "'", m.Index));
 						break;
 
 					case "heading":
 						if (!headings.ContainsKey(id))
-							log.Add(new LogLine(LogLine.Level.ERR, "Unknown heading '" + id + "'", m.Index));
+							log.Add(new LogLine(LogLine.Level.ERR, m.ToString().Trim(), "Unknown heading '" + id + "'", m.Index));
 						break;
 
 					case "reference":
 						if (!references.ContainsKey(id))
-							log.Add(new LogLine(LogLine.Level.ERR, "Unknown reference '" + id + "'", m.Index));
+							log.Add(new LogLine(LogLine.Level.ERR, m.ToString().Trim(), "Unknown reference '" + id + "'", m.Index));
 						break;
 
 					default:
-						log.Add(new LogLine(LogLine.Level.ERR, "Unknown command '" + type + "'", m.Index));
+						log.Add(new LogLine(LogLine.Level.ERR, m.ToString().Trim(), "Unknown command '" + type + "'", m.Index));
 						break;
 				}
 			}

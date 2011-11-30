@@ -5,16 +5,18 @@ using System.Text;
 
 namespace DocumentLib
 {
-	class Table : Content
+	public class Reference : Content
 	{
-		public Table(string id, int position, string match, string text)
-			: base(id, position, match, text)
+		public Reference(string id, int position, string match, string text, string url) : base(id, position, match, text)
 		{
+			this.url = url;
 		}
 
 		public override string ToString()
 		{
 			return id + " - " + text;
 		}
+
+		public string url;
 	}
 }

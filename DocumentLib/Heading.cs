@@ -7,8 +7,8 @@ namespace DocumentLib
 {
 	public class Heading : Content
 	{
-		public Heading(string id, int position, Heading parent, string text, int level, bool showInToc)
-			: base(id, position, text)
+		public Heading(string id, int position, string match, Heading parent, string text, int level, bool showInToc)
+			: base(id, position, match, text)
 		{
 			this.level = level;
 			this.showInToc = showInToc;
