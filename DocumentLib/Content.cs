@@ -9,7 +9,7 @@ namespace DocumentLib
 	{
 		public Content(string id, int position, string match, string text)
 		{
-			this.id = id;
+			this.id = id.Replace(' ', '_').ToLower();
 			this.position = position;
 			this.match = match;
 			this.text = text;

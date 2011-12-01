@@ -20,37 +20,45 @@ namespace DocumentLib
 			StringBuilder html = new StringBuilder();
 
 			html.Append("<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01//EN\" \"http://www.w3.org/TR/html4/strict.dtd\">\r\n");
-			html.Append("<html>\r\n<head><link href=\"style.css\" rel=\"stylesheet\" type=\"text/css\"></head>\r\n<body>\r\n");
+			html.Append("<html>\r\n<head>\r\n<title>Title</title>\r\n<link href=\"style.css\" rel=\"stylesheet\" type=\"text/css\">\r\n<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\">\r\n</head>\r\n<body>\r\n");
 
 			// Convert @page links to actual page numbers
 			document = new Regex("@page\\((.+?)\\)").Replace(document, "<a href='#$1' class='pageref'>here</a>");
 
 			StringBuilder toc = new StringBuilder();
 
+			toc.Append("<div>\r\n");
+
 			foreach (KeyValuePair<string, Heading> p in parser.GetHeadings())
 			{
 				document = document.Replace("@heading(" + p.Value.id + ")", "<a href='#" + p.Value.id + "'>" + p.Value.text + "</a>");
 				document = document.Replace(p.Value.match, "<h" + p.Value.level + " id='" + p.Value.id + "'>" + p.Value.text + "</h" + p.Value.level + ">");
-				toc.Append("<a href='#" + p.Value.id + "' class='toc_" + p.Value.level + "'>" + p.Value.text + "</a><br/>\r\n");
+				toc.Append("<a href='#" + p.Value.id + "' class='toc_" + p.Value.level + "'>" + p.Value.text + "</a><br>\r\n");
 			}
+
+			toc.Append("</div>\r\n");
 
 			document = document.Replace("@toc", toc.ToString());
 
 			StringBuilder figures = new StringBuilder();
 
+			figures.Append("<div>\r\n");
+
 			foreach (KeyValuePair<string, Figure> p in parser.GetFigures())
 			{
 				document = document.Replace("@figure(" + p.Value.id + ")", "<a href='#" + p.Value.id + "' class='figref'>Figure x</a>");
-				document = document.Replace(p.Value.match, "<div id='" + p.Value.id + "' class='figure'><img src='" + p.Value.imagePath + "' alt='" + p.Value.text + "' title='" + p.Value.text + "' /><div class='caption'>" + p.Value.text + "</div></div>");
-				figures.Append("<a href='#" + p.Value.id + "' class='figtoc'>" + p.Value.text + "</a><br/>\r\n");
+				document = document.Replace(p.Value.match, "<div id='" + p.Value.id + "' class='figure'><img src='" + p.Value.imagePath + "' alt='" + p.Value.text + "' title='" + p.Value.text + "'><div class='caption'>" + p.Value.text + "</div></div>");
+				figures.Append("<a href='#" + p.Value.id + "' class='figtoc'>" + p.Value.text + "</a><br>\r\n");
 			}
+
+			figures.Append("</div>\r\n");
 
 			document = document.Replace("@figures", figures.ToString());
 
 			foreach (KeyValuePair<string, Reference> p in parser.GetReferences())
 			{
 				document = document.Replace("@reference(" + p.Value.id + ")", "<a href='#" + p.Value.id + "' class='refref'>[" + p.Value.id + "]</a>");
-				document = document.Replace(p.Value.match, "<a href='" + p.Value.url + "' id='" + p.Value.id + "' class='reftoc'>" + p.Value.url + " - " + p.Value.text + "</a><br/>");
+				document = document.Replace(p.Value.match, "<a href='" + p.Value.url + "' id='" + p.Value.id + "' class='reftoc'>" + p.Value.url + " - " + p.Value.text + "</a><br>");
 			}
 
 			// Convert lines to paragraphs
