@@ -5,18 +5,22 @@ using System.Text;
 
 namespace DocumentLib
 {
-	public class Reference : Content
+	public class Reference
 	{
-		public Reference(string id, int position, string match, string text, string url) : base(id, position, match, text)
+		public Reference(string match, int figNum, string url)
 		{
+			this.match = match;
+			this.figNum = figNum;
 			this.url = url;
 		}
 
 		public override string ToString()
 		{
-			return id + " - " + text;
+			return "[" + figNum + "] " + url;
 		}
 
+		public string match;
+		public int figNum;
 		public string url;
 	}
 }

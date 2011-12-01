@@ -76,8 +76,8 @@ namespace Report_Writer
 			foreach (KeyValuePair<string, DocumentLib.Figure> pair in parser.GetFigures())
 				lbFigures.Items.Add(pair.Value);
 
-			foreach (KeyValuePair<string, DocumentLib.Reference> pair in parser.GetReferences())
-				lbReferences.Items.Add(pair.Value);
+			foreach (DocumentLib.Reference r in parser.GetReferences())
+				lbReferences.Items.Add(r);
 
 			string html = DocumentLib.HtmlGenerator.GetHtml(txtDocument.Text);
 
@@ -122,17 +122,14 @@ namespace Report_Writer
 			lbFigures.ClearSelected();
 		}
 
-		private void lbReferences_SelectedIndexChanged(object sender, EventArgs e)
-		{
-			if (lbReferences.SelectedItem != null)
-				Navigate(((DocumentLib.Reference)lbReferences.SelectedItem).position);
-
-			lbReferences.ClearSelected();
-		}
-
 		private void lbTables_SelectedIndexChanged(object sender, EventArgs e)
 		{
 			lbTables.ClearSelected();
+		}
+
+		private void lbReferences_SelectedIndexChanged(object sender, EventArgs e)
+		{
+			lbReferences.ClearSelected();
 		}
 	}
 }

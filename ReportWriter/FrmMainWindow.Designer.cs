@@ -33,6 +33,7 @@
 			this.splitContainer2 = new System.Windows.Forms.SplitContainer();
 			this.splitContainer3 = new System.Windows.Forms.SplitContainer();
 			this.txtDocument = new System.Windows.Forms.TextBox();
+			this.lbLog = new System.Windows.Forms.ListBox();
 			this.splitContainer4 = new System.Windows.Forms.SplitContainer();
 			this.lbFigures = new System.Windows.Forms.ListBox();
 			this.splitContainer5 = new System.Windows.Forms.SplitContainer();
@@ -40,7 +41,6 @@
 			this.lbReferences = new System.Windows.Forms.ListBox();
 			this.ssTip = new System.Windows.Forms.StatusStrip();
 			this.tsslblTip = new System.Windows.Forms.ToolStripStatusLabel();
-			this.lbLog = new System.Windows.Forms.ListBox();
 			((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
 			this.splitContainer1.Panel1.SuspendLayout();
 			this.splitContainer1.Panel2.SuspendLayout();
@@ -142,6 +142,18 @@
 			this.txtDocument.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtDocument_KeyUp);
 			this.txtDocument.MouseUp += new System.Windows.Forms.MouseEventHandler(this.txtDocument_MouseUp);
 			// 
+			// lbLog
+			// 
+			this.lbLog.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.lbLog.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.lbLog.FormattingEnabled = true;
+			this.lbLog.ItemHeight = 15;
+			this.lbLog.Location = new System.Drawing.Point(0, 0);
+			this.lbLog.Name = "lbLog";
+			this.lbLog.Size = new System.Drawing.Size(379, 94);
+			this.lbLog.TabIndex = 0;
+			this.lbLog.SelectedIndexChanged += new System.EventHandler(this.lbLog_SelectedIndexChanged);
+			// 
 			// splitContainer4
 			// 
 			this.splitContainer4.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -233,18 +245,6 @@
 			this.tsslblTip.Name = "tsslblTip";
 			this.tsslblTip.Size = new System.Drawing.Size(118, 17);
 			this.tsslblTip.Text = "toolStripStatusLabel1";
-			// 
-			// lbLog
-			// 
-			this.lbLog.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.lbLog.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.lbLog.FormattingEnabled = true;
-			this.lbLog.ItemHeight = 15;
-			this.lbLog.Location = new System.Drawing.Point(0, 0);
-			this.lbLog.Name = "lbLog";
-			this.lbLog.Size = new System.Drawing.Size(379, 94);
-			this.lbLog.TabIndex = 0;
-			this.lbLog.SelectedIndexChanged += new System.EventHandler(this.lbLog_SelectedIndexChanged);
 			// 
 			// FrmMainWindow
 			// 

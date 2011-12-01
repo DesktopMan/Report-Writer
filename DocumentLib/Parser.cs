@@ -24,7 +24,7 @@ namespace DocumentLib
 			return figures;
 		}
 
-		public Dictionary<string, Reference> GetReferences()
+		public List<Reference> GetReferences()
 		{
 			return references;
 		}
@@ -34,7 +34,7 @@ namespace DocumentLib
 			headings = new Dictionary<string, Heading>();
 			figures = new Dictionary<string, Figure>();
 			tables = new Dictionary<string, Table>();
-			references = new Dictionary<string, Reference>();
+			references = new List<Reference>();
 			log = new List<LogLine>();
 
 			if (document == "")
@@ -131,22 +131,28 @@ namespace DocumentLib
 
 		void ExtractReferences()
 		{
-			Regex re = new Regex("^@reference\\((.+?),(.+?),(.+?)\\)\r$", RegexOptions.Multiline);
+			Regex re = new Regex("@\\(\"(.+?)\"\\)", RegexOptions.Multiline);
 			MatchCollection mc = re.Matches(document);
+
+			int figNum = 1;
 
 			foreach (Match m in mc)
 			{
-				string id = m.Groups[1].ToString().Trim();
-				string url = m.Groups[2].ToString().Trim();
-				string text = m.Groups[3].ToString().Trim();
+				string url = m.Groups[1].ToString().Trim();
 
-				if (references.ContainsKey(id))
+				bool match = false;
+
+				for(int i = 0; i < references.Count; i++)
 				{
-					log.Add(new LogLine(LogLine.Level.ERR, m.ToString().Trim(), "Skipping duplicate reference id '" + id + "'", m.Index));
-					continue;
+					if (references[i].url == url)
+					{
+						match = true;
+						break;
+					}
 				}
 
-				references[id] = new Reference(id, m.Index, m.ToString().Trim(), text, url);
+				if (!match)
+					references.Add(new Reference(m.ToString().Trim(), figNum++, url));
 			}
 		}
 
@@ -160,6 +166,10 @@ namespace DocumentLib
 			{
 				string type = m.Groups[1].ToString();
 				string id = m.Groups[2].ToString();
+
+				// Ignore inline url references
+				if (type.Length == 0 || type[0] == '(')
+					continue;
 
 				switch (type)
 				{
@@ -178,12 +188,8 @@ namespace DocumentLib
 							log.Add(new LogLine(LogLine.Level.ERR, m.ToString().Trim(), "Unknown heading '" + id + "'", m.Index));
 						break;
 
-					case "reference":
-						if (!references.ContainsKey(id))
-							log.Add(new LogLine(LogLine.Level.ERR, m.ToString().Trim(), "Unknown reference '" + id + "'", m.Index));
-						break;
 					case "page":
-						if (!figures.ContainsKey(id) && !tables.ContainsKey(id) && !headings.ContainsKey(id) && !references.ContainsKey(id))
+						if (!figures.ContainsKey(id) && !tables.ContainsKey(id) && !headings.ContainsKey(id))
 							log.Add(new LogLine(LogLine.Level.ERR, m.ToString().Trim(), "Unknown id '" + id + "'", m.Index));
 						break;
 
@@ -199,7 +205,7 @@ namespace DocumentLib
 		Dictionary<string, Heading> headings = null;
 		Dictionary<string, Figure> figures = null;
 		Dictionary<string, Table> tables = null;
-		Dictionary<string, Reference> references = null;
+		List<Reference> references = null;
 
 		List<LogLine> log;
 	}

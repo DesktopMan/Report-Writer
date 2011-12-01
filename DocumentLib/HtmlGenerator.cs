@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.Net;
 
 namespace DocumentLib
 {
@@ -55,11 +56,19 @@ namespace DocumentLib
 
 			document = document.Replace("@figures", figures.ToString());
 
-			foreach (KeyValuePair<string, Reference> p in parser.GetReferences())
+			StringBuilder references = new StringBuilder();
+
+			references.Append("<div>\r\n");
+
+			foreach (Reference r in parser.GetReferences())
 			{
-				document = document.Replace("@reference(" + p.Value.id + ")", "<a href='#" + p.Value.id + "' class='refref'>[" + p.Value.id + "]</a>");
-				document = document.Replace(p.Value.match, "<a href='" + p.Value.url + "' id='" + p.Value.id + "' class='reftoc'>" + p.Value.url + " - " + p.Value.text + "</a><br>");
+				document = document.Replace(r.match, "<a href='" + r.url + "'>[" + r.figNum + "]</a>");
+				references.Append("<a href='" + r.url + "'>" + r.ToString() + " - " + GetWebPageTitle(r.url) + "</a><br>\r\n");
 			}
+
+			references.Append("</div>\r\n");
+
+			document = document.Replace("@references", references.ToString());
 
 			// Convert lines to paragraphs
 			document = new Regex("^([^<].+)\r$", RegexOptions.Multiline).Replace(document, "<p>$1</p>");
@@ -68,6 +77,47 @@ namespace DocumentLib
 			html.Append("</body></html>");
 
 			return html.ToString();
+		}
+
+		public static string GetWebPageTitle(string url)
+		{
+			// Create a request to the url
+			HttpWebRequest request = HttpWebRequest.Create(url) as HttpWebRequest;
+
+			// If the request wasn't an HTTP request (like a file), ignore it
+			if (request == null) return null;
+
+			// Use the user's credentials
+			request.UseDefaultCredentials = true;
+
+			// Obtain a response from the server, if there was an error, return nothing
+			HttpWebResponse response = null;
+
+			try { response = request.GetResponse() as HttpWebResponse; }
+
+			catch (WebException) { return null; }
+
+			// Regular expression for an HTML title
+			string regex = @"(?<=<title.*>)([\s\S]*)(?=</title>)";
+
+			// If the correct HTML header exists for HTML text, continue
+			if (new List<string>(response.Headers.AllKeys).Contains("Content-Type"))
+
+				if (response.Headers["Content-Type"].StartsWith("text/html"))
+				{
+					// Download the page
+					WebClient web = new WebClient();
+
+					string page = web.DownloadString(url);
+
+					// Extract the title
+					Regex ex = new Regex(regex, RegexOptions.IgnoreCase);
+
+					return ex.Match(page).Value.Trim();
+				}
+
+			// Not a valid HTML page
+			return null;
 		}
 	}
 }
