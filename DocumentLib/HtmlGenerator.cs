@@ -24,7 +24,7 @@ namespace DocumentLib
 			html.Append("<html>\r\n<head>\r\n<title>Title</title>\r\n<link href=\"style.css\" rel=\"stylesheet\" type=\"text/css\">\r\n<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\">\r\n</head>\r\n<body>\r\n");
 
 			// Convert @page links to actual page numbers
-			document = new Regex("@page\\((.+?)\\)").Replace(document, "<a href='#$1' class='pageref'>here</a>");
+			document = new Regex("@page\\((.+?)\\)").Replace(document, "<a href='#$1' class='pageref'>this link</a>");
 
 			StringBuilder toc = new StringBuilder();
 
