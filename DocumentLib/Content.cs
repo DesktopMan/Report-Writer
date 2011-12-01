@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 
 namespace DocumentLib
 {
@@ -9,7 +10,9 @@ namespace DocumentLib
 	{
 		public Content(string id, int position, string match, string text)
 		{
-			this.id = id.Replace(' ', '_').ToLower();
+			Regex re = new Regex("[^a-z^_^-]");
+
+			this.id = re.Replace(id.ToLower().Trim(), "_");
 			this.position = position;
 			this.match = match;
 			this.text = text;
