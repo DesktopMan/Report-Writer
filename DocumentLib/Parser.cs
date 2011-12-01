@@ -56,18 +56,18 @@ namespace DocumentLib
 		}
 
 		void ExtractHeadings()
-        {
-            Regex re = new Regex("^([#$]+) ([^\\||.]+?)( \\| (.+?))?\r$", RegexOptions.Multiline);
-            MatchCollection mc = re.Matches(document);
+		{
+			Regex re = new Regex("^([#$]+) ([^\\||.]+?)( \\| (.+?))?\r$", RegexOptions.Multiline);
+			MatchCollection mc = re.Matches(document);
 
 			Heading currentHeading = null;
 
-            foreach (Match m in mc)
-            {
+			foreach (Match m in mc)
+			{
 				string id = m.Groups[4].ToString().Trim();
-                string text = m.Groups[2].ToString().Trim();
-                int level = m.Groups[1].Length;
-                bool showInToc = m.Groups[1].ToString()[0] == '#';
+				string text = m.Groups[2].ToString().Trim();
+				int level = m.Groups[1].Length;
+				bool showInToc = m.Groups[1].ToString()[0] == '#';
 
 				Heading parent = currentHeading;
 
@@ -82,23 +82,24 @@ namespace DocumentLib
 						id = text;
 				}
 
-                if (text == "")
-                {
-                    log.Add(new LogLine(LogLine.Level.WARN, "Heading with no text", m.ToString().Trim(), m.Index));
-                    continue;
-                }
-
-                if (headings.ContainsKey(id))
-                {
-                    log.Add( new LogLine(LogLine.Level.ERR, "Skipping duplicate heading id '" + id + "'", m.ToString().Trim(), m.Index));
+				if (text == "")
+				{
+					log.Add(new LogLine(LogLine.Level.WARN, "Heading with no text", m.ToString().Trim(), m.Index));
 					continue;
-                }
+				}
 
-                headings[id] = new Heading(id, m.Index, m.ToString().Trim(), parent, text, level, showInToc);
+				if (headings.ContainsKey(id))
+				{
+					log.Add(new LogLine(LogLine.Level.ERR, "Skipping duplicate heading id '" + id + "'", m.ToString().Trim(), m.Index));
+					continue;
+				}
 
-				currentHeading = headings[id];
-            }
-        }
+				Heading h = new Heading(id, m.Index, m.ToString().Trim(), parent, text, level, showInToc);
+
+				headings[h.id] = h;
+				currentHeading = h;
+			}
+		}
 
 		void ExtractFigures()
 		{
@@ -120,7 +121,8 @@ namespace DocumentLib
 				if (!File.Exists(path))
 					log.Add(new LogLine(LogLine.Level.WARN, m.ToString().Trim(), "Unable to find figure file '" + path + "'", m.Index));
 
-				figures[id] = new Figure(id, m.Index, m.ToString().Trim(), text, path);
+				Figure f = new Figure(id, m.Index, m.ToString().Trim(), text, path);
+				figures[f.id] = f;
 			}
 		}
 
@@ -142,7 +144,7 @@ namespace DocumentLib
 
 				bool match = false;
 
-				for(int i = 0; i < references.Count; i++)
+				for (int i = 0; i < references.Count; i++)
 				{
 					if (references[i].url == url)
 					{

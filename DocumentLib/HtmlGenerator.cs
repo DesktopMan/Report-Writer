@@ -12,7 +12,7 @@ namespace DocumentLib
 		public static string GetHtml(string document)
 		{
 			Parser parser = new Parser();
-			
+
 			parser.SetDocument(document);
 
 			if (!parser.Parse())
