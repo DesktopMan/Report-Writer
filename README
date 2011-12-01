@@ -1,1 +1,113 @@
-To be written
+Headings
+========
+
+A line is marked as a heading by using any number of # in front of it.
+Optionally, a manual id can be given by typing an id after |.
+
+Note: If no manual id is given it is generated automatically by taking
+the heading text and replacing all non-id characters (see below) to _.
+
+Example:
+
+# Top heading | top
+## Sub heading 1
+### Sub heading 2
+
+Note 2: Nested headings will be given automatic ids in the form of
+top-sub1-sub2 and so on.
+
+Table of contents
+=================
+
+Inserts a table of contents
+
+Example:
+
+# Table of contents
+
+@toc
+
+Figures
+=======
+
+Figures are presented with an image and accompanying text
+
+@figure(id, path, text)
+
+path - Local path or URL to image. Can not contain comma
+text - Figure description
+
+Example: @figure(nice_painting, nice_painting.png, Nice painting!)
+
+Note: Figures must be defined on dedicated lines in the document
+
+Figure references
+=================
+
+Inserts a link to a given figure
+
+@figure(id)
+
+Example: For more information see @figure(nice_painting).
+Result : For more information see Figure 1.
+
+Note: The figure can be defined after a reference to is it used.
+
+Table of figures
+================
+
+Inserts a table of figures
+
+Example:
+
+# Table of figures
+
+@figures
+
+References
+==========
+
+Inserts a numbered link to a given URL
+
+@("URL")
+
+Note: URL must be quoted
+
+Example: Bananas are delicious. @("http://www.wikipedia.org")
+Result : Bananas are delicious. [1]
+
+Note 2: Repeated references use the first number they were allocated
+
+Reference list
+==============
+
+Inserts a list of references with their numbers
+
+Example: @references
+Result : [1] http://www.wikipedia.org - Wikipedia
+
+Note: It's up to the exporter to download the link and grab the title
+automatically as shown in this example.
+
+Page number
+===========
+
+Inserts a link to the page of a given id
+
+Example: See @page(top).
+Result : See Page 2.
+
+Note: Not all exporters can support this, as not all media has paging.
+Non-paged exporters should create a generic link instead, e.g. "here".
+
+Ids
+===
+
+An id is a symbol identifying a unique piece of the document. The id
+must be unique even across content types.
+
+Ids can only contain the following symbols:
+a-z _ -
+
+Any id given not conforming to this will be forced to do so by replacing
+any illegal characters with _.
