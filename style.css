@@ -76,7 +76,7 @@ p
 
 a
 {
-	color: #000000;
+	color: black;
 	text-decoration: none;
 }
 
@@ -130,22 +130,21 @@ a.figtoc::before { content: "Figure " target-counter(attr(href), figure) " - "; 
 a.tabletoc { content: "Table " target-counter(attr(href), table) " - " target-content(attr(href)) .caption; }
 a.reftoc::before { content: "[" counter(reference) "] "; }
 
-a.toc_1, a.toc_2, a.toc_3, a.figtoc, a.tabletoc
+a.toc_1::before
 {
-	text-decoration: none;
-	color: black;
+	content: target-counter(attr(href), h1) " ";
 }
 
-a.toc_2:before
+a.toc_2::before
 {
 	margin-left: 1em;
-	content: "";
+	content: target-counter(attr(href), h1) "." target-counter(attr(href), h2) " ";
 }
 
-a.toc_3:before
+a.toc_3::before
 {
 	margin-left: 2em;
-	content: "";
+	content: target-counter(attr(href), h1) " . " target-counter(attr(href), h2) "." target-counter(attr(href), h3) " ";
 }
 
 a.toc_1:after, a.toc_2:after, a.toc_3:after, a.figtoc::after, a.tabletoc:after {
