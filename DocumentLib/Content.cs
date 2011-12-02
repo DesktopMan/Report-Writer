@@ -10,7 +10,7 @@ namespace DocumentLib
 	{
 		public Content(string id, int position, string match, string text)
 		{
-			Regex re = new Regex("[^a-z^_^-]");
+			Regex re = new Regex("[^a-z^0-9^_^-]");
 
 			this.id = re.Replace(id.ToLower().Trim(), "_");
 			this.position = position;
