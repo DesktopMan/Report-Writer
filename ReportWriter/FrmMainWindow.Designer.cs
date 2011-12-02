@@ -1,38 +1,37 @@
 ﻿namespace Report_Writer
 {
-    partial class FrmMainWindow
-    {
-        /// <summary>
-        /// Required designer variable.
-        /// </summary>
-        private System.ComponentModel.IContainer components = null;
+	partial class FrmMainWindow
+	{
+		/// <summary>
+		/// Required designer variable.
+		/// </summary>
+		private System.ComponentModel.IContainer components = null;
 
-        /// <summary>
-        /// Clean up any resources being used.
-        /// </summary>
-        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing && (components != null))
-            {
-                components.Dispose();
-            }
-            base.Dispose(disposing);
-        }
+		/// <summary>
+		/// Clean up any resources being used.
+		/// </summary>
+		/// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+		protected override void Dispose(bool disposing)
+		{
+			if (disposing && (components != null))
+			{
+				components.Dispose();
+			}
+			base.Dispose(disposing);
+		}
 
-        #region Windows Form Designer generated code
+		#region Windows Form Designer generated code
 
-        /// <summary>
-        /// Required method for Designer support - do not modify
-        /// the contents of this method with the code editor.
-        /// </summary>
-        private void InitializeComponent()
-        {
+		/// <summary>
+		/// Required method for Designer support - do not modify
+		/// the contents of this method with the code editor.
+		/// </summary>
+		private void InitializeComponent()
+		{
 			this.splitContainer1 = new System.Windows.Forms.SplitContainer();
 			this.lbNavigation = new System.Windows.Forms.ListBox();
 			this.splitContainer2 = new System.Windows.Forms.SplitContainer();
 			this.splitContainer3 = new System.Windows.Forms.SplitContainer();
-			this.txtDocument = new System.Windows.Forms.TextBox();
 			this.lbLog = new System.Windows.Forms.ListBox();
 			this.splitContainer4 = new System.Windows.Forms.SplitContainer();
 			this.lbFigures = new System.Windows.Forms.ListBox();
@@ -41,6 +40,7 @@
 			this.lbReferences = new System.Windows.Forms.ListBox();
 			this.ssTip = new System.Windows.Forms.StatusStrip();
 			this.tsslblTip = new System.Windows.Forms.ToolStripStatusLabel();
+			this.txtDocument = new System.Windows.Forms.RichTextBox();
 			((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
 			this.splitContainer1.Panel1.SuspendLayout();
 			this.splitContainer1.Panel2.SuspendLayout();
@@ -127,20 +127,6 @@
 			this.splitContainer3.Size = new System.Drawing.Size(379, 522);
 			this.splitContainer3.SplitterDistance = 424;
 			this.splitContainer3.TabIndex = 0;
-			// 
-			// txtDocument
-			// 
-			this.txtDocument.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.txtDocument.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.txtDocument.Location = new System.Drawing.Point(0, 0);
-			this.txtDocument.Multiline = true;
-			this.txtDocument.Name = "txtDocument";
-			this.txtDocument.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-			this.txtDocument.Size = new System.Drawing.Size(379, 424);
-			this.txtDocument.TabIndex = 1;
-			this.txtDocument.TextChanged += new System.EventHandler(this.txtDocument_TextChanged);
-			this.txtDocument.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtDocument_KeyUp);
-			this.txtDocument.MouseUp += new System.Windows.Forms.MouseEventHandler(this.txtDocument_MouseUp);
 			// 
 			// lbLog
 			// 
@@ -243,8 +229,20 @@
 			// tsslblTip
 			// 
 			this.tsslblTip.Name = "tsslblTip";
-			this.tsslblTip.Size = new System.Drawing.Size(118, 17);
+			this.tsslblTip.Size = new System.Drawing.Size(109, 17);
 			this.tsslblTip.Text = "toolStripStatusLabel1";
+			// 
+			// txtDocument
+			// 
+			this.txtDocument.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.txtDocument.Location = new System.Drawing.Point(0, 0);
+			this.txtDocument.Name = "txtDocument";
+			this.txtDocument.Size = new System.Drawing.Size(379, 424);
+			this.txtDocument.TabIndex = 0;
+			this.txtDocument.Text = "";
+			this.txtDocument.TextChanged += new System.EventHandler(this.txtDocument_TextChanged);
+			this.txtDocument.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtDocument_KeyUp);
+			this.txtDocument.MouseUp += new System.Windows.Forms.MouseEventHandler(this.txtDocument_MouseUp);
 			// 
 			// FrmMainWindow
 			// 
@@ -266,7 +264,6 @@
 			((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).EndInit();
 			this.splitContainer2.ResumeLayout(false);
 			this.splitContainer3.Panel1.ResumeLayout(false);
-			this.splitContainer3.Panel1.PerformLayout();
 			this.splitContainer3.Panel2.ResumeLayout(false);
 			((System.ComponentModel.ISupportInitialize)(this.splitContainer3)).EndInit();
 			this.splitContainer3.ResumeLayout(false);
@@ -283,23 +280,23 @@
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
-        }
+		}
 
-        #endregion
+		#endregion
 
-        private System.Windows.Forms.SplitContainer splitContainer1;
-        private System.Windows.Forms.SplitContainer splitContainer2;
-        private System.Windows.Forms.ListBox lbNavigation;
-        private System.Windows.Forms.SplitContainer splitContainer3;
-        private System.Windows.Forms.TextBox txtDocument;
-        private System.Windows.Forms.StatusStrip ssTip;
+		private System.Windows.Forms.SplitContainer splitContainer1;
+		private System.Windows.Forms.SplitContainer splitContainer2;
+		private System.Windows.Forms.ListBox lbNavigation;
+		private System.Windows.Forms.SplitContainer splitContainer3;
+		private System.Windows.Forms.StatusStrip ssTip;
 		private System.Windows.Forms.ToolStripStatusLabel tsslblTip;
-        private System.Windows.Forms.SplitContainer splitContainer4;
-        private System.Windows.Forms.SplitContainer splitContainer5;
-        private System.Windows.Forms.ListBox lbFigures;
-        private System.Windows.Forms.ListBox lbTables;
-        private System.Windows.Forms.ListBox lbReferences;
+		private System.Windows.Forms.SplitContainer splitContainer4;
+		private System.Windows.Forms.SplitContainer splitContainer5;
+		private System.Windows.Forms.ListBox lbFigures;
+		private System.Windows.Forms.ListBox lbTables;
+		private System.Windows.Forms.ListBox lbReferences;
 		private System.Windows.Forms.ListBox lbLog;
-    }
+		private System.Windows.Forms.RichTextBox txtDocument;
+	}
 }
 

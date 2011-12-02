@@ -16,11 +16,14 @@ namespace DocumentLib
 			this.position = position;
 			this.match = match;
 			this.text = text;
+
+			colored = false;
 		}
 
 		public string id;
 		public string text;
 		public int position;
 		public string match;
+		public bool colored;
 	}
 }

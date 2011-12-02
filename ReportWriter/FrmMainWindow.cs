@@ -21,12 +21,19 @@ namespace Report_Writer
 
 		private void FrmMainWindow_Load(object sender, EventArgs e)
 		{
+			txtDocument.DetectUrls = true;
+
 			txtDocument.Text = File.ReadAllText("Docs/Specification.txt");
 			UpdateInterface();
 		}
 
 		private void txtDocument_KeyUp(object sender, KeyEventArgs e)
 		{
+			if (e.KeyCode == Keys.V && e.Control)
+			{
+				e.SuppressKeyPress = true;
+			}
+
 			if (e.KeyCode != Keys.Enter && e.KeyCode != Keys.Up && e.KeyCode != Keys.Down)
 				return;
 
@@ -71,19 +78,27 @@ namespace Report_Writer
 			lbReferences.Items.Clear();
 
 			foreach (KeyValuePair<string, DocumentLib.Heading> pair in parser.GetHeadings())
+			{
+				BackColorText(pair.Value.position, pair.Value.match.Length, Color.LightGreen);
 				lbNavigation.Items.Add(pair.Value);
+			}
 
 			foreach (KeyValuePair<string, DocumentLib.Figure> pair in parser.GetFigures())
+			{
+				BackColorText(pair.Value.position, pair.Value.match.Length, Color.Yellow);
 				lbFigures.Items.Add(pair.Value);
+			}
 
 			foreach (DocumentLib.Reference r in parser.GetReferences())
+			{
 				lbReferences.Items.Add(r);
+			}
 
+			/*
 			string html = DocumentLib.HtmlGenerator.GetHtml(txtDocument.Text);
-
 			File.WriteAllText("output.html", html);
-
 			Clipboard.SetText(html);
+			*/
 
 			changed = false;
 		}
@@ -130,6 +145,15 @@ namespace Report_Writer
 		private void lbReferences_SelectedIndexChanged(object sender, EventArgs e)
 		{
 			lbReferences.ClearSelected();
+		}
+
+		private void BackColorText(int start, int length, Color color)
+		{
+			int currentPosition = txtDocument.SelectionStart;
+
+			txtDocument.Select(start, length);
+			txtDocument.SelectionBackColor = color;
+			txtDocument.Select(currentPosition, 0);
 		}
 	}
 }

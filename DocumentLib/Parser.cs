@@ -57,7 +57,7 @@ namespace DocumentLib
 
 		void ExtractHeadings()
 		{
-			Regex re = new Regex("^([#$]+) ([^\\||.]+?)( \\| (.+?))?\r$", RegexOptions.Multiline);
+			Regex re = new Regex("^([#$]+) ([^\\||.]+?)( \\| (.+?))?$", RegexOptions.Multiline);
 			MatchCollection mc = re.Matches(document);
 
 			Heading currentHeading = null;
@@ -103,7 +103,7 @@ namespace DocumentLib
 
 		void ExtractFigures()
 		{
-			Regex re = new Regex("^@figure\\((.+?),(.+?),(.+?)\\)\r$", RegexOptions.Multiline);
+			Regex re = new Regex("^@figure\\((.+?),(.+?),(.+?)\\)$", RegexOptions.Multiline);
 			MatchCollection mc = re.Matches(document);
 
 			foreach (Match m in mc)
