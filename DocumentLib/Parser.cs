@@ -30,6 +30,11 @@ namespace DocumentLib
 			return figures;
 		}
 
+		public Dictionary<string, Table> GetTables()
+		{
+			return tables;
+		}
+
 		public List<Reference> GetReferences()
 		{
 			return references;
@@ -134,7 +139,27 @@ namespace DocumentLib
 
 		void ExtractTables()
 		{
+			Regex re = new Regex("^@table\\((.+?),(.+?),(.+?)\\)$", RegexOptions.Multiline);
+			MatchCollection mc = re.Matches(document);
 
+			foreach (Match m in mc)
+			{
+				string id = m.Groups[1].ToString().Trim();
+				string path = Path.Combine(basePath, m.Groups[2].ToString().Trim());
+				string text = m.Groups[3].ToString().Trim();
+
+				if (tables.ContainsKey(id))
+				{
+					log.Add(new LogLine(LogLine.Level.ERR, m.ToString().Trim(), "Skipping duplicate table id '" + id + "'", m.Index));
+					continue;
+				}
+
+				if (!File.Exists(path))
+					log.Add(new LogLine(LogLine.Level.WARN, m.ToString().Trim(), "Unable to find table file '" + path + "'", m.Index));
+
+				Table t = new Table(id, m.Index, m.ToString().Trim(), text, path);
+				tables[t.id] = t;
+			}
 		}
 
 		void ExtractReferences()

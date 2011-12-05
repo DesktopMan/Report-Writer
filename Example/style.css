@@ -97,6 +97,12 @@ div.table {
   margin: 1em 0;
   counter-increment: table;
   page-break-inside: avoid;
+  text-align: center;
+}
+
+table {
+  margin-left: auto;
+  margin-right: auto;
 }
 
 a.reftoc {
@@ -127,7 +133,7 @@ div.table .caption:before {
 }
 
 a.figtoc::before { content: "Figure " target-counter(attr(href), figure) " - "; }
-a.tabletoc { content: "Table " target-counter(attr(href), table) " - " target-content(attr(href)) .caption; }
+a.tabletoc::before { content: "Table " target-counter(attr(href), table) " - "; }
 a.reftoc::before { content: "[" counter(reference) "] "; }
 
 a.toc_1::before

@@ -21,52 +21,13 @@ namespace DocumentLib
 			// Convert @page links to actual page numbers
 			document = new Regex("@page\\((.+?)\\)").Replace(document, "<a href='#$1' class='pageref'>this link</a>");
 
-			StringBuilder toc = new StringBuilder();
-
-			toc.Append("<div>\r\n");
-
-			foreach (KeyValuePair<string, Heading> p in parser.GetHeadings())
-			{
-				document = document.Replace("@heading(" + p.Value.id + ")", "<a href='#" + p.Value.id + "'>" + p.Value.text + "</a>");
-				document = document.Replace(p.Value.match, "<h" + p.Value.level + " id='" + p.Value.id + "'>" + p.Value.text + "</h" + p.Value.level + ">");
-				toc.Append("<a href='#" + p.Value.id + "' class='toc_" + p.Value.level + "'>" + p.Value.text + "</a><br>\r\n");
-			}
-
-			toc.Append("</div>\r\n");
-
-			document = document.Replace("@toc", toc.ToString());
-
-			StringBuilder figures = new StringBuilder();
-
-			figures.Append("<div>\r\n");
-
-			foreach (KeyValuePair<string, Figure> p in parser.GetFigures())
-			{
-				document = document.Replace("@figure(" + p.Value.id + ")", "<a href='#" + p.Value.id + "' class='figref'>Figure x</a>");
-				document = document.Replace(p.Value.match, "<div id='" + p.Value.id + "' class='figure'><img src='" + p.Value.imagePath + "' alt='" + p.Value.text + "' title='" + p.Value.text + "'><div class='caption'>" + p.Value.text + "</div></div>");
-				figures.Append("<a href='#" + p.Value.id + "' class='figtoc'>" + p.Value.text + "</a><br>\r\n");
-			}
-
-			figures.Append("</div>\r\n");
-
-			document = document.Replace("@figures", figures.ToString());
-
-			StringBuilder references = new StringBuilder();
-
-			references.Append("<div>\r\n");
-
-			foreach (Reference r in parser.GetReferences())
-			{
-				document = document.Replace(r.match, "<a href='" + r.url + "'>[" + r.figNum + "]</a>");
-				references.Append("<a href='" + r.url + "'>" + r.ToString() + " - " + GetWebPageTitle(r.url) + "</a><br>\r\n");
-			}
-
-			references.Append("</div>\r\n");
-
-			document = document.Replace("@references", references.ToString());
+			document = ProcessHeadings(document, parser.GetHeadings());
+			document = ProcessFigures(document, parser.GetFigures());
+			document = ProcessTables(document, parser.GetTables());
+			document = ProcessReferences(document, parser.GetReferences());
 
 			// Convert lines to paragraphs
-			document = new Regex("^([^<].+)\r$", RegexOptions.Multiline).Replace(document, "<p>$1</p>");
+			document = new Regex("^([^<^\n].+)$", RegexOptions.Multiline).Replace(document, "<p>$1</p>");
 
 			html.Append(document);
 			html.Append("</body></html>");
@@ -113,6 +74,102 @@ namespace DocumentLib
 
 			// Not a valid HTML page
 			return null;
+		}
+
+		private static string ProcessHeadings(string document, Dictionary<string, Heading> headings)
+		{
+			StringBuilder toc = new StringBuilder();
+
+			toc.Append("<div>\r\n");
+
+			foreach (KeyValuePair<string, Heading> p in headings)
+			{
+				document = document.Replace("@heading(" + p.Value.id + ")", "<a href='#" + p.Value.id + "'>" + p.Value.text + "</a>");
+				document = document.Replace(p.Value.match, "<h" + p.Value.level + " id='" + p.Value.id + "'>" + p.Value.text + "</h" + p.Value.level + ">");
+				toc.Append("<a href='#" + p.Value.id + "' class='toc_" + p.Value.level + "'>" + p.Value.text + "</a><br>\r\n");
+			}
+
+			toc.Append("</div>\r\n");
+
+			return document.Replace("@toc", toc.ToString());
+		}
+
+		private static string ProcessFigures(string document, Dictionary<string, Figure> figures)
+		{
+
+			StringBuilder figtoc = new StringBuilder();
+
+			figtoc.Append("<div>\r\n");
+
+			foreach (KeyValuePair<string, Figure> p in figures)
+			{
+				document = document.Replace("@figure(" + p.Value.id + ")", "<a href='#" + p.Value.id + "' class='figref'>Figure x</a>");
+				document = document.Replace(p.Value.match, "<div id='" + p.Value.id + "' class='figure'><img src='" + p.Value.imagePath + "' alt='" + p.Value.text + "' title='" + p.Value.text + "'><div class='caption'>" + p.Value.text + "</div></div>");
+				figtoc.Append("<a href='#" + p.Value.id + "' class='figtoc'>" + p.Value.text + "</a><br>\r\n");
+			}
+
+			figtoc.Append("</div>\r\n");
+
+			return document.Replace("@figures", figtoc.ToString());
+		}
+
+		private static string ProcessTables(string document, Dictionary<string, Table> tables)
+		{
+			StringBuilder tabletoc = new StringBuilder();
+
+			tabletoc.Append("<div>\r\n");
+
+			foreach (KeyValuePair<string, Table> p in tables)
+			{
+				document = document.Replace("@table(" + p.Value.id + ")", "<a href='#" + p.Value.id + "' class='tableref'>Table x</a>");
+
+				StringBuilder table = new StringBuilder();
+
+				table.Append("<div id='" + p.Value.id + "' class='table'>\r\n");
+				table.Append("<table>\r\n");
+
+				for (int row = 0; row < p.Value.table.Count; row++)
+				{
+					table.Append("<tr>");
+					for (int col = 0; col < p.Value.table[row].Count; col++)
+					{
+						if (row == 0)
+							table.Append("<th>" + p.Value.table[row][col] + "</th>");
+						else
+							table.Append("<td>" + p.Value.table[row][col] + "</td>");
+					}
+					table.Append("</tr>\r\n");
+				}
+				
+				table.Append("</table>\r\n");
+				table.Append("<div class='caption'>" + p.Value.text + "</div>\r\n");
+				table.Append("</div>");
+
+				document = document.Replace(p.Value.match, table.ToString());
+				tabletoc.Append("<a href='#" + p.Value.id + "' class='tabletoc'>" + p.Value.text + "</a><br>\r\n");
+			}
+
+			tabletoc.Append("</div>\r\n");
+
+			return document.Replace("@tables", tabletoc.ToString());
+		}
+
+		private static string ProcessReferences(string document, List<Reference> references)
+		{
+
+			StringBuilder reflist = new StringBuilder();
+
+			reflist.Append("<div>\r\n");
+
+			foreach (Reference r in references)
+			{
+				document = document.Replace(r.match, "<a href='" + r.url + "'>[" + r.figNum + "]</a>");
+				reflist.Append("<a href='" + r.url + "'>" + r.ToString() + " - " + GetWebPageTitle(r.url) + "</a><br>\r\n");
+			}
+
+			reflist.Append("</div>\r\n");
+
+			return document.Replace("@references", reflist.ToString());
 		}
 	}
 }

@@ -73,6 +73,7 @@ namespace Report_Writer
 
 			lbNavigation.Items.Clear();
 			lbFigures.Items.Clear();
+			lbTables.Items.Clear();
 			lbReferences.Items.Clear();
 
 			foreach (KeyValuePair<string, DocumentLib.Heading> pair in parser.GetHeadings())
@@ -85,6 +86,12 @@ namespace Report_Writer
 			{
 				BackColorText(pair.Value.position, pair.Value.match.Length, Color.Yellow);
 				lbFigures.Items.Add(pair.Value);
+			}
+
+			foreach (KeyValuePair<string, DocumentLib.Table> pair in parser.GetTables())
+			{
+				BackColorText(pair.Value.position, pair.Value.match.Length, Color.Yellow);
+				lbTables.Items.Add(pair.Value);
 			}
 
 			foreach (DocumentLib.Reference r in parser.GetReferences())
@@ -134,6 +141,9 @@ namespace Report_Writer
 
 		private void lbTables_SelectedIndexChanged(object sender, EventArgs e)
 		{
+			if (lbTables.SelectedItem != null)
+				Navigate(((DocumentLib.Table)lbTables.SelectedItem).position);
+
 			lbTables.ClearSelected();
 		}
 

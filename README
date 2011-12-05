@@ -64,6 +64,26 @@ Example:
 
 @figures
 
+Tables
+======
+
+Tables are supported using external CSV files
+
+@table(id, path, text)
+
+Note: First row in CSV file will be used as column headers
+
+Table of tables
+===============
+
+Inserts a table of tables
+
+Example:
+
+# Table of tables
+
+@tables
+
 References
 ==========
 
