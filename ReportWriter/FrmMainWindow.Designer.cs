@@ -32,6 +32,7 @@
 			this.lbNavigation = new System.Windows.Forms.ListBox();
 			this.splitContainer2 = new System.Windows.Forms.SplitContainer();
 			this.splitContainer3 = new System.Windows.Forms.SplitContainer();
+			this.txtDocument = new System.Windows.Forms.RichTextBox();
 			this.lbLog = new System.Windows.Forms.ListBox();
 			this.splitContainer4 = new System.Windows.Forms.SplitContainer();
 			this.lbFigures = new System.Windows.Forms.ListBox();
@@ -40,7 +41,6 @@
 			this.lbReferences = new System.Windows.Forms.ListBox();
 			this.ssTip = new System.Windows.Forms.StatusStrip();
 			this.tsslblTip = new System.Windows.Forms.ToolStripStatusLabel();
-			this.txtDocument = new System.Windows.Forms.RichTextBox();
 			((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
 			this.splitContainer1.Panel1.SuspendLayout();
 			this.splitContainer1.Panel2.SuspendLayout();
@@ -127,6 +127,19 @@
 			this.splitContainer3.Size = new System.Drawing.Size(379, 522);
 			this.splitContainer3.SplitterDistance = 424;
 			this.splitContainer3.TabIndex = 0;
+			// 
+			// txtDocument
+			// 
+			this.txtDocument.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.txtDocument.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.txtDocument.Location = new System.Drawing.Point(0, 0);
+			this.txtDocument.Name = "txtDocument";
+			this.txtDocument.Size = new System.Drawing.Size(379, 424);
+			this.txtDocument.TabIndex = 0;
+			this.txtDocument.Text = "";
+			this.txtDocument.TextChanged += new System.EventHandler(this.txtDocument_TextChanged);
+			this.txtDocument.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtDocument_KeyUp);
+			this.txtDocument.MouseUp += new System.Windows.Forms.MouseEventHandler(this.txtDocument_MouseUp);
 			// 
 			// lbLog
 			// 
@@ -229,20 +242,8 @@
 			// tsslblTip
 			// 
 			this.tsslblTip.Name = "tsslblTip";
-			this.tsslblTip.Size = new System.Drawing.Size(109, 17);
+			this.tsslblTip.Size = new System.Drawing.Size(118, 17);
 			this.tsslblTip.Text = "toolStripStatusLabel1";
-			// 
-			// txtDocument
-			// 
-			this.txtDocument.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.txtDocument.Location = new System.Drawing.Point(0, 0);
-			this.txtDocument.Name = "txtDocument";
-			this.txtDocument.Size = new System.Drawing.Size(379, 424);
-			this.txtDocument.TabIndex = 0;
-			this.txtDocument.Text = "";
-			this.txtDocument.TextChanged += new System.EventHandler(this.txtDocument_TextChanged);
-			this.txtDocument.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtDocument_KeyUp);
-			this.txtDocument.MouseUp += new System.Windows.Forms.MouseEventHandler(this.txtDocument_MouseUp);
 			// 
 			// FrmMainWindow
 			// 
