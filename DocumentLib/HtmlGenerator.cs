@@ -84,7 +84,7 @@ namespace DocumentLib
 
 			foreach (KeyValuePair<string, Heading> p in headings)
 			{
-				document = document.Replace("@heading(" + p.Value.id + ")", "<a href='#" + p.Value.id + "'>" + p.Value.text + "</a>");
+				document = document.Replace("@heading(" + p.Value.id + ")", "<a href='#" + p.Value.id + "' class='chapref'>" + p.Value.text + "</a>");
 				document = document.Replace(p.Value.match, "<h" + p.Value.level + " id='" + p.Value.id + "'>" + p.Value.text + "</h" + p.Value.level + ">");
 				toc.Append("<a href='#" + p.Value.id + "' class='toc_" + p.Value.level + "'>" + p.Value.text + "</a><br>\r\n");
 			}
@@ -103,7 +103,7 @@ namespace DocumentLib
 
 			foreach (KeyValuePair<string, Figure> p in figures)
 			{
-				document = document.Replace("@figure(" + p.Value.id + ")", "<a href='#" + p.Value.id + "' class='figref'>Figure x</a>");
+				document = document.Replace("@figure(" + p.Value.id + ")", "<a href='#" + p.Value.id + "' class='figref'>this figure</a>");
 				document = document.Replace(p.Value.match, "<div id='" + p.Value.id + "' class='figure'><img src='" + p.Value.imagePath + "' alt='" + p.Value.text + "' title='" + p.Value.text + "'><div class='caption'>" + p.Value.text + "</div></div>");
 				figtoc.Append("<a href='#" + p.Value.id + "' class='figtoc'>" + p.Value.text + "</a><br>\r\n");
 			}
@@ -121,7 +121,7 @@ namespace DocumentLib
 
 			foreach (KeyValuePair<string, Table> p in tables)
 			{
-				document = document.Replace("@table(" + p.Value.id + ")", "<a href='#" + p.Value.id + "' class='tableref'>Table x</a>");
+				document = document.Replace("@table(" + p.Value.id + ")", "<a href='#" + p.Value.id + "' class='tableref'>this table</a>");
 
 				StringBuilder table = new StringBuilder();
 

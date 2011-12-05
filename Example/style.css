@@ -80,11 +80,10 @@ a
 	text-decoration: none;
 }
 
-a.pageref { font-style: italic; content: "page " target-counter(attr(href), page); }
-a.chaff { font-style: italic; content: "chapter " target-counter(attr(href), chapter) ", "; }
-a.figref { font-style: italic; content: "figure " target-counter(attr(href), figure); }
-a.tableref { font-style: italic; content: "table " target-counter(attr(href), table); }
-a.refref { content: "[" target-counter(attr(href), reference) "]"; }
+a.pageref { font-style: italic; content: "Page " target-counter(attr(href), page); }
+a.figref { font-style: italic; content: "Figure " target-counter(attr(href), figure); }
+a.tableref { font-style: italic; content: "Table " target-counter(attr(href), table); }
+a.chapref { font-style: italic; }
 
 div.figure {
   margin: 1em 0;
@@ -103,6 +102,10 @@ div.table {
 table {
   margin-left: auto;
   margin-right: auto;
+}
+
+th, td {
+  padding-right: 0.5em;
 }
 
 a.reftoc {
@@ -134,7 +137,6 @@ div.table .caption:before {
 
 a.figtoc::before { content: "Figure " target-counter(attr(href), figure) " - "; }
 a.tabletoc::before { content: "Table " target-counter(attr(href), table) " - "; }
-a.reftoc::before { content: "[" counter(reference) "] "; }
 
 a.toc_1::before
 {
