@@ -92,11 +92,8 @@ namespace Report_Writer
 				lbReferences.Items.Add(r);
 			}
 
-			/*
-			string html = DocumentLib.HtmlGenerator.GetHtml(txtDocument.Text);
-			File.WriteAllText("output.html", html);
-			Clipboard.SetText(html);
-			*/
+			string html = DocumentLib.HtmlGenerator.GetHtml(parser);
+			File.WriteAllText(Path.Combine(Path.GetDirectoryName(filePath), "output.html"), html);
 
 			changed = false;
 		}
