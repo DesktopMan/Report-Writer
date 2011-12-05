@@ -18,18 +18,26 @@ namespace DocumentLib
 			html.Append("<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01//EN\" \"http://www.w3.org/TR/html4/strict.dtd\">\r\n");
 			html.Append("<html>\r\n<head>\r\n<title>Title</title>\r\n<link href=\"style.css\" rel=\"stylesheet\" type=\"text/css\">\r\n<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\">\r\n</head>\r\n<body>\r\n");
 
-			// Convert @page links to actual page numbers
-			document = new Regex("@page\\((.+?)\\)").Replace(document, "<a href='#$1' class='pageref'>this link</a>");
+			if (!parser.GetSuccess())
+			{
+				html.Append("<p>Errors occurred while parsing the document. Please correct these before trying to export.</p>\r\n");
+			}
+			else
+			{
+				// Convert @page links to actual page numbers
+				document = new Regex("@page\\((.+?)\\)").Replace(document, "<a href='#$1' class='pageref'>this link</a>");
 
-			document = ProcessHeadings(document, parser.GetHeadings());
-			document = ProcessFigures(document, parser.GetFigures());
-			document = ProcessTables(document, parser.GetTables());
-			document = ProcessReferences(document, parser.GetReferences());
+				// Convert lines to paragraphs
+				document = new Regex("^([^@figure|^@table|^\n|^#|^\\$].+?)$", RegexOptions.Multiline).Replace(document, "<p>$1</p>");
 
-			// Convert lines to paragraphs
-			document = new Regex("^([^<^\n].+)$", RegexOptions.Multiline).Replace(document, "<p>$1</p>");
+				document = ProcessHeadings(document, parser.GetHeadings());
+				document = ProcessFigures(document, parser.GetFigures());
+				document = ProcessTables(document, parser.GetTables());
+				document = ProcessReferences(document, parser.GetReferences());
 
-			html.Append(document);
+				html.Append(document);
+			}
+
 			html.Append("</body></html>");
 
 			return html.ToString();

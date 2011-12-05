@@ -13,6 +13,7 @@ namespace DocumentLib
 		{
 			this.document = document;
 			this.basePath = basePath;
+			success = false;
 		}
 
 		public string GetDocument()
@@ -40,6 +41,11 @@ namespace DocumentLib
 			return references;
 		}
 
+		public bool GetSuccess()
+		{
+			return success;
+		}
+
 		public bool Parse()
 		{
 			headings = new Dictionary<string, Heading>();
@@ -58,7 +64,9 @@ namespace DocumentLib
 
 			VerifyReferences();
 
-			return true;
+			success = log.Count == 0;
+
+			return success;
 		}
 
 		public List<LogLine> GetLog()
@@ -191,7 +199,7 @@ namespace DocumentLib
 
 		void VerifyReferences()
 		{
-			Regex re = new Regex("@(.+?)\\(([^,|.]+?)\\)");
+			Regex re = new Regex("@([^\\(|^ |.]+?)\\(([^,|.]+?)\\)");
 
 			MatchCollection mc = re.Matches(document);
 
@@ -235,6 +243,7 @@ namespace DocumentLib
 
 		string document;
 		string basePath;
+		bool success;
 
 		Dictionary<string, Heading> headings = null;
 		Dictionary<string, Figure> figures = null;
