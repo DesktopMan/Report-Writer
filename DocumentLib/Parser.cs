@@ -9,9 +9,15 @@ namespace DocumentLib
 {
 	public class Parser
 	{
-		public void SetDocument(string document)
+		public void SetDocument(string document, string basePath)
 		{
 			this.document = document;
+			this.basePath = basePath;
+		}
+
+		public string GetDocument()
+		{
+			return document;
 		}
 
 		public Dictionary<string, Heading> GetHeadings()
@@ -118,7 +124,7 @@ namespace DocumentLib
 					continue;
 				}
 
-				if (!File.Exists(path))
+				if (!File.Exists(Path.Combine(basePath, path)))
 					log.Add(new LogLine(LogLine.Level.WARN, m.ToString().Trim(), "Unable to find figure file '" + path + "'", m.Index));
 
 				Figure f = new Figure(id, m.Index, m.ToString().Trim(), text, path);
@@ -203,6 +209,7 @@ namespace DocumentLib
 		}
 
 		string document;
+		string basePath;
 
 		Dictionary<string, Heading> headings = null;
 		Dictionary<string, Figure> figures = null;

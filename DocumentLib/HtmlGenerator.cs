@@ -9,14 +9,9 @@ namespace DocumentLib
 {
 	public class HtmlGenerator
 	{
-		public static string GetHtml(string document)
+		public static string GetHtml(Parser parser)
 		{
-			Parser parser = new Parser();
-
-			parser.SetDocument(document);
-
-			if (!parser.Parse())
-				return "There were errors parsing the document.";
+			string document = parser.GetDocument();
 
 			StringBuilder html = new StringBuilder();
 

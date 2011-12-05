@@ -13,6 +13,7 @@ namespace Report_Writer
 	public partial class FrmMainWindow : Form
 	{
 		DocumentLib.Parser parser = new DocumentLib.Parser();
+		string filePath;
 
 		public FrmMainWindow()
 		{
@@ -21,10 +22,7 @@ namespace Report_Writer
 
 		private void FrmMainWindow_Load(object sender, EventArgs e)
 		{
-			txtDocument.DetectUrls = true;
-
-			txtDocument.Text = File.ReadAllText("Docs/Specification.txt");
-			UpdateInterface();
+			LoadDocument("Example/document.txt");
 		}
 
 		private void txtDocument_KeyUp(object sender, KeyEventArgs e)
@@ -60,7 +58,7 @@ namespace Report_Writer
 			if (changed == false)
 				return;
 
-			parser.SetDocument(txtDocument.Text);
+			parser.SetDocument(txtDocument.Text, Path.GetDirectoryName(filePath));
 			parser.Parse();
 
 			lbLog.Items.Clear();
@@ -154,6 +152,17 @@ namespace Report_Writer
 			txtDocument.Select(start, length);
 			txtDocument.SelectionBackColor = color;
 			txtDocument.Select(currentPosition, 0);
+		}
+
+		private void LoadDocument(string path)
+		{
+			if (!File.Exists(path))
+				return;
+
+			filePath = path;
+
+			txtDocument.Text = File.ReadAllText(path);
+			UpdateInterface();
 		}
 	}
 }
