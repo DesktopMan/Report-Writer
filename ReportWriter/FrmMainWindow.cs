@@ -154,11 +154,16 @@ namespace Report_Writer
 
 		private void BackColorText(int start, int length, Color color)
 		{
+			this.ActiveControl = null;
+
 			int currentPosition = txtDocument.SelectionStart;
 
 			txtDocument.Select(start, length);
 			txtDocument.SelectionBackColor = color;
+
 			txtDocument.Select(currentPosition, 0);
+
+			txtDocument.Focus();
 		}
 
 		private void LoadDocument(string path)
