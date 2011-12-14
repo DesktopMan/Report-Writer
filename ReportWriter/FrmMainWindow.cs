@@ -21,16 +21,11 @@ namespace Report_Writer
 
 		private void FrmMainWindow_Load(object sender, EventArgs e)
 		{
-			LoadDocument("Example/document.txt");
+			Open("Example/document.txt");
 		}
 
 		private void txtDocument_KeyUp(object sender, KeyEventArgs e)
 		{
-			if (e.KeyCode == Keys.V && e.Control)
-			{
-				e.SuppressKeyPress = true;
-			}
-
 			if (e.KeyCode != Keys.Enter && e.KeyCode != Keys.Up && e.KeyCode != Keys.Down)
 				return;
 
@@ -65,11 +60,6 @@ namespace Report_Writer
 			foreach (DocumentLib.LogLine l in parser.GetLog())
 				lbLog.Items.Add(l);
 
-			if (lbLog.Items.Count == 0)
-				tsslblTip.Text = "Document parsed successfully";
-			else
-				tsslblTip.Text = "Some issues were found while parsing this document";
-
 			lbNavigation.Items.Clear();
 			lbFigures.Items.Clear();
 			lbTables.Items.Clear();
@@ -97,9 +87,6 @@ namespace Report_Writer
 			{
 				lbReferences.Items.Add(r);
 			}
-
-			string html = DocumentLib.HtmlGenerator.GetHtml(parser);
-			File.WriteAllText(Path.Combine(Path.GetDirectoryName(filePath), "output.html"), html);
 
 			changed = false;
 		}
@@ -165,15 +152,77 @@ namespace Report_Writer
 			txtDocument.Focus();
 		}
 
-		private void LoadDocument(string path)
+		private void Open(string path)
 		{
 			if (!File.Exists(path))
 				return;
 
 			filePath = path;
 
+			txtDocument.Text = "";
 			txtDocument.Text = File.ReadAllText(path);
+			tsslblTip.Text = "Opened document '" + filePath + "'";
+
 			UpdateInterface();
+		}
+
+		private void Save()
+		{
+			UpdateInterface();
+
+			File.WriteAllText(filePath, txtDocument.Text);
+			tsslblTip.Text = "Saved document '" + filePath + "'";
+		}
+
+		private void Export()
+		{
+			Save();
+			UpdateInterface();
+
+			string exportName = Path.Combine(Path.GetDirectoryName(filePath), "output.html");
+			string html = DocumentLib.HtmlGenerator.GetHtml(parser);
+
+			File.WriteAllText(exportName, html);
+
+			tsslblTip.Text = "Exported document to '" + exportName + "'";
+		}
+
+		private void tsbOpen_Click(object sender, EventArgs e)
+		{
+			if (ofdOpen.ShowDialog() != DialogResult.OK)
+				return;
+
+			Open(ofdOpen.FileName);
+		}
+
+		private void tsbSave_Click(object sender, EventArgs e)
+		{
+			Save();
+		}
+
+		private void tsbExport_Click(object sender, EventArgs e)
+		{
+			Export();
+		}
+
+		private void txtDocument_KeyDown(object sender, KeyEventArgs e)
+		{
+			if (e.Control)
+				e.SuppressKeyPress = true;
+
+			if (e.KeyCode == Keys.O && e.Control)
+			{
+				if (ofdOpen.ShowDialog() != DialogResult.OK)
+					return;
+
+				Open(ofdOpen.FileName);
+			}
+
+			if (e.KeyCode == Keys.S && e.Control)
+				Save();
+
+			if (e.KeyCode == Keys.E && e.Control)
+				Export();
 		}
 	}
 }
