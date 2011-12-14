@@ -207,8 +207,7 @@ namespace Report_Writer
 
 		private void txtDocument_KeyDown(object sender, KeyEventArgs e)
 		{
-			if (e.Control)
-				e.SuppressKeyPress = true;
+			bool handled = false;
 
 			if (e.KeyCode == Keys.O && e.Control)
 			{
@@ -216,13 +215,24 @@ namespace Report_Writer
 					return;
 
 				Open(ofdOpen.FileName);
+
+				handled = true;
 			}
 
 			if (e.KeyCode == Keys.S && e.Control)
+			{
 				Save();
+				handled = true;
+			}
 
 			if (e.KeyCode == Keys.E && e.Control)
+			{
 				Export();
+				handled = true;
+			}
+
+			if (handled)
+				e.SuppressKeyPress = true;
 		}
 	}
 }
