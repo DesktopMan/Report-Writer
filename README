@@ -151,3 +151,31 @@ a-z _ -
 
 Any id given not conforming to this will be forced to do so by replacing
 any illegal characters with _.
+
+Files / templates
+=================
+
+Other report writer files can be inserted in a document
+
+@file(filename.txt)
+
+This can be used to split up chapters, or create templates, see
+variables below.
+
+Variables
+=========
+
+Variables can be set in a document and used later in the same document,
+or in a document included after it, see above.
+
+Example:
+
+$title = Document Title
+$author = Mystery Author X
+# $title - $author
+
+Result:
+
+# Document Title - Mystery Author X
+
+Note: Variables follow the same naming rules as ids.

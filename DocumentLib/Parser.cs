@@ -45,7 +45,7 @@ namespace DocumentLib
 			return success;
 		}
 
-		public bool Parse()
+		public bool Parse(bool processTemplates = false)
 		{
 			chapters = new Dictionary<string, Chapter>();
 			figures = new Dictionary<string, Figure>();
@@ -55,6 +55,9 @@ namespace DocumentLib
 
 			if (document == "")
 				return true;
+
+			if (processTemplates)
+				document = ProcessTemplates(document);
 
 			ExtractChapters();
 			ExtractFigures();
@@ -71,6 +74,36 @@ namespace DocumentLib
 		public List<LogLine> GetLog()
 		{
 			return log;
+		}
+
+		string ProcessTemplates(string document)
+		{
+			// Find and insert all external files
+			MatchCollection fileMatches = new Regex("^@file\\((.+?)\\)$", RegexOptions.Multiline).Matches(document);
+
+			foreach (Match m in fileMatches)
+			{
+				string match = m.Groups[0].ToString();
+				string fileName = m.Groups[1].ToString().Trim();
+				string fullPath = Path.Combine(basePath, fileName);
+
+				if (File.Exists(fullPath))
+					document = document.Replace(match, File.ReadAllText(fullPath));
+			}
+
+			// Find and replace all variables defined
+			MatchCollection variableMatches = new Regex(@"^\$(.+?)=(.+)$", RegexOptions.Multiline).Matches(document);
+
+			foreach (Match m in variableMatches)
+			{
+				document = document.Replace(m.Groups[0].ToString(), "");
+				string key = m.Groups[1].ToString().Trim();
+				string value = m.Groups[2].ToString().Trim();
+
+				document = document.Replace("$" + key, value);
+			}
+
+			return document;
 		}
 
 		void ExtractChapters()

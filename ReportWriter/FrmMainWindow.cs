@@ -179,8 +179,12 @@ namespace Report_Writer
 			Save();
 			UpdateInterface();
 
+			DocumentLib.Parser fullParser = new DocumentLib.Parser();
+			fullParser.SetDocument(txtDocument.Text, Path.GetDirectoryName(filePath));
+			fullParser.Parse(true);
+
 			string exportName = Path.Combine(Path.GetDirectoryName(filePath), "output.html");
-			string html = DocumentLib.HtmlGenerator.GetHtml(parser);
+			string html = DocumentLib.HtmlGenerator.GetHtml(fullParser);
 
 			File.WriteAllText(exportName, html);
 
