@@ -41,23 +41,18 @@
 			this.lbReferences = new System.Windows.Forms.ListBox();
 			this.ssTip = new System.Windows.Forms.StatusStrip();
 			this.tsslblTip = new System.Windows.Forms.ToolStripStatusLabel();
-			((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
 			this.splitContainer1.Panel1.SuspendLayout();
 			this.splitContainer1.Panel2.SuspendLayout();
 			this.splitContainer1.SuspendLayout();
-			((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).BeginInit();
 			this.splitContainer2.Panel1.SuspendLayout();
 			this.splitContainer2.Panel2.SuspendLayout();
 			this.splitContainer2.SuspendLayout();
-			((System.ComponentModel.ISupportInitialize)(this.splitContainer3)).BeginInit();
 			this.splitContainer3.Panel1.SuspendLayout();
 			this.splitContainer3.Panel2.SuspendLayout();
 			this.splitContainer3.SuspendLayout();
-			((System.ComponentModel.ISupportInitialize)(this.splitContainer4)).BeginInit();
 			this.splitContainer4.Panel1.SuspendLayout();
 			this.splitContainer4.Panel2.SuspendLayout();
 			this.splitContainer4.SuspendLayout();
-			((System.ComponentModel.ISupportInitialize)(this.splitContainer5)).BeginInit();
 			this.splitContainer5.Panel1.SuspendLayout();
 			this.splitContainer5.Panel2.SuspendLayout();
 			this.splitContainer5.SuspendLayout();
@@ -77,8 +72,8 @@
 			// splitContainer1.Panel2
 			// 
 			this.splitContainer1.Panel2.Controls.Add(this.splitContainer2);
-			this.splitContainer1.Size = new System.Drawing.Size(776, 522);
-			this.splitContainer1.SplitterDistance = 201;
+			this.splitContainer1.Size = new System.Drawing.Size(792, 535);
+			this.splitContainer1.SplitterDistance = 205;
 			this.splitContainer1.TabIndex = 0;
 			// 
 			// lbNavigation
@@ -89,7 +84,7 @@
 			this.lbNavigation.ItemHeight = 15;
 			this.lbNavigation.Location = new System.Drawing.Point(0, 0);
 			this.lbNavigation.Name = "lbNavigation";
-			this.lbNavigation.Size = new System.Drawing.Size(201, 522);
+			this.lbNavigation.Size = new System.Drawing.Size(205, 535);
 			this.lbNavigation.TabIndex = 1;
 			this.lbNavigation.SelectedIndexChanged += new System.EventHandler(this.lbNavigation_SelectedIndexChanged);
 			// 
@@ -106,8 +101,8 @@
 			// splitContainer2.Panel2
 			// 
 			this.splitContainer2.Panel2.Controls.Add(this.splitContainer4);
-			this.splitContainer2.Size = new System.Drawing.Size(571, 522);
-			this.splitContainer2.SplitterDistance = 379;
+			this.splitContainer2.Size = new System.Drawing.Size(583, 535);
+			this.splitContainer2.SplitterDistance = 386;
 			this.splitContainer2.TabIndex = 0;
 			// 
 			// splitContainer3
@@ -124,8 +119,8 @@
 			// splitContainer3.Panel2
 			// 
 			this.splitContainer3.Panel2.Controls.Add(this.lbLog);
-			this.splitContainer3.Size = new System.Drawing.Size(379, 522);
-			this.splitContainer3.SplitterDistance = 424;
+			this.splitContainer3.Size = new System.Drawing.Size(386, 535);
+			this.splitContainer3.SplitterDistance = 434;
 			this.splitContainer3.TabIndex = 0;
 			// 
 			// txtDocument
@@ -134,7 +129,7 @@
 			this.txtDocument.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.txtDocument.Location = new System.Drawing.Point(0, 0);
 			this.txtDocument.Name = "txtDocument";
-			this.txtDocument.Size = new System.Drawing.Size(379, 424);
+			this.txtDocument.Size = new System.Drawing.Size(386, 434);
 			this.txtDocument.TabIndex = 0;
 			this.txtDocument.Text = "";
 			this.txtDocument.TextChanged += new System.EventHandler(this.txtDocument_TextChanged);
@@ -149,7 +144,7 @@
 			this.lbLog.ItemHeight = 15;
 			this.lbLog.Location = new System.Drawing.Point(0, 0);
 			this.lbLog.Name = "lbLog";
-			this.lbLog.Size = new System.Drawing.Size(379, 94);
+			this.lbLog.Size = new System.Drawing.Size(386, 97);
 			this.lbLog.TabIndex = 0;
 			this.lbLog.SelectedIndexChanged += new System.EventHandler(this.lbLog_SelectedIndexChanged);
 			// 
@@ -167,8 +162,8 @@
 			// splitContainer4.Panel2
 			// 
 			this.splitContainer4.Panel2.Controls.Add(this.splitContainer5);
-			this.splitContainer4.Size = new System.Drawing.Size(188, 522);
-			this.splitContainer4.SplitterDistance = 162;
+			this.splitContainer4.Size = new System.Drawing.Size(193, 535);
+			this.splitContainer4.SplitterDistance = 166;
 			this.splitContainer4.TabIndex = 0;
 			// 
 			// lbFigures
@@ -179,7 +174,7 @@
 			this.lbFigures.ItemHeight = 15;
 			this.lbFigures.Location = new System.Drawing.Point(0, 0);
 			this.lbFigures.Name = "lbFigures";
-			this.lbFigures.Size = new System.Drawing.Size(188, 162);
+			this.lbFigures.Size = new System.Drawing.Size(193, 166);
 			this.lbFigures.TabIndex = 0;
 			this.lbFigures.SelectedIndexChanged += new System.EventHandler(this.lbFigures_SelectedIndexChanged);
 			// 
@@ -197,8 +192,8 @@
 			// splitContainer5.Panel2
 			// 
 			this.splitContainer5.Panel2.Controls.Add(this.lbReferences);
-			this.splitContainer5.Size = new System.Drawing.Size(188, 356);
-			this.splitContainer5.SplitterDistance = 168;
+			this.splitContainer5.Size = new System.Drawing.Size(193, 365);
+			this.splitContainer5.SplitterDistance = 172;
 			this.splitContainer5.TabIndex = 0;
 			// 
 			// lbTables
@@ -211,7 +206,7 @@
             "Tables will be here"});
 			this.lbTables.Location = new System.Drawing.Point(0, 0);
 			this.lbTables.Name = "lbTables";
-			this.lbTables.Size = new System.Drawing.Size(188, 168);
+			this.lbTables.Size = new System.Drawing.Size(193, 172);
 			this.lbTables.TabIndex = 1;
 			this.lbTables.SelectedIndexChanged += new System.EventHandler(this.lbTables_SelectedIndexChanged);
 			// 
@@ -225,7 +220,7 @@
             "References will be here"});
 			this.lbReferences.Location = new System.Drawing.Point(0, 0);
 			this.lbReferences.Name = "lbReferences";
-			this.lbReferences.Size = new System.Drawing.Size(188, 184);
+			this.lbReferences.Size = new System.Drawing.Size(193, 189);
 			this.lbReferences.TabIndex = 1;
 			this.lbReferences.SelectedIndexChanged += new System.EventHandler(this.lbReferences_SelectedIndexChanged);
 			// 
@@ -233,9 +228,9 @@
 			// 
 			this.ssTip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tsslblTip});
-			this.ssTip.Location = new System.Drawing.Point(0, 522);
+			this.ssTip.Location = new System.Drawing.Point(0, 535);
 			this.ssTip.Name = "ssTip";
-			this.ssTip.Size = new System.Drawing.Size(776, 22);
+			this.ssTip.Size = new System.Drawing.Size(792, 22);
 			this.ssTip.TabIndex = 1;
 			this.ssTip.Text = "statusStrip1";
 			// 
@@ -249,7 +244,7 @@
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(776, 544);
+			this.ClientSize = new System.Drawing.Size(792, 557);
 			this.Controls.Add(this.splitContainer1);
 			this.Controls.Add(this.ssTip);
 			this.Name = "FrmMainWindow";
@@ -258,23 +253,18 @@
 			this.Load += new System.EventHandler(this.FrmMainWindow_Load);
 			this.splitContainer1.Panel1.ResumeLayout(false);
 			this.splitContainer1.Panel2.ResumeLayout(false);
-			((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
 			this.splitContainer1.ResumeLayout(false);
 			this.splitContainer2.Panel1.ResumeLayout(false);
 			this.splitContainer2.Panel2.ResumeLayout(false);
-			((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).EndInit();
 			this.splitContainer2.ResumeLayout(false);
 			this.splitContainer3.Panel1.ResumeLayout(false);
 			this.splitContainer3.Panel2.ResumeLayout(false);
-			((System.ComponentModel.ISupportInitialize)(this.splitContainer3)).EndInit();
 			this.splitContainer3.ResumeLayout(false);
 			this.splitContainer4.Panel1.ResumeLayout(false);
 			this.splitContainer4.Panel2.ResumeLayout(false);
-			((System.ComponentModel.ISupportInitialize)(this.splitContainer4)).EndInit();
 			this.splitContainer4.ResumeLayout(false);
 			this.splitContainer5.Panel1.ResumeLayout(false);
 			this.splitContainer5.Panel2.ResumeLayout(false);
-			((System.ComponentModel.ISupportInitialize)(this.splitContainer5)).EndInit();
 			this.splitContainer5.ResumeLayout(false);
 			this.ssTip.ResumeLayout(false);
 			this.ssTip.PerformLayout();
