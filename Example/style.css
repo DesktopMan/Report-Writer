@@ -68,6 +68,15 @@ h3::before {
   content: counter(h1) " . " counter(h2) "." counter(h3) " ";
 }
 
+h1.notoc::before, h2.notoc::before, h3.notoc::before {
+  content: normal;
+}
+
+h1.notoc, h2.notoc, h3.notoc {
+  counter-increment: none;
+  counter-reset: none;
+}
+
 p
 {
   text-align: justify;

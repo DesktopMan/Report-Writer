@@ -92,8 +92,14 @@ namespace DocumentLib
 			foreach (KeyValuePair<string, Chapter> p in chapters)
 			{
 				document = document.Replace("@chapref(" + p.Value.id + ")", "<a href='#" + p.Value.id + "' class='chapref'>" + p.Value.text + "</a>");
-				document = document.Replace(p.Value.match, "<h" + p.Value.level + " id='" + p.Value.id + "'>" + p.Value.text + "</h" + p.Value.level + ">");
-				toc.Append("<a href='#" + p.Value.id + "' class='toc_" + p.Value.level + "'>" + p.Value.text + "</a><br>\r\n");
+
+				if (p.Value.showInToc)
+				{
+					document = document.Replace(p.Value.match, "<h" + p.Value.level + " id='" + p.Value.id + "'>" + p.Value.text + "</h" + p.Value.level + ">");
+					toc.Append("<a href='#" + p.Value.id + "' class='toc_" + p.Value.level + "'>" + p.Value.text + "</a><br>\r\n");
+				}
+				else
+					document = document.Replace(p.Value.match, "<h" + p.Value.level + " id='" + p.Value.id + "' class='notoc'>" + p.Value.text + "</h" + p.Value.level + ">");
 			}
 
 			toc.Append("</div>\r\n");

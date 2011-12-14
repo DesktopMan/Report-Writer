@@ -1,8 +1,12 @@
 Chapters
 ========
 
-A line is marked as a chapter by using any number of # in front of it.
-Optionally, a manual id can be given by typing an id after |.
+A line is marked as a chapter by using any number of # or $ in front of
+it. Optionally, a manual id can be given by typing an id after |.
+
+Chapters starting with # will be visible in the table of contents and
+have numbering, while chapters starting with $ will not be listed in
+the table of contents and will not have numbering.
 
 Note: If no manual id is given it is generated automatically by taking
 the chapter title and replacing all non-id characters (see below) to _.
@@ -31,7 +35,7 @@ Inserts a table of contents
 
 Example:
 
-# Table of contents
+$ Table of contents
 
 @toc
 
