@@ -20,9 +20,9 @@ namespace DocumentLib
 			return document;
 		}
 
-		public Dictionary<string, Heading> GetHeadings()
+		public Dictionary<string, Chapter> GetChapters()
 		{
-			return headings;
+			return chapters;
 		}
 
 		public Dictionary<string, Figure> GetFigures()
@@ -47,7 +47,7 @@ namespace DocumentLib
 
 		public bool Parse()
 		{
-			headings = new Dictionary<string, Heading>();
+			chapters = new Dictionary<string, Chapter>();
 			figures = new Dictionary<string, Figure>();
 			tables = new Dictionary<string, Table>();
 			references = new List<Reference>();
@@ -56,7 +56,7 @@ namespace DocumentLib
 			if (document == "")
 				return true;
 
-			ExtractHeadings();
+			ExtractChapters();
 			ExtractFigures();
 			ExtractTables();
 			ExtractReferences();
@@ -73,12 +73,12 @@ namespace DocumentLib
 			return log;
 		}
 
-		void ExtractHeadings()
+		void ExtractChapters()
 		{
 			Regex re = new Regex("^([#$]+) ([^\\||.]+?)( \\| (.+?))?$", RegexOptions.Multiline);
 			MatchCollection mc = re.Matches(document);
 
-			Heading currentHeading = null;
+			Chapter currentChapter = null;
 
 			foreach (Match m in mc)
 			{
@@ -87,7 +87,7 @@ namespace DocumentLib
 				int level = m.Groups[1].Length;
 				bool showInToc = m.Groups[1].ToString()[0] == '#';
 
-				Heading parent = currentHeading;
+				Chapter parent = currentChapter;
 
 				while (parent != null && level <= parent.level)
 					parent = parent.parent;
@@ -102,20 +102,20 @@ namespace DocumentLib
 
 				if (text == "")
 				{
-					log.Add(new LogLine(LogLine.Level.WARN, "Heading with no text", m.ToString().Trim(), m.Index));
+					log.Add(new LogLine(LogLine.Level.WARN, "Chapter with no text", m.ToString().Trim(), m.Index));
 					continue;
 				}
 
-				if (headings.ContainsKey(id))
+				if (chapters.ContainsKey(id))
 				{
-					log.Add(new LogLine(LogLine.Level.ERR, "Skipping duplicate heading id '" + id + "'", m.ToString().Trim(), m.Index));
+					log.Add(new LogLine(LogLine.Level.ERR, "Skipping duplicate chapter id '" + id + "'", m.ToString().Trim(), m.Index));
 					continue;
 				}
 
-				Heading h = new Heading(id, m.Index, m.ToString().Trim(), parent, text, level, showInToc);
+				Chapter h = new Chapter(id, m.Index, m.ToString().Trim(), parent, text, level, showInToc);
 
-				headings[h.id] = h;
-				currentHeading = h;
+				chapters[h.id] = h;
+				currentChapter = h;
 			}
 		}
 
@@ -213,23 +213,23 @@ namespace DocumentLib
 
 				switch (type)
 				{
-					case "figure":
+					case "figref":
 						if (!figures.ContainsKey(id))
 							log.Add(new LogLine(LogLine.Level.ERR, m.ToString().Trim(), "Unknown figure '" + id + "'", m.Index));
 						break;
 
-					case "table":
+					case "tableref":
 						if (!tables.ContainsKey(id))
 							log.Add(new LogLine(LogLine.Level.ERR, m.ToString().Trim(), "Unknown table '" + id + "'", m.Index));
 						break;
 
-					case "heading":
-						if (!headings.ContainsKey(id))
-							log.Add(new LogLine(LogLine.Level.ERR, m.ToString().Trim(), "Unknown heading '" + id + "'", m.Index));
+					case "chapref":
+						if (!chapters.ContainsKey(id))
+							log.Add(new LogLine(LogLine.Level.ERR, m.ToString().Trim(), "Unknown chapter '" + id + "'", m.Index));
 						break;
 
-					case "page":
-						if (!figures.ContainsKey(id) && !tables.ContainsKey(id) && !headings.ContainsKey(id))
+					case "pageref":
+						if (!figures.ContainsKey(id) && !tables.ContainsKey(id) && !chapters.ContainsKey(id))
 							log.Add(new LogLine(LogLine.Level.ERR, m.ToString().Trim(), "Unknown id '" + id + "'", m.Index));
 						break;
 
@@ -244,7 +244,7 @@ namespace DocumentLib
 		string basePath;
 		bool success;
 
-		Dictionary<string, Heading> headings = null;
+		Dictionary<string, Chapter> chapters = null;
 		Dictionary<string, Figure> figures = null;
 		Dictionary<string, Table> tables = null;
 		List<Reference> references = null;

@@ -1,20 +1,28 @@
-Headings
+Chapters
 ========
 
-A line is marked as a heading by using any number of # in front of it.
+A line is marked as a chapter by using any number of # in front of it.
 Optionally, a manual id can be given by typing an id after |.
 
 Note: If no manual id is given it is generated automatically by taking
-the heading text and replacing all non-id characters (see below) to _.
+the chapter title and replacing all non-id characters (see below) to _.
 
 Example:
 
-# Top heading | top
-## Sub heading 1
-### Sub heading 2
+# Top chapter | top
+## Sub chapter 1
+### Sub chapter 2
 
-Note 2: Nested headings will be given automatic ids in the form of
+Note 2: Nested chapters will be given automatic ids in the form of
 top-sub1-sub2 and so on.
+
+Chapter reference
+=================
+
+Inserts a link to a given chapter
+
+Example: See @chapref(intro)
+Result : See Introduction
 
 Table of contents
 =================
@@ -46,9 +54,9 @@ Figure references
 
 Inserts a link to a given figure
 
-@figure(id)
+@figref(id)
 
-Example: For more information see @figure(nice_painting).
+Example: For more information see @figref(nice_painting).
 Result : For more information see Figure 1.
 
 Note: The figure can be defined after a reference to is it used.
@@ -72,6 +80,18 @@ Tables are supported using external CSV files
 @table(id, path, text)
 
 Note: First row in CSV file will be used as column headers
+
+Figure references
+=================
+
+Inserts a link to a given table
+
+@tableref(id)
+
+Example: For more information see @tableref(nice_painting).
+Result : For more information see Table 1.
+
+Note: The table can be defined after a reference to is it used.
 
 Table of tables
 ===============
@@ -114,7 +134,7 @@ Page number
 
 Inserts a link to the page of a given id
 
-Example: See @page(top).
+Example: See @pageref(top).
 Result : See Page 2.
 
 Note: Not all exporters can support this, as not all media has paging.

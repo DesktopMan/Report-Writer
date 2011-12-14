@@ -44,12 +44,12 @@ namespace Report_Writer
 
 		private void lbNavigation_SelectedIndexChanged(object sender, EventArgs e)
 		{
-			DocumentLib.Heading heading = (DocumentLib.Heading)lbNavigation.SelectedItem;
+			DocumentLib.Chapter chapter = (DocumentLib.Chapter)lbNavigation.SelectedItem;
 
-			if (heading == null)
+			if (chapter == null)
 				return;
 
-			Navigate(heading.position);
+			Navigate(chapter.position);
 		}
 
 		private void UpdateInterface()
@@ -75,7 +75,7 @@ namespace Report_Writer
 			lbTables.Items.Clear();
 			lbReferences.Items.Clear();
 
-			foreach (KeyValuePair<string, DocumentLib.Heading> pair in parser.GetHeadings())
+			foreach (KeyValuePair<string, DocumentLib.Chapter> pair in parser.GetChapters())
 			{
 				BackColorText(pair.Value.position, pair.Value.match.Length, Color.LightGreen);
 				lbNavigation.Items.Add(pair.Value);

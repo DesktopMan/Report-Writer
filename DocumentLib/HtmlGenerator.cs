@@ -23,13 +23,13 @@ namespace DocumentLib
 			}
 			else
 			{
-				// Convert @page links to actual page numbers
-				document = new Regex("@page\\((.+?)\\)").Replace(document, "<a href='#$1' class='pageref'>this link</a>");
+				// Convert @pageref links to actual page numbers
+				document = new Regex("@pageref\\((.+?)\\)").Replace(document, "<a href='#$1' class='pageref'>this link</a>");
 
 				// Convert lines to paragraphs
-				document = new Regex("^([^@figure|^@table|^\n|^#|^\\$].+?)$", RegexOptions.Multiline).Replace(document, "<p>$1</p>");
+				document = new Regex("^([^@figure\\(|^@table\\(|^\n|^#|^\\$].+?)$", RegexOptions.Multiline).Replace(document, "<p>$1</p>");
 
-				document = ProcessHeadings(document, parser.GetHeadings());
+				document = ProcessChapters(document, parser.GetChapters());
 				document = ProcessFigures(document, parser.GetFigures());
 				document = ProcessTables(document, parser.GetTables());
 				document = ProcessReferences(document, parser.GetReferences());
@@ -83,15 +83,15 @@ namespace DocumentLib
 			return null;
 		}
 
-		private static string ProcessHeadings(string document, Dictionary<string, Heading> headings)
+		private static string ProcessChapters(string document, Dictionary<string, Chapter> chapters)
 		{
 			StringBuilder toc = new StringBuilder();
 
 			toc.Append("<div>\r\n");
 
-			foreach (KeyValuePair<string, Heading> p in headings)
+			foreach (KeyValuePair<string, Chapter> p in chapters)
 			{
-				document = document.Replace("@heading(" + p.Value.id + ")", "<a href='#" + p.Value.id + "' class='chapref'>" + p.Value.text + "</a>");
+				document = document.Replace("@chapref(" + p.Value.id + ")", "<a href='#" + p.Value.id + "' class='chapref'>" + p.Value.text + "</a>");
 				document = document.Replace(p.Value.match, "<h" + p.Value.level + " id='" + p.Value.id + "'>" + p.Value.text + "</h" + p.Value.level + ">");
 				toc.Append("<a href='#" + p.Value.id + "' class='toc_" + p.Value.level + "'>" + p.Value.text + "</a><br>\r\n");
 			}
@@ -110,7 +110,7 @@ namespace DocumentLib
 
 			foreach (KeyValuePair<string, Figure> p in figures)
 			{
-				document = document.Replace("@figure(" + p.Value.id + ")", "<a href='#" + p.Value.id + "' class='figref'>this figure</a>");
+				document = document.Replace("@figref(" + p.Value.id + ")", "<a href='#" + p.Value.id + "' class='figref'>this figure</a>");
 				document = document.Replace(p.Value.match, "<div id='" + p.Value.id + "' class='figure'><img src='" + p.Value.imagePath + "' alt='" + p.Value.text + "' title='" + p.Value.text + "'><div class='caption'>" + p.Value.text + "</div></div>");
 				figtoc.Append("<a href='#" + p.Value.id + "' class='figtoc'>" + p.Value.text + "</a><br>\r\n");
 			}
@@ -128,7 +128,7 @@ namespace DocumentLib
 
 			foreach (KeyValuePair<string, Table> p in tables)
 			{
-				document = document.Replace("@table(" + p.Value.id + ")", "<a href='#" + p.Value.id + "' class='tableref'>this table</a>");
+				document = document.Replace("@tableref(" + p.Value.id + ")", "<a href='#" + p.Value.id + "' class='tableref'>this table</a>");
 
 				StringBuilder table = new StringBuilder();
 

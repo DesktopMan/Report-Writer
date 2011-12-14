@@ -4,9 +4,9 @@ using System.Text;
 
 namespace DocumentLib
 {
-	public class Heading : Content
+	public class Chapter : Content
 	{
-		public Heading(string id, int position, string match, Heading parent, string text, int level, bool showInToc)
+		public Chapter(string id, int position, string match, Chapter parent, string text, int level, bool showInToc)
 			: base(id, position, match, text)
 		{
 			this.level = level;
@@ -28,6 +28,6 @@ namespace DocumentLib
 
 		public int level;
 		public bool showInToc;
-		public Heading parent;
+		public Chapter parent;
 	}
 }
