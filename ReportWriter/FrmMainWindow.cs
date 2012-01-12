@@ -170,7 +170,7 @@ namespace Report_Writer
 		{
 			UpdateInterface();
 
-			File.WriteAllText(filePath, txtDocument.Text);
+			File.WriteAllText(filePath, txtDocument.Text.Replace("\n", Environment.NewLine));
 			tsslblTip.Text = "Saved document '" + filePath + "'";
 		}
 
