@@ -146,7 +146,9 @@ namespace DocumentLib
 					table.Append("<tr>");
 					for (int col = 0; col < p.Value.table[row].Count; col++)
 					{
-						if (row == 0)
+						if (row == 0 && p.Value.headerTop || col == 0 && p.Value.headerLeft ||
+							row == p.Value.table.Count - 1 && p.Value.headerBottom ||
+							col == p.Value.table[row].Count - 1 && p.Value.headerRight)
 							table.Append("<th>" + p.Value.table[row][col] + "</th>");
 						else
 							table.Append("<td>" + p.Value.table[row][col] + "</td>");

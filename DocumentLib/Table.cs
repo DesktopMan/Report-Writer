@@ -7,7 +7,7 @@ namespace DocumentLib
 {
 	public class Table : Content
 	{
-		public Table(string id, int position, string match, string text, string csvPath)
+		public Table(string id, int position, string match, string text, string csvPath, string headers)
 			: base(id, position, match, text)
 		{
 			int rowCount = 0;
@@ -22,6 +22,14 @@ namespace DocumentLib
 
 				rowCount++;
 			}
+
+			foreach (string s in headers.Split('|'))
+			{
+				if (s.Trim() == "top") headerTop = true;
+				if (s.Trim() == "right") headerRight = true;
+				if (s.Trim() == "bottom") headerBottom = true;
+				if (s.Trim() == "left") headerLeft = true;
+			}
 		}
 
 		public override string ToString()
@@ -30,5 +38,6 @@ namespace DocumentLib
 		}
 
 		public Dictionary<int, Dictionary<int, string>> table = new Dictionary<int, Dictionary<int, string>>();
+		public bool headerTop, headerRight, headerBottom, headerLeft;
 	}
 }

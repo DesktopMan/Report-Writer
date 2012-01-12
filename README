@@ -81,9 +81,14 @@ Tables
 
 Tables are supported using external CSV files
 
-@table(id, path, text)
+@table(id, path, text, headers)
 
-Note: First row in CSV file will be used as column headers
+Headers is optional. It can contain top, right, bottom and left,
+seperated by |.
+
+Example:
+
+@table(numbers, tables/numbers.csv, A table with numbers, top|left)
 
 Figure references
 =================

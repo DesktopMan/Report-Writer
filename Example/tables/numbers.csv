@@ -1,5 +1,4 @@
-Count,Occurence
-1,45
-2,35
-3,15
-4,5
+,Top 1,Top 2,
+Left 1,1,45,Right 1
+Left 2,2,35,Right 2
+,Bottom 1,Bottom 2,
