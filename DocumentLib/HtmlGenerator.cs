@@ -29,8 +29,8 @@ namespace DocumentLib
 				// Center lines
 				document = new Regex("^--\\s*(.*?)\\s*$", RegexOptions.Multiline).Replace(document, "<p style='text-align: center'>$1</p>");
 
-				// Convert lines to paragraphs
-				document = new Regex("^([^@figure\\(|^@table\\(|^\n|^#|^\\$|^\\<p\\>].+?)$", RegexOptions.Multiline).Replace(document, "<p>$1</p>");
+				// Convert lines to paragraphs (ignoring any figures, tables, or raw html)
+				document = new Regex("^([^@figure\\(|^@table\\(|^\n|^#|^\\$|^\\<].+?)$", RegexOptions.Multiline).Replace(document, "<p>$1</p>");
 
 				// Convert lines only containing # to vertical padding paragraphs
 				document = new Regex("^#\n", RegexOptions.Multiline).Replace(document, "<p><br></p>\n");
