@@ -29,6 +29,9 @@ namespace DocumentLib
 				// Convert lines to paragraphs
 				document = new Regex("^([^@figure\\(|^@table\\(|^\n|^#|^\\$].+?)$", RegexOptions.Multiline).Replace(document, "<p>$1</p>");
 
+				// Convert lines only containing # to vertical padding paragraphs
+				document = new Regex("^#\n", RegexOptions.Multiline).Replace(document, "<p><br></p>\n");
+
 				document = ProcessChapters(document, parser.GetChapters());
 				document = ProcessFigures(document, parser.GetFigures());
 				document = ProcessTables(document, parser.GetTables());

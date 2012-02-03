@@ -188,3 +188,11 @@ Result:
 # Document Title - Mystery Author X
 
 Note: Variables follow the same naming rules as ids.
+
+Special formatting
+==================
+
+Vertical padding (mostly used for the front page) can be inserted by
+writing lines only containing #.
+
+Example: #
