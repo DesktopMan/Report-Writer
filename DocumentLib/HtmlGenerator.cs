@@ -26,8 +26,11 @@ namespace DocumentLib
 				// Convert @pageref links to actual page numbers
 				document = new Regex("@pageref\\((.+?)\\)").Replace(document, "<a href='#$1' class='pageref'>this link</a>");
 
+				// Center lines
+				document = new Regex("^--\\s*(.*?)\\s*$", RegexOptions.Multiline).Replace(document, "<p style='text-align: center'>$1</p>");
+
 				// Convert lines to paragraphs
-				document = new Regex("^([^@figure\\(|^@table\\(|^\n|^#|^\\$].+?)$", RegexOptions.Multiline).Replace(document, "<p>$1</p>");
+				document = new Regex("^([^@figure\\(|^@table\\(|^\n|^#|^\\$|^\\<p\\>].+?)$", RegexOptions.Multiline).Replace(document, "<p>$1</p>");
 
 				// Convert lines only containing # to vertical padding paragraphs
 				document = new Regex("^#\n", RegexOptions.Multiline).Replace(document, "<p><br></p>\n");

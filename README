@@ -192,7 +192,14 @@ Note: Variables follow the same naming rules as ids.
 Special formatting
 ==================
 
-Vertical padding (mostly used for the front page) can be inserted by
-writing lines only containing #.
+These commands should rarely be used as the exporter should be
+responsible for the output formatting. Some special cases are required,
+such as the front page. These commands are for those special cases.
+
+Vertical padding can be inserted by writing lines only containing #.
 
 Example: #
+
+A regular paragraph can be centered by prepending the line with --.
+
+Example: -- This line is centered
