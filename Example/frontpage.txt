@@ -1,1 +1,25 @@
-$ $title - by $author
+-- <img src="http://www.uia.no/no/content/download/79969/1326369/file/UiA+logo+engelsk.jpg" width="50%" height="50%" alt="UiA Logo">
+
+#
+#
+
+<div style="font-size: 16pt; text-align: center"><b>$title</b></div>
+
+#
+<p style="text-align: center">By<br>
+<br>$authors
+</p>
+-- Supervisor(s): $supervisors<br><br>
+
+-- <b>Project report for $course in $semester</b><br><br>
+
+<p style="text-align: center">Faculty of Engineering and Science
+<br>University of Agder
+<br>$place, $date
+</p>
+
+-- Status: $status
+
+<p><b>Keywords:</b> $keywords<br></p>
+
+<p><b>Abstract:</b><br>$abstract</p>
