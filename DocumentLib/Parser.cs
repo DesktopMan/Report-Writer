@@ -88,7 +88,7 @@ namespace DocumentLib
 				string fullPath = Path.Combine(basePath, fileName);
 
 				if (File.Exists(fullPath))
-					document = document.Replace(match, File.ReadAllText(fullPath));
+					document = document.Replace(match, File.ReadAllText(fullPath).Replace("\r", ""));
 			}
 
 			// Find and replace all variables defined
