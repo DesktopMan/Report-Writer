@@ -91,26 +91,44 @@ namespace DocumentLib
 
 		private static string ProcessChapters(string document, Dictionary<string, Chapter> chapters)
 		{
+			string toInsert = "";
+			// Each item has a built in position, but that's not accurate after
+			// the document has been changed. Search for it instead.
+			// This is guaranteed to work as the chapters are found in
+			// sequential order.
+			int position;
+
 			StringBuilder toc = new StringBuilder();
+			StringBuilder output = new StringBuilder(document);
 
 			toc.Append("<div>\r\n");
 
 			foreach (KeyValuePair<string, Chapter> p in chapters)
 			{
-				document = document.Replace("@chapref(" + p.Value.id + ")", "<a href='#" + p.Value.id + "' class='chapref'>" + p.Value.text + "</a>");
+				// First update all chapter references
+				output.Replace("@chapref(" + p.Value.id + ")", "<a href='#" + p.Value.id + "' class='chapref'>" + p.Value.text + "</a>");
+
+				// Get the first match. There might be more in case sub headings
+				// have the same title.
+				position = output.ToString().IndexOf(p.Value.match + "\n");
+
+				// Get rid of the header line
+				output.Remove(position, p.Value.match.Length);
 
 				if (p.Value.showInToc)
 				{
-					document = document.Replace(p.Value.match, "<h" + p.Value.level + " id='" + p.Value.id + "'>" + p.Value.text + "</h" + p.Value.level + ">");
+					toInsert = "<h" + p.Value.level + " id='" + p.Value.id + "'>" + p.Value.text + "</h" + p.Value.level + ">";
 					toc.Append("<a href='#" + p.Value.id + "' class='toc_" + p.Value.level + "'>" + p.Value.text + "</a><br>\r\n");
 				}
 				else
-					document = document.Replace(p.Value.match, "<h" + p.Value.level + " id='" + p.Value.id + "' class='notoc'>" + p.Value.text + "</h" + p.Value.level + ">");
+					toInsert = "<h" + p.Value.level + " id='" + p.Value.id + "' class='notoc'>" + p.Value.text + "</h" + p.Value.level + ">";
+
+				output.Insert(position, toInsert);
 			}
 
 			toc.Append("</div>\r\n");
 
-			return document.Replace("@toc", toc.ToString());
+			return output.Replace("@toc", toc.ToString()).ToString();
 		}
 
 		private static string ProcessFigures(string document, Dictionary<string, Figure> figures)

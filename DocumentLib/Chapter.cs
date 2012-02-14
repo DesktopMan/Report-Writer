@@ -11,6 +11,7 @@ namespace DocumentLib
 		{
 			this.level = level;
 			this.showInToc = showInToc;
+			this.parent = parent;
 		}
 
 		public string GetFullTitle()

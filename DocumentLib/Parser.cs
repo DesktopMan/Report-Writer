@@ -10,6 +10,10 @@ namespace DocumentLib
 	{
 		public void SetDocument(string document, string basePath)
 		{
+			// Ensure newline at end of file. Parser/exporter expects it
+			if (document.Length > 0 && document[document.Length - 1] != '\n')
+				document += "\n";
+
 			this.document = document;
 			this.basePath = basePath;
 			success = false;
@@ -111,7 +115,7 @@ namespace DocumentLib
 			Regex re = new Regex("^([#$]+) ([^\\||.]+?)( \\| (.+?))?$", RegexOptions.Multiline);
 			MatchCollection mc = re.Matches(document);
 
-			Chapter currentChapter = null;
+			Chapter previousChapter = null;
 
 			foreach (Match m in mc)
 			{
@@ -120,7 +124,7 @@ namespace DocumentLib
 				int level = m.Groups[1].Length;
 				bool showInToc = m.Groups[1].ToString()[0] == '#';
 
-				Chapter parent = currentChapter;
+				Chapter parent = previousChapter;
 
 				while (parent != null && level <= parent.level)
 					parent = parent.parent;
@@ -139,16 +143,16 @@ namespace DocumentLib
 					continue;
 				}
 
-				if (chapters.ContainsKey(id))
+				Chapter h = new Chapter(id, m.Index, m.ToString().Trim(), parent, text, level, showInToc);
+
+				if (chapters.ContainsKey(h.id))
 				{
-					log.Add(new LogLine(LogLine.Level.ERR, "Skipping duplicate chapter id '" + id + "'", m.ToString().Trim(), m.Index));
+					log.Add(new LogLine(LogLine.Level.ERR, m.ToString().Trim(), "Skipping duplicate chapter id '" + id + "'", m.Index));
 					continue;
 				}
 
-				Chapter h = new Chapter(id, m.Index, m.ToString().Trim(), parent, text, level, showInToc);
-
 				chapters[h.id] = h;
-				currentChapter = h;
+				previousChapter = h;
 			}
 		}
 
