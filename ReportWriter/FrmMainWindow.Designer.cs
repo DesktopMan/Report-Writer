@@ -43,8 +43,8 @@
 			this.ssTip = new System.Windows.Forms.StatusStrip();
 			this.tsslblTip = new System.Windows.Forms.ToolStripStatusLabel();
 			this.toolStrip1 = new System.Windows.Forms.ToolStrip();
-			this.tsbSave = new System.Windows.Forms.ToolStripButton();
 			this.tsbOpen = new System.Windows.Forms.ToolStripButton();
+			this.tsbSave = new System.Windows.Forms.ToolStripButton();
 			this.tsbExport = new System.Windows.Forms.ToolStripButton();
 			this.ofdOpen = new System.Windows.Forms.OpenFileDialog();
 			this.splitContainer1.Panel1.SuspendLayout();
@@ -260,16 +260,6 @@
 			this.toolStrip1.TabIndex = 2;
 			this.toolStrip1.Text = "toolStrip1";
 			// 
-			// tsbSave
-			// 
-			this.tsbSave.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-			this.tsbSave.Image = ((System.Drawing.Image)(resources.GetObject("tsbSave.Image")));
-			this.tsbSave.ImageTransparentColor = System.Drawing.Color.Magenta;
-			this.tsbSave.Name = "tsbSave";
-			this.tsbSave.Size = new System.Drawing.Size(23, 22);
-			this.tsbSave.Text = "Save";
-			this.tsbSave.Click += new System.EventHandler(this.tsbSave_Click);
-			// 
 			// tsbOpen
 			// 
 			this.tsbOpen.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
@@ -279,6 +269,16 @@
 			this.tsbOpen.Size = new System.Drawing.Size(23, 22);
 			this.tsbOpen.Text = "Open";
 			this.tsbOpen.Click += new System.EventHandler(this.tsbOpen_Click);
+			// 
+			// tsbSave
+			// 
+			this.tsbSave.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+			this.tsbSave.Image = ((System.Drawing.Image)(resources.GetObject("tsbSave.Image")));
+			this.tsbSave.ImageTransparentColor = System.Drawing.Color.Magenta;
+			this.tsbSave.Name = "tsbSave";
+			this.tsbSave.Size = new System.Drawing.Size(23, 22);
+			this.tsbSave.Text = "Save";
+			this.tsbSave.Click += new System.EventHandler(this.tsbSave_Click);
 			// 
 			// tsbExport
 			// 
@@ -305,6 +305,7 @@
 			this.Name = "FrmMainWindow";
 			this.Text = "Report Writer";
 			this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
+			this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FrmMainWindow_FormClosing);
 			this.Load += new System.EventHandler(this.FrmMainWindow_Load);
 			this.splitContainer1.Panel1.ResumeLayout(false);
 			this.splitContainer1.Panel2.ResumeLayout(false);

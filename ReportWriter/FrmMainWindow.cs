@@ -35,6 +35,7 @@ namespace Report_Writer
 		private void txtDocument_TextChanged(object sender, EventArgs e)
 		{
 			changed = true;
+			needSave = true;
 		}
 
 		private void lbNavigation_SelectedIndexChanged(object sender, EventArgs e)
@@ -103,6 +104,7 @@ namespace Report_Writer
 		}
 
 		private bool changed = false;
+		private bool needSave = false;
 
 		private void txtDocument_MouseUp(object sender, MouseEventArgs e)
 		{
@@ -157,6 +159,8 @@ namespace Report_Writer
 			if (!File.Exists(path))
 				return;
 
+			DocumentClose();
+
 			filePath = path;
 
 			txtDocument.Text = "";
@@ -164,6 +168,8 @@ namespace Report_Writer
 			tsslblTip.Text = "Opened document '" + filePath + "'";
 
 			UpdateInterface();
+
+			needSave = false;
 		}
 
 		private void Save()
@@ -172,6 +178,8 @@ namespace Report_Writer
 
 			File.WriteAllText(filePath, txtDocument.Text.Replace("\n", Environment.NewLine));
 			tsslblTip.Text = "Saved document '" + filePath + "'";
+
+			needSave = false;
 		}
 
 		private void Export()
@@ -193,6 +201,8 @@ namespace Report_Writer
 
 		private void tsbOpen_Click(object sender, EventArgs e)
 		{
+			DocumentClose();
+
 			if (ofdOpen.ShowDialog() != DialogResult.OK)
 				return;
 
@@ -254,6 +264,26 @@ namespace Report_Writer
 
 			if (handled)
 				e.SuppressKeyPress = true;
+		}
+
+		private void FrmMainWindow_FormClosing(object sender, FormClosingEventArgs e)
+		{
+			if (DocumentClose() == DialogResult.Cancel)
+				e.Cancel = true;
+		}
+
+		private DialogResult DocumentClose()
+		{
+			DialogResult res = DialogResult.No;
+
+			if (needSave)
+			{
+				res = MessageBox.Show("Do you want to save changes you made to the document?", "ReportWriter", MessageBoxButtons.YesNoCancel);
+
+				if (res == DialogResult.Yes)
+					Save();
+			}
+			return res;
 		}
 	}
 }
