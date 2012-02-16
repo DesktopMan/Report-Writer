@@ -67,19 +67,19 @@ namespace Report_Writer
 
 			foreach (KeyValuePair<string, DocumentLib.Chapter> pair in parser.GetChapters())
 			{
-				BackColorText(pair.Value.position, pair.Value.match.Length, Color.LightGreen);
+				// BackColorText(pair.Value.position, pair.Value.match.Length, Color.LightGreen);
 				lbNavigation.Items.Add(pair.Value);
 			}
 
 			foreach (KeyValuePair<string, DocumentLib.Figure> pair in parser.GetFigures())
 			{
-				BackColorText(pair.Value.position, pair.Value.match.Length, Color.Yellow);
+				// BackColorText(pair.Value.position, pair.Value.match.Length, Color.Yellow);
 				lbFigures.Items.Add(pair.Value);
 			}
 
 			foreach (KeyValuePair<string, DocumentLib.Table> pair in parser.GetTables())
 			{
-				BackColorText(pair.Value.position, pair.Value.match.Length, Color.Yellow);
+				// BackColorText(pair.Value.position, pair.Value.match.Length, Color.Yellow);
 				lbTables.Items.Add(pair.Value);
 			}
 
