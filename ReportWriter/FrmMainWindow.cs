@@ -169,6 +169,8 @@ namespace Report_Writer
 
 			UpdateInterface();
 
+			this.Text = "ReportWriter - " + Path.GetFileName(filePath);
+
 			needSave = false;
 		}
 
@@ -191,7 +193,7 @@ namespace Report_Writer
 			fullParser.SetDocument(txtDocument.Text, Path.GetDirectoryName(filePath));
 			fullParser.Parse(true);
 
-			string exportName = Path.Combine(Path.GetDirectoryName(filePath), "output.html");
+			string exportName = Path.Combine(Path.GetDirectoryName(filePath), Path.GetFileName(filePath).Replace(".txt", ".html"));
 			string html = DocumentLib.HtmlGenerator.GetHtml(fullParser);
 
 			File.WriteAllText(exportName, html);
@@ -283,6 +285,7 @@ namespace Report_Writer
 				if (res == DialogResult.Yes)
 					Save();
 			}
+
 			return res;
 		}
 	}
