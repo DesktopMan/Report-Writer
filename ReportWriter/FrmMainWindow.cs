@@ -235,6 +235,23 @@ namespace Report_Writer
 				handled = true;
 			}
 
+			if (e.KeyCode == Keys.C && e.Control)
+			{
+				if (txtDocument.SelectedText != "")
+				{
+					Clipboard.Clear();
+					Clipboard.SetText(txtDocument.SelectedText);
+				}
+
+				handled = true;
+			}
+
+			if (e.KeyCode == Keys.V && e.Control)
+			{
+				txtDocument.SelectedText = Clipboard.GetText();
+				handled = true;
+			}
+
 			if (handled)
 				e.SuppressKeyPress = true;
 		}
