@@ -21,7 +21,7 @@ namespace Report_Writer
 
 		private void FrmMainWindow_Load(object sender, EventArgs e)
 		{
-			Open("Example/document.txt");
+			Open(Properties.Settings.Default.LastDocument);
 		}
 
 		private void txtDocument_KeyUp(object sender, KeyEventArgs e)
@@ -166,6 +166,9 @@ namespace Report_Writer
 			txtDocument.Text = "";
 			txtDocument.Text = File.ReadAllText(path);
 			tsslblTip.Text = "Opened document '" + filePath + "'";
+
+			Properties.Settings.Default.LastDocument = filePath;
+			Properties.Settings.Default.Save();
 
 			UpdateInterface();
 
