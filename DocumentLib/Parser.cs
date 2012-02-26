@@ -143,11 +143,11 @@ namespace DocumentLib
 					continue;
 				}
 
-				Chapter h = new Chapter(id, m.Index, m.ToString().Trim(), parent, text, level, showInToc);
+				Chapter h = new Chapter(id, m.Index, m.ToString(), parent, text, level, showInToc);
 
 				if (chapters.ContainsKey(h.id))
 				{
-					log.Add(new LogLine(LogLine.Level.ERR, m.ToString().Trim(), "Skipping duplicate chapter id '" + id + "'", m.Index));
+					log.Add(new LogLine(LogLine.Level.ERR, m.ToString(), "Skipping duplicate chapter id '" + id + "'", m.Index));
 					continue;
 				}
 
