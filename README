@@ -1,3 +1,15 @@
+Paragraphs
+==========
+
+Any content that does not match anything below will be considered a
+regular document paragraph. A paragraph must end with two newlines.
+A manual line break can be inserted with a single newline.
+
+Example:
+
+This is a
+two line paragraph
+
 Chapters
 ========
 

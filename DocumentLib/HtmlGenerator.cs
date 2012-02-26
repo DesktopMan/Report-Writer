@@ -30,7 +30,15 @@ namespace DocumentLib
 				document = new Regex("^--\\s*(.*?)\\s*$", RegexOptions.Multiline).Replace(document, "<p style='text-align: center'>$1</p>");
 
 				// Convert lines to paragraphs (ignoring any figures, tables, or raw html)
-				document = new Regex("^([^@figure\\(|^@table\\(|^\n|^#|^\\$|^\\<].+?)$", RegexOptions.Multiline).Replace(document, "<p>$1</p>");
+				MatchCollection paragraphs = new Regex("(^([^@figure\\(|^@table\\(|^\n|^#|^\\$|^\\<].+?)\n)+", RegexOptions.Multiline).Matches(document);
+
+				for (int i = paragraphs.Count - 1; i >= 0; i--)
+				{
+					Match m = paragraphs[i];
+
+					document = document.Remove(m.Index, m.Length);
+					document = document.Insert(m.Index, "<p>\n" + m.Groups[0].Value.ToString().Substring(0, m.Groups[0].Value.Length - 1).Replace("\n", "<br>\n") + "\n</p>\n");
+				}
 
 				// Convert lines only containing # to vertical padding paragraphs
 				document = new Regex("^#\n", RegexOptions.Multiline).Replace(document, "<p><br></p>\n");
