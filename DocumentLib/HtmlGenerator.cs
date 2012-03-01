@@ -210,8 +210,16 @@ namespace DocumentLib
 
 			foreach (Reference r in references)
 			{
-				document = document.Replace(r.match, "<a href='" + r.url + "'>[" + r.figNum + "]</a>");
-				reflist.Append("<a href='" + r.url + "'>" + r.ToString() + " - " + GetWebPageTitle(r.url) + "</a><br>\r\n");
+				if (r.content.StartsWith("http"))
+				{
+					reflist.AppendFormat("<a id='reference_{0}' href='{1}'>{2}</a><br>\r\n", r.figNum, r.content, r.ToString() + " - " + GetWebPageTitle(r.content));
+					document = document.Replace(r.match, "<a href='" + r.content + "'>[" + r.figNum + "]</a>");
+				}
+				else
+				{
+					reflist.AppendFormat("<span id='reference_{0}'>[{0}] {1}</span><br>\r\n", r.figNum, r.content);
+					document = document.Replace(r.match, "<a href='#reference_" + r.figNum + "' title='" + r.content + "'>[" + r.figNum + "]</a>");
+				}
 			}
 
 			reflist.Append("</div>\r\n");

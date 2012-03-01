@@ -6,20 +6,20 @@ namespace DocumentLib
 {
 	public class Reference
 	{
-		public Reference(string match, int figNum, string url)
+		public Reference(string match, int figNum, string content)
 		{
 			this.match = match;
 			this.figNum = figNum;
-			this.url = url;
+			this.content = content;
 		}
 
 		public override string ToString()
 		{
-			return "[" + figNum + "] " + url;
+			return "[" + figNum + "] " + content;
 		}
 
 		public string match;
 		public int figNum;
-		public string url;
+		public string content;
 	}
 }

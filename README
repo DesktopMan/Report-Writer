@@ -128,14 +128,18 @@ Example:
 References
 ==========
 
-Inserts a numbered link to a given URL
+Inserts a numbered reference
 
-@("URL")
-
-Note: URL must be quoted
+@("reference")
 
 Example: Bananas are delicious. @("http://www.wikipedia.org")
+         Carrots are delicious. @("Old school book")
+
 Result : Bananas are delicious. [1]
+         Carrots are delicious. [2]
+
+Note  : Any reference starting with "http" will be treated as a link.
+        Anything else will be added directly in the references section.
 
 Note 2: Repeated references use the first number they were allocated
 
@@ -145,10 +149,13 @@ Reference list
 Inserts a list of references with their numbers
 
 Example: @references
-Result : [1] http://www.wikipedia.org - Wikipedia
 
-Note: It's up to the exporter to download the link and grab the title
-automatically as shown in this example.
+Result : [1] http://www.wikipedia.org - Wikipedia
+         [2] Old school book
+
+Note: The HTML exporter will download the page and insert the title
+      as seen above automatically. Sometimes this takes a little while,
+      so only export when you plan to create a PDF.
 
 Page number
 ===========

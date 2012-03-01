@@ -216,13 +216,13 @@ namespace DocumentLib
 
 			foreach (Match m in mc)
 			{
-				string url = m.Groups[1].ToString().Trim();
+				string content = m.Groups[1].ToString().Trim();
 
 				bool match = false;
 
 				for (int i = 0; i < references.Count; i++)
 				{
-					if (references[i].url == url)
+					if (references[i].content == content)
 					{
 						match = true;
 						break;
@@ -230,7 +230,7 @@ namespace DocumentLib
 				}
 
 				if (!match)
-					references.Add(new Reference(m.ToString().Trim(), figNum++, url));
+					references.Add(new Reference(m.ToString().Trim(), figNum++, content));
 			}
 		}
 
