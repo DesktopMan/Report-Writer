@@ -228,7 +228,7 @@ namespace Report_Writer
 		{
 			bool handled = false;
 
-			if ((e.KeyCode == Keys.O) || (e.KeyValue == 131087) && e.Control)
+			if ((e.KeyCode == Keys.O || e.KeyValue == 131087) && e.Control)
 			{
 				if (ofdOpen.ShowDialog() != DialogResult.OK)
 					return;
@@ -238,19 +238,19 @@ namespace Report_Writer
 				handled = true;
 			}
 
-			if ((e.KeyCode == Keys.S) || (e.KeyValue == 131091) && e.Control)
+			if ((e.KeyCode == Keys.S || e.KeyValue == 131091) && e.Control)
 			{
 				Save();
 				handled = true;
 			}
 
-			if ((e.KeyCode == Keys.E) || (e.KeyValue == 131077) && e.Control)
+			if ((e.KeyCode == Keys.E || e.KeyValue == 131077) && e.Control)
 			{
 				Export();
 				handled = true;
 			}
 
-			if ((e.KeyCode == Keys.C) || (e.KeyValue == 131075) && e.Control)
+			if ((e.KeyCode == Keys.C || e.KeyValue == 131075) && e.Control)
 			{
 				if (txtDocument.SelectedText != "")
 				{
@@ -261,7 +261,7 @@ namespace Report_Writer
 				handled = true;
 			}
 
-			if ((e.KeyCode == Keys.V) || (e.KeyValue == 131094) && e.Control)
+			if ((e.KeyCode == Keys.V || e.KeyValue == 131094) && e.Control)
 			{
 				txtDocument.SelectedText = Clipboard.GetText();
 				handled = true;
