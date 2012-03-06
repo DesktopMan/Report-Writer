@@ -112,7 +112,7 @@ namespace DocumentLib
 
 		void ExtractChapters()
 		{
-			Regex re = new Regex("^([#$]+) ([^\\||.]+?)( \\| (.+?))?$", RegexOptions.Multiline);
+			Regex re = new Regex("^([#$]+) ([^\\|]+?)( \\| (.+?))?$", RegexOptions.Multiline);
 			MatchCollection mc = re.Matches(document);
 
 			Chapter previousChapter = null;
