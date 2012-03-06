@@ -17,17 +17,23 @@ namespace DocumentLib
 		{
 			StringBuilder sb = new StringBuilder();
 
-			switch (level)
-			{
-				case Level.INFO: sb.Append("I"); break;
-				case Level.WARN: sb.Append("W"); break;
-				case Level.ERR: sb.Append("E"); break;
-				case Level.DBG: sb.Append("D"); break;
-			}
-
+			sb.Append(GetLevel());
 			sb.Append(": " + text);
 
 			return sb.ToString();
+		}
+
+		public string GetLevel()
+		{
+			switch (level)
+			{
+				case Level.INFO: return "I";
+				case Level.WARN: return "W";
+				case Level.ERR: return "E";
+				case Level.DBG: return "D";
+			}
+
+			return "";
 		}
 
 		public Level level;
