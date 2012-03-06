@@ -17,6 +17,7 @@ namespace Report_Writer
 		private string filePath;
 		private bool changed = false;
 		private bool needSave = false;
+		NHunspellExtender.NHunspellTextBoxExtender spell;
 
 		public FrmMainWindow()
 		{
@@ -25,6 +26,22 @@ namespace Report_Writer
 
 		private void FrmMainWindow_Load(object sender, EventArgs e)
 		{
+			int p = (int) Environment.OSVersion.Platform;
+
+			// Enable spell check, but only on Windows
+			if (!((p == 4) || (p == 6) || (p == 128)))
+			{
+				tsbSpellCheck.Checked = Properties.Settings.Default.SpellCheck;
+				spell = new NHunspellExtender.NHunspellTextBoxExtender();
+				spell.SetSpellCheckEnabled(txtDocument, tsbSpellCheck.Checked);
+				spell.SpellAsYouType = true;
+			}
+			else
+			{
+				tsbSpellCheck.Enabled = false;
+				tsbSpellCheck.ToolTipText += " (Windows only)";
+			}
+
 			Open(Properties.Settings.Default.LastDocument);
 		}
 
@@ -407,6 +424,15 @@ namespace Report_Writer
 		private void tstxtSearch_Click_1(object sender, EventArgs e)
 		{
 			tstxtSearch.SelectAll();
+		}
+
+		private void tsbSpellCheck_Click(object sender, EventArgs e)
+		{
+			spell.SetSpellCheckEnabled(txtDocument, tsbSpellCheck.Checked);
+			txtDocument.Invalidate();
+
+			Properties.Settings.Default.SpellCheck = tsbSpellCheck.Checked;
+			Properties.Settings.Default.Save();
 		}
 	}
 }

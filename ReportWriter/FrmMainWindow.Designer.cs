@@ -53,6 +53,7 @@
 			this.tsbPrevious = new System.Windows.Forms.ToolStripButton();
 			this.ofdOpen = new System.Windows.Forms.OpenFileDialog();
 			this.fswDocument = new System.IO.FileSystemWatcher();
+			this.tsbSpellCheck = new System.Windows.Forms.ToolStripButton();
 			this.splitContainer1.Panel1.SuspendLayout();
 			this.splitContainer1.Panel2.SuspendLayout();
 			this.splitContainer1.SuspendLayout();
@@ -294,7 +295,8 @@
             this.tsbExport,
             this.tstxtSearch,
             this.tsbNext,
-            this.tsbPrevious});
+            this.tsbPrevious,
+            this.tsbSpellCheck});
 			this.toolStrip1.Location = new System.Drawing.Point(0, 0);
 			this.toolStrip1.Name = "toolStrip1";
 			this.toolStrip1.Size = new System.Drawing.Size(792, 25);
@@ -370,6 +372,17 @@
 			this.fswDocument.SynchronizingObject = this;
 			this.fswDocument.Changed += new System.IO.FileSystemEventHandler(this.fswDocument_Changed);
 			// 
+			// tsbSpellCheck
+			// 
+			this.tsbSpellCheck.CheckOnClick = true;
+			this.tsbSpellCheck.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+			this.tsbSpellCheck.Image = ((System.Drawing.Image)(resources.GetObject("tsbSpellCheck.Image")));
+			this.tsbSpellCheck.ImageTransparentColor = System.Drawing.Color.Magenta;
+			this.tsbSpellCheck.Name = "tsbSpellCheck";
+			this.tsbSpellCheck.Size = new System.Drawing.Size(70, 22);
+			this.tsbSpellCheck.Text = "Spell check";
+			this.tsbSpellCheck.Click += new System.EventHandler(this.tsbSpellCheck_Click);
+			// 
 			// FrmMainWindow
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -437,6 +450,7 @@
 		private System.Windows.Forms.ToolStripTextBox tstxtSearch;
 		private System.Windows.Forms.ToolStripButton tsbNext;
 		private System.Windows.Forms.ToolStripButton tsbPrevious;
+		private System.Windows.Forms.ToolStripButton tsbSpellCheck;
 	}
 }
 
