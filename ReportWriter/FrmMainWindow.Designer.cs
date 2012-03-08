@@ -48,6 +48,9 @@
 			this.tsbOpen = new System.Windows.Forms.ToolStripButton();
 			this.tsbSave = new System.Windows.Forms.ToolStripButton();
 			this.tsbExport = new System.Windows.Forms.ToolStripButton();
+			this.tstxtSearch = new System.Windows.Forms.ToolStripTextBox();
+			this.tsbNext = new System.Windows.Forms.ToolStripButton();
+			this.tsbPrevious = new System.Windows.Forms.ToolStripButton();
 			this.ofdOpen = new System.Windows.Forms.OpenFileDialog();
 			this.fswDocument = new System.IO.FileSystemWatcher();
 			this.splitContainer1.Panel1.SuspendLayout();
@@ -288,7 +291,10 @@
 			this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tsbOpen,
             this.tsbSave,
-            this.tsbExport});
+            this.tsbExport,
+            this.tstxtSearch,
+            this.tsbNext,
+            this.tsbPrevious});
 			this.toolStrip1.Location = new System.Drawing.Point(0, 0);
 			this.toolStrip1.Name = "toolStrip1";
 			this.toolStrip1.Size = new System.Drawing.Size(792, 25);
@@ -325,12 +331,41 @@
 			this.tsbExport.Text = "Export";
 			this.tsbExport.Click += new System.EventHandler(this.tsbExport_Click);
 			// 
+			// tstxtSearch
+			// 
+			this.tstxtSearch.Name = "tstxtSearch";
+			this.tstxtSearch.Size = new System.Drawing.Size(100, 25);
+			this.tstxtSearch.Text = "Find...";
+			this.tstxtSearch.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tstxtSearch_KeyDown);
+			this.tstxtSearch.Click += new System.EventHandler(this.tstxtSearch_Click_1);
+			// 
+			// tsbNext
+			// 
+			this.tsbNext.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+			this.tsbNext.Image = ((System.Drawing.Image)(resources.GetObject("tsbNext.Image")));
+			this.tsbNext.ImageTransparentColor = System.Drawing.Color.Magenta;
+			this.tsbNext.Name = "tsbNext";
+			this.tsbNext.Size = new System.Drawing.Size(23, 22);
+			this.tsbNext.Text = "Next";
+			this.tsbNext.Click += new System.EventHandler(this.tsbNext_Click);
+			// 
+			// tsbPrevious
+			// 
+			this.tsbPrevious.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+			this.tsbPrevious.Image = ((System.Drawing.Image)(resources.GetObject("tsbPrevious.Image")));
+			this.tsbPrevious.ImageTransparentColor = System.Drawing.Color.Magenta;
+			this.tsbPrevious.Name = "tsbPrevious";
+			this.tsbPrevious.Size = new System.Drawing.Size(23, 22);
+			this.tsbPrevious.Text = "Previous";
+			this.tsbPrevious.Click += new System.EventHandler(this.tsbPrevious_Click);
+			// 
 			// ofdOpen
 			// 
 			this.ofdOpen.Filter = "Text files (*.txt)|*.txt|All files (*.*)|*.*";
 			// 
 			// fswDocument
 			// 
+			this.fswDocument.EnableRaisingEvents = true;
 			this.fswDocument.NotifyFilter = System.IO.NotifyFilters.LastWrite;
 			this.fswDocument.SynchronizingObject = this;
 			this.fswDocument.Changed += new System.IO.FileSystemEventHandler(this.fswDocument_Changed);
@@ -399,6 +434,9 @@
 		private System.Windows.Forms.ListBox lbNavigation;
 		private System.Windows.Forms.ListBox lbTodos;
 		private System.IO.FileSystemWatcher fswDocument;
+		private System.Windows.Forms.ToolStripTextBox tstxtSearch;
+		private System.Windows.Forms.ToolStripButton tsbNext;
+		private System.Windows.Forms.ToolStripButton tsbPrevious;
 	}
 }
 

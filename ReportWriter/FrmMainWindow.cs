@@ -184,6 +184,8 @@ namespace Report_Writer
 			fswDocument.Path = Path.GetDirectoryName(filePath);
 			fswDocument.Filter = Path.GetFileName(filePath);
 			fswDocument.EnableRaisingEvents = true;
+
+			txtDocument.Focus();
 		}
 
 		private void Save()
@@ -280,6 +282,25 @@ namespace Report_Writer
 				handled = true;
 			}
 
+			if ((e.KeyCode == Keys.F || e.KeyValue == 131078) && e.Control)
+			{
+				tstxtSearch.Focus();
+				tstxtSearch.SelectAll();
+				handled = true;
+			}
+
+			if ((e.KeyCode == Keys.N || e.KeyValue == 131086) && e.Control)
+			{
+				FindNext(tstxtSearch.Text);
+				handled = true;
+			}
+
+			if ((e.KeyCode == Keys.P || e.KeyValue == 131107) && e.Control)
+			{
+				FindPrevious(tstxtSearch.Text);
+				handled = true;
+			}
+
 			if (handled)
 				e.SuppressKeyPress = true;
 		}
@@ -329,6 +350,63 @@ namespace Report_Writer
 				needSave = false;
 				Open(filePath);
 			}
+		}
+
+		private void tstxtSearch_Click(object sender, EventArgs e)
+		{
+			tstxtSearch.SelectAll();
+		}
+
+		private void tstxtSearch_KeyDown(object sender, KeyEventArgs e)
+		{
+			if (e.KeyCode == Keys.Enter)
+			{
+				tstxtSearch.SelectAll();
+				FindNext(tstxtSearch.Text);
+			}
+		}
+
+		private void FindNext(string s)
+		{
+			if (txtDocument.SelectionStart == txtDocument.Text.Length)
+				return;
+
+			int match = txtDocument.Text.IndexOf(tstxtSearch.Text, txtDocument.SelectionStart + 1, StringComparison.CurrentCultureIgnoreCase);
+
+			if (match >= 0)
+			{
+				txtDocument.Focus();
+				txtDocument.Select(match, tstxtSearch.Text.Length);
+			}
+		}
+
+		private void FindPrevious(string s)
+		{
+			if (txtDocument.SelectionStart == 0)
+				return;
+
+			int match = txtDocument.Text.LastIndexOf(tstxtSearch.Text, txtDocument.SelectionStart - 1, StringComparison.CurrentCultureIgnoreCase);
+
+			if (match >= 0)
+			{
+				txtDocument.Focus();
+				txtDocument.Select(match, tstxtSearch.Text.Length);
+			}
+		}
+
+		private void tsbNext_Click(object sender, EventArgs e)
+		{
+			FindNext(tstxtSearch.Text);
+		}
+
+		private void tsbPrevious_Click(object sender, EventArgs e)
+		{
+			FindPrevious(tstxtSearch.Text);
+		}
+
+		private void tstxtSearch_Click_1(object sender, EventArgs e)
+		{
+			tstxtSearch.SelectAll();
 		}
 	}
 }
