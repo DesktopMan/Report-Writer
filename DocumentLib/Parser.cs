@@ -14,8 +14,7 @@ namespace DocumentLib
 			if (document.Length > 0 && document[document.Length - 1] != '\n')
 				document += "\n";
 
-			// Remove todos and notes
-			this.document = new Regex("^(TODO:|NOTE:).*\n", RegexOptions.Multiline).Replace(document, "");
+			this.document = document;
 			this.basePath = basePath;
 			success = false;
 		}
@@ -62,7 +61,11 @@ namespace DocumentLib
 				return true;
 
 			if (processTemplates)
+			{
 				document = ProcessTemplates(document);
+				// Remove todos and notes
+				document = new Regex("^(TODO:|NOTE:).*\n", RegexOptions.Multiline).Replace(document, "");
+			}
 
 			ExtractChapters();
 			ExtractFigures();
