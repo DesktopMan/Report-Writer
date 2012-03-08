@@ -30,6 +30,9 @@
 		{
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmMainWindow));
 			this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+			this.splitContainer6 = new System.Windows.Forms.SplitContainer();
+			this.lbNavigation = new System.Windows.Forms.ListBox();
+			this.lbTodos = new System.Windows.Forms.ListBox();
 			this.splitContainer2 = new System.Windows.Forms.SplitContainer();
 			this.splitContainer3 = new System.Windows.Forms.SplitContainer();
 			this.txtDocument = new System.Windows.Forms.RichTextBox();
@@ -46,12 +49,13 @@
 			this.tsbSave = new System.Windows.Forms.ToolStripButton();
 			this.tsbExport = new System.Windows.Forms.ToolStripButton();
 			this.ofdOpen = new System.Windows.Forms.OpenFileDialog();
-			this.splitContainer6 = new System.Windows.Forms.SplitContainer();
-			this.lbNavigation = new System.Windows.Forms.ListBox();
-			this.lbTodos = new System.Windows.Forms.ListBox();
+			this.fswDocument = new System.IO.FileSystemWatcher();
 			this.splitContainer1.Panel1.SuspendLayout();
 			this.splitContainer1.Panel2.SuspendLayout();
 			this.splitContainer1.SuspendLayout();
+			this.splitContainer6.Panel1.SuspendLayout();
+			this.splitContainer6.Panel2.SuspendLayout();
+			this.splitContainer6.SuspendLayout();
 			this.splitContainer2.Panel1.SuspendLayout();
 			this.splitContainer2.Panel2.SuspendLayout();
 			this.splitContainer2.SuspendLayout();
@@ -66,9 +70,7 @@
 			this.splitContainer5.SuspendLayout();
 			this.ssTip.SuspendLayout();
 			this.toolStrip1.SuspendLayout();
-			this.splitContainer6.Panel1.SuspendLayout();
-			this.splitContainer6.Panel2.SuspendLayout();
-			this.splitContainer6.SuspendLayout();
+			((System.ComponentModel.ISupportInitialize)(this.fswDocument)).BeginInit();
 			this.SuspendLayout();
 			// 
 			// splitContainer1
@@ -87,6 +89,46 @@
 			this.splitContainer1.Size = new System.Drawing.Size(792, 510);
 			this.splitContainer1.SplitterDistance = 205;
 			this.splitContainer1.TabIndex = 0;
+			// 
+			// splitContainer6
+			// 
+			this.splitContainer6.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.splitContainer6.Location = new System.Drawing.Point(0, 0);
+			this.splitContainer6.Name = "splitContainer6";
+			this.splitContainer6.Orientation = System.Windows.Forms.Orientation.Horizontal;
+			// 
+			// splitContainer6.Panel1
+			// 
+			this.splitContainer6.Panel1.Controls.Add(this.lbNavigation);
+			// 
+			// splitContainer6.Panel2
+			// 
+			this.splitContainer6.Panel2.Controls.Add(this.lbTodos);
+			this.splitContainer6.Size = new System.Drawing.Size(205, 510);
+			this.splitContainer6.SplitterDistance = 412;
+			this.splitContainer6.TabIndex = 0;
+			// 
+			// lbNavigation
+			// 
+			this.lbNavigation.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.lbNavigation.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.lbNavigation.FormattingEnabled = true;
+			this.lbNavigation.ItemHeight = 15;
+			this.lbNavigation.Location = new System.Drawing.Point(0, 0);
+			this.lbNavigation.Name = "lbNavigation";
+			this.lbNavigation.Size = new System.Drawing.Size(205, 412);
+			this.lbNavigation.TabIndex = 2;
+			this.lbNavigation.SelectedIndexChanged += new System.EventHandler(this.lbNavigation_SelectedIndexChanged);
+			// 
+			// lbTodos
+			// 
+			this.lbTodos.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.lbTodos.FormattingEnabled = true;
+			this.lbTodos.Location = new System.Drawing.Point(0, 0);
+			this.lbTodos.Name = "lbTodos";
+			this.lbTodos.Size = new System.Drawing.Size(205, 94);
+			this.lbTodos.TabIndex = 0;
+			this.lbTodos.SelectedIndexChanged += new System.EventHandler(this.lbTodos_SelectedIndexChanged);
 			// 
 			// splitContainer2
 			// 
@@ -287,45 +329,11 @@
 			// 
 			this.ofdOpen.Filter = "Text files (*.txt)|*.txt|All files (*.*)|*.*";
 			// 
-			// splitContainer6
+			// fswDocument
 			// 
-			this.splitContainer6.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.splitContainer6.Location = new System.Drawing.Point(0, 0);
-			this.splitContainer6.Name = "splitContainer6";
-			this.splitContainer6.Orientation = System.Windows.Forms.Orientation.Horizontal;
-			// 
-			// splitContainer6.Panel1
-			// 
-			this.splitContainer6.Panel1.Controls.Add(this.lbNavigation);
-			// 
-			// splitContainer6.Panel2
-			// 
-			this.splitContainer6.Panel2.Controls.Add(this.lbTodos);
-			this.splitContainer6.Size = new System.Drawing.Size(205, 510);
-			this.splitContainer6.SplitterDistance = 412;
-			this.splitContainer6.TabIndex = 0;
-			// 
-			// lbNavigation
-			// 
-			this.lbNavigation.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.lbNavigation.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.lbNavigation.FormattingEnabled = true;
-			this.lbNavigation.ItemHeight = 15;
-			this.lbNavigation.Location = new System.Drawing.Point(0, 0);
-			this.lbNavigation.Name = "lbNavigation";
-			this.lbNavigation.Size = new System.Drawing.Size(205, 412);
-			this.lbNavigation.TabIndex = 2;
-			this.lbNavigation.SelectedIndexChanged += new System.EventHandler(this.lbNavigation_SelectedIndexChanged);
-			// 
-			// lbTodos
-			// 
-			this.lbTodos.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.lbTodos.FormattingEnabled = true;
-			this.lbTodos.Location = new System.Drawing.Point(0, 0);
-			this.lbTodos.Name = "lbTodos";
-			this.lbTodos.Size = new System.Drawing.Size(205, 94);
-			this.lbTodos.TabIndex = 0;
-			this.lbTodos.SelectedIndexChanged += new System.EventHandler(this.lbTodos_SelectedIndexChanged);
+			this.fswDocument.NotifyFilter = System.IO.NotifyFilters.LastWrite;
+			this.fswDocument.SynchronizingObject = this;
+			this.fswDocument.Changed += new System.IO.FileSystemEventHandler(this.fswDocument_Changed);
 			// 
 			// FrmMainWindow
 			// 
@@ -343,6 +351,9 @@
 			this.splitContainer1.Panel1.ResumeLayout(false);
 			this.splitContainer1.Panel2.ResumeLayout(false);
 			this.splitContainer1.ResumeLayout(false);
+			this.splitContainer6.Panel1.ResumeLayout(false);
+			this.splitContainer6.Panel2.ResumeLayout(false);
+			this.splitContainer6.ResumeLayout(false);
 			this.splitContainer2.Panel1.ResumeLayout(false);
 			this.splitContainer2.Panel2.ResumeLayout(false);
 			this.splitContainer2.ResumeLayout(false);
@@ -359,9 +370,7 @@
 			this.ssTip.PerformLayout();
 			this.toolStrip1.ResumeLayout(false);
 			this.toolStrip1.PerformLayout();
-			this.splitContainer6.Panel1.ResumeLayout(false);
-			this.splitContainer6.Panel2.ResumeLayout(false);
-			this.splitContainer6.ResumeLayout(false);
+			((System.ComponentModel.ISupportInitialize)(this.fswDocument)).EndInit();
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -389,6 +398,7 @@
 		private System.Windows.Forms.SplitContainer splitContainer6;
 		private System.Windows.Forms.ListBox lbNavigation;
 		private System.Windows.Forms.ListBox lbTodos;
+		private System.IO.FileSystemWatcher fswDocument;
 	}
 }
 

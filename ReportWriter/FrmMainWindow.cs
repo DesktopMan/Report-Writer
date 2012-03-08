@@ -13,8 +13,10 @@ namespace Report_Writer
 {
 	public partial class FrmMainWindow : Form
 	{
-		DocumentLib.Parser parser = new DocumentLib.Parser();
-		string filePath;
+		private DocumentLib.Parser parser = new DocumentLib.Parser();
+		private string filePath;
+		private bool changed = false;
+		private bool needSave = false;
 
 		public FrmMainWindow()
 		{
@@ -109,9 +111,6 @@ namespace Report_Writer
 			txtDocument.ScrollToCaret();
 		}
 
-		private bool changed = false;
-		private bool needSave = false;
-
 		private void txtDocument_MouseUp(object sender, MouseEventArgs e)
 		{
 			UpdateInterface();
@@ -181,14 +180,22 @@ namespace Report_Writer
 			this.Text = "ReportWriter - " + Path.GetFileName(filePath);
 
 			needSave = false;
+
+			fswDocument.Path = Path.GetDirectoryName(filePath);
+			fswDocument.Filter = Path.GetFileName(filePath);
+			fswDocument.EnableRaisingEvents = true;
 		}
 
 		private void Save()
 		{
 			UpdateInterface();
 
+			fswDocument.EnableRaisingEvents = false;
+
 			File.WriteAllText(filePath, txtDocument.Text.Replace("\n", Environment.NewLine));
 			tsslblTip.Text = "Saved document '" + filePath + "'";
+
+			fswDocument.EnableRaisingEvents = true;
 
 			needSave = false;
 		}
@@ -308,6 +315,20 @@ namespace Report_Writer
 			Navigate(todo.location);
 
 			lbTodos.ClearSelected();
+		}
+
+		private void fswDocument_Changed(object sender, FileSystemEventArgs e)
+		{
+			string message = "The document has changed outside the application. Do you want to reload it?\n";
+			message += "This will discard any local changes.";
+
+			DialogResult result = MessageBox.Show(message, "ReportWriter", MessageBoxButtons.YesNo);
+
+			if (result == DialogResult.Yes)
+			{
+				needSave = false;
+				Open(filePath);
+			}
 		}
 	}
 }
