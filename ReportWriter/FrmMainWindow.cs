@@ -6,6 +6,8 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 using System.IO;
+using System.Text.RegularExpressions;
+using System.Diagnostics;
 
 namespace Report_Writer
 {
@@ -65,6 +67,7 @@ namespace Report_Writer
 			lbFigures.Items.Clear();
 			lbTables.Items.Clear();
 			lbReferences.Items.Clear();
+			lbTodos.Items.Clear();
 
 			foreach (KeyValuePair<string, DocumentLib.Chapter> pair in parser.GetChapters())
 			{
@@ -88,6 +91,9 @@ namespace Report_Writer
 			{
 				lbReferences.Items.Add(r);
 			}
+
+			foreach (Match m in new Regex("^(TODO|NOTE):.*", RegexOptions.Multiline).Matches(txtDocument.Text))
+				lbTodos.Items.Add(new DocumentLib.Todo(m.Index, m.Value));
 
 			changed = false;
 		}
@@ -290,6 +296,18 @@ namespace Report_Writer
 			}
 
 			return res;
+		}
+
+		private void lbTodos_SelectedIndexChanged(object sender, EventArgs e)
+		{
+			if (lbTodos.SelectedItem == null)
+				return;
+
+			DocumentLib.Todo todo = (DocumentLib.Todo)lbTodos.SelectedItem;
+
+			Navigate(todo.location);
+
+			lbTodos.ClearSelected();
 		}
 	}
 }

@@ -180,6 +180,18 @@ a-z _ -
 Any id given not conforming to this will be forced to do so by replacing
 any illegal characters with _.
 
+TODOs
+=====
+
+Any line starting with TODO: or NOTE: will be displayed under the
+navigation pane and can be clicked to jump to that location. They are
+removed when exporting and will not be visible in the document.
+
+Example:
+
+TODO: Update this with a figure
+NOTE: Should we remove this?
+
 Files / templates
 =================
 

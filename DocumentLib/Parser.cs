@@ -14,7 +14,8 @@ namespace DocumentLib
 			if (document.Length > 0 && document[document.Length - 1] != '\n')
 				document += "\n";
 
-			this.document = document;
+			// Remove todos and notes
+			this.document = new Regex("^(TODO:|NOTE:).*\n", RegexOptions.Multiline).Replace(document, "");
 			this.basePath = basePath;
 			success = false;
 		}

@@ -41,6 +41,7 @@
     <Compile Include="Figure.cs" />
     <Compile Include="Chapter.cs" />
     <Compile Include="HtmlGenerator.cs" />
+    <Compile Include="Todo.cs" />
     <Compile Include="LogLine.cs" />
     <Compile Include="Parser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
