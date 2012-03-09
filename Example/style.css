@@ -97,6 +97,7 @@ a.chapref { font-style: italic; }
 div.figure {
   margin: 1em 0;
   counter-increment: figure;
+  page-break-before: avoid;
   page-break-inside: avoid;
   text-align: center;
 }
@@ -109,6 +110,7 @@ img {
 div.table {
   margin: 1em 0;
   counter-increment: table;
+  page-break-before: avoid;
   page-break-inside: avoid;
   text-align: center;
 }
@@ -116,6 +118,11 @@ div.table {
 table {
   margin-left: auto;
   margin-right: auto;
+}
+
+ol, ul, dl {
+  page-break-before: avoid;
+  page-break-inside: avoid;
 }
 
 th, td {
