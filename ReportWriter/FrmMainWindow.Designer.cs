@@ -51,9 +51,9 @@
 			this.tstxtSearch = new System.Windows.Forms.ToolStripTextBox();
 			this.tsbNext = new System.Windows.Forms.ToolStripButton();
 			this.tsbPrevious = new System.Windows.Forms.ToolStripButton();
+			this.tsbSpellCheck = new System.Windows.Forms.ToolStripButton();
 			this.ofdOpen = new System.Windows.Forms.OpenFileDialog();
 			this.fswDocument = new System.IO.FileSystemWatcher();
-			this.tsbSpellCheck = new System.Windows.Forms.ToolStripButton();
 			this.splitContainer1.Panel1.SuspendLayout();
 			this.splitContainer1.Panel2.SuspendLayout();
 			this.splitContainer1.SuspendLayout();
@@ -284,8 +284,8 @@
 			// tsslblTip
 			// 
 			this.tsslblTip.Name = "tsslblTip";
-			this.tsslblTip.Size = new System.Drawing.Size(118, 17);
-			this.tsslblTip.Text = "toolStripStatusLabel1";
+			this.tsslblTip.Size = new System.Drawing.Size(116, 17);
+			this.tsslblTip.Text = "Report Writer started";
 			// 
 			// toolStrip1
 			// 
@@ -361,17 +361,6 @@
 			this.tsbPrevious.Text = "Previous";
 			this.tsbPrevious.Click += new System.EventHandler(this.tsbPrevious_Click);
 			// 
-			// ofdOpen
-			// 
-			this.ofdOpen.Filter = "Text files (*.txt)|*.txt|All files (*.*)|*.*";
-			// 
-			// fswDocument
-			// 
-			this.fswDocument.EnableRaisingEvents = true;
-			this.fswDocument.NotifyFilter = System.IO.NotifyFilters.LastWrite;
-			this.fswDocument.SynchronizingObject = this;
-			this.fswDocument.Changed += new System.IO.FileSystemEventHandler(this.fswDocument_Changed);
-			// 
 			// tsbSpellCheck
 			// 
 			this.tsbSpellCheck.CheckOnClick = true;
@@ -382,6 +371,17 @@
 			this.tsbSpellCheck.Size = new System.Drawing.Size(70, 22);
 			this.tsbSpellCheck.Text = "Spell check";
 			this.tsbSpellCheck.Click += new System.EventHandler(this.tsbSpellCheck_Click);
+			// 
+			// ofdOpen
+			// 
+			this.ofdOpen.Filter = "Text files (*.txt)|*.txt|All files (*.*)|*.*";
+			// 
+			// fswDocument
+			// 
+			this.fswDocument.EnableRaisingEvents = true;
+			this.fswDocument.NotifyFilter = System.IO.NotifyFilters.LastWrite;
+			this.fswDocument.SynchronizingObject = this;
+			this.fswDocument.Changed += new System.IO.FileSystemEventHandler(this.fswDocument_Changed);
 			// 
 			// FrmMainWindow
 			// 

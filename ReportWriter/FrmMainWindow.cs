@@ -57,6 +57,7 @@ namespace Report_Writer
 		{
 			changed = true;
 			needSave = true;
+			tsslblTip.Text = "";
 		}
 
 		private void lbNavigation_SelectedIndexChanged(object sender, EventArgs e)
