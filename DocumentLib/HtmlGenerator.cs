@@ -98,7 +98,7 @@ namespace DocumentLib
 			foreach (KeyValuePair<string, Chapter> p in chapters)
 			{
 				// First update all chapter references
-				output.Replace("@chapref(" + p.Value.id + ")", "<a href='#" + p.Value.id + "' class='chapref'>" + p.Value.text + "</a>");
+				output.Replace("@chapref(" + p.Value.id + ")", "<a href='#" + p.Value.id + "' class='chapref_" + p.Value.level + "'>" + p.Value.text + "</a>");
 
 				// Get the first match. There might be more in case sub headings
 				// have the same title.

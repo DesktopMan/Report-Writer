@@ -92,7 +92,7 @@ a
 a.pageref { font-style: italic; content: "Page " target-counter(attr(href), page); }
 a.figref { font-style: italic; content: "Figure " target-counter(attr(href), figure); }
 a.tableref { font-style: italic; content: "Table " target-counter(attr(href), table); }
-a.chapref { font-style: italic; }
+a.chapref_1, a.chapref_2, a.chapref_3 { font-style: italic; }
 
 div.figure {
   margin: 1em 0;
