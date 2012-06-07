@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Net;
+using System.Web;
 
 namespace DocumentLib
 {
@@ -196,8 +197,11 @@ namespace DocumentLib
 			{
 				if (r.content.StartsWith("http"))
 				{
-					reflist.AppendFormat("<a id='reference_{0}' href='{1}'>{2}</a><br>\r\n", r.figNum, r.content, r.ToString() + " - " + GetWebPageTitle(r.content));
-					document = document.Replace(r.match, "<a href='" + r.content + "'>[" + r.figNum + "]</a>");
+					string link = HttpUtility.HtmlEncode(r.content);
+					string text = HttpUtility.HtmlEncode(HttpUtility.UrlDecode(r.content));
+
+					reflist.AppendFormat("<a id='reference_{0}' href=\"{1}\">[{2}] {3}</a><br>\r\n", r.figNum, link, r.figNum, text);
+					document = document.Replace(r.match, "<a href=\"" + link + "\">[" + r.figNum + "]</a>");
 				}
 				else
 				{
