@@ -177,11 +177,20 @@ namespace DocumentLib
 					continue;
 				}
 
-				if (!File.Exists(Path.Combine(basePath, path)))
-					log.Add(new LogLine(LogLine.Level.WARN, m.ToString().Trim(), "Unable to find figure file '" + path + "'", m.Index));
-
-				Figure f = new Figure(id, m.Index, m.ToString().Trim(), text, path);
-				figures[f.id] = f;
+				try
+				{
+					if (!File.Exists(Path.Combine(basePath, path)))
+						log.Add(new LogLine(LogLine.Level.WARN, m.ToString().Trim(), "Unable to find figure file '" + path + "'", m.Index));
+					else
+					{
+						Figure f = new Figure(id, m.Index, m.ToString().Trim(), text, path);
+						figures[f.id] = f;
+					}
+				}
+				catch (System.Exception)
+				{
+					log.Add(new LogLine(LogLine.Level.ERR, m.ToString().Trim(), "Invalid figure file path '" + path + "'", m.Index));
+				}
 			}
 		}
 
@@ -193,7 +202,7 @@ namespace DocumentLib
 			foreach (Match m in mc)
 			{
 				string id = m.Groups[1].ToString().Trim();
-				string path = Path.Combine(basePath, m.Groups[2].ToString().Trim());
+				string path = m.Groups[2].ToString().Trim();
 				string text = m.Groups[3].ToString().Trim();
 				string headers = m.Groups[5].ToString().Trim();
 
@@ -203,11 +212,20 @@ namespace DocumentLib
 					continue;
 				}
 
-				if (!File.Exists(path))
-					log.Add(new LogLine(LogLine.Level.WARN, m.ToString().Trim(), "Unable to find table file '" + path + "'", m.Index));
-
-				Table t = new Table(id, m.Index, m.ToString().Trim(), text, path, headers);
-				tables[t.id] = t;
+				try
+				{
+					if (!File.Exists(Path.Combine(basePath, path)))
+						log.Add(new LogLine(LogLine.Level.WARN, m.ToString().Trim(), "Unable to find table file '" + path + "'", m.Index));
+					else
+					{
+						Table t = new Table(id, m.Index, m.ToString().Trim(), text, Path.Combine(basePath, path), headers);
+						tables[t.id] = t;
+					}
+				}
+				catch (System.Exception)
+				{
+					log.Add(new LogLine(LogLine.Level.ERR, m.ToString().Trim(), "Invalid table file path '" + path + "'", m.Index));
+				}
 			}
 		}
 
