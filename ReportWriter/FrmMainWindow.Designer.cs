@@ -54,6 +54,7 @@
 			this.tsbSpellCheck = new System.Windows.Forms.ToolStripButton();
 			this.ofdOpen = new System.Windows.Forms.OpenFileDialog();
 			this.fswDocument = new System.IO.FileSystemWatcher();
+			this.sfdSave = new System.Windows.Forms.SaveFileDialog();
 			this.splitContainer1.Panel1.SuspendLayout();
 			this.splitContainer1.Panel2.SuspendLayout();
 			this.splitContainer1.SuspendLayout();
@@ -383,6 +384,11 @@
 			this.fswDocument.SynchronizingObject = this;
 			this.fswDocument.Changed += new System.IO.FileSystemEventHandler(this.fswDocument_Changed);
 			// 
+			// sfdSave
+			// 
+			this.sfdSave.DefaultExt = "txt";
+			this.sfdSave.Filter = "Text files|*.txt";
+			// 
 			// FrmMainWindow
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -451,6 +457,7 @@
 		private System.Windows.Forms.ToolStripButton tsbNext;
 		private System.Windows.Forms.ToolStripButton tsbPrevious;
 		private System.Windows.Forms.ToolStripButton tsbSpellCheck;
+		private System.Windows.Forms.SaveFileDialog sfdSave;
 	}
 }
 

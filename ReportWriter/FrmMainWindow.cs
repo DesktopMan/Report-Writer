@@ -212,12 +212,28 @@ namespace Report_Writer
 
 			fswDocument.EnableRaisingEvents = false;
 
-			File.WriteAllText(filePath, txtDocument.Text.Replace("\n", Environment.NewLine));
-			tsslblTip.Text = "Saved document '" + filePath + "'";
+			if (filePath == null)
+			{
+				if (sfdSave.ShowDialog() == DialogResult.OK)
+					filePath = sfdSave.FileName;
+			}
 
-			fswDocument.EnableRaisingEvents = true;
+			if (filePath != null)
+			{
+				File.WriteAllText(filePath, txtDocument.Text.Replace("\n", Environment.NewLine));
+				tsslblTip.Text = "Saved document '" + filePath + "'";
 
-			needSave = false;
+				Properties.Settings.Default.LastDocument = filePath;
+				Properties.Settings.Default.Save();
+
+				this.Text = "ReportWriter - " + Path.GetFileName(filePath);
+
+				fswDocument.Path = Path.GetDirectoryName(filePath);
+				fswDocument.Filter = Path.GetFileName(filePath);
+				fswDocument.EnableRaisingEvents = true;
+
+				needSave = false;
+			}
 		}
 
 		private void Export()
